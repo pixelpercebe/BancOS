@@ -55,40 +55,12 @@ static void freq_to_seconds(float freq_ghz, int *seconds, int *nanoseconds) {
     *nanoseconds = (int)((total_seconds - *seconds) * 1e9); // Parte fraccionaria a nanosegundos
 }
 
-
-/*
-#define INT_ERROR(code, msg, value) \
-    (fprintf(stderr, msg, value), code)
-*/
-
-int main(int argc, char *argv[]) {
-    // gcc mutex.cond.c -pthread -o mutex_cond
-    //mutex_cond 5 (para crear 5 temporizadores) 
-    if (argc < 2) {
-        fprintf(stderr, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
-        return 1;
-
-        //return INT_ERROR(1, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
-    }
-
-    num_temp = atoi(argv[1]);
-    if (num_temp <= 0) {
-        fprintf(stderr, "El número de temporizadores debe ser positivo.\n");
-        return 1;
-    }
-
-    float freq_cpu = atof(argv[2]);
-    if (freq_cpu <= 0) {
-        fprintf(stderr, "La frecuencia de la CPU debe ser positiva.\n");
-        return 1;
-    }
-
-    freq_to_seconds(freq_cpu, &seconds, &nanoseconds);
-    printf("Frecuencia CPU: %.2f GHz -> Tiempo de tick: %d segundos y %d nanosegundos\n", freq_cpu, seconds, nanoseconds);
-
+int init_clock_module(float freq_cpu) {
     // Declaracion y Asignacion de Memoria Dinamica
     pthread_t clock_tid;
     // array de IDs de temporizadores
+    global_ticks = 0;
+    done = 0;   
     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
     if (timer_tids == NULL) {
         perror("Error al asignar memoria para los hilos.");
@@ -121,15 +93,25 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    freq_to_seconds(freq_cpu, &seconds, &nanoseconds);
+    printf("Frecuencia CPU: %.2f GHz -> Tiempo de tick: %d segundos y %d nanosegundos\n", freq_cpu, seconds, nanoseconds);
+    return clock_tid;
+}
+
+void wait_clock_module() {
     // pthread_join(clock_tid, NULL);
     // for (int i = 0; i < temp_kop; i++) {
     //     pthread_join(timer_tids[i], NULL);
     // }
     
     //while(1), esperar indefinidamente
-    pause(); 
+    pause();
+}
 
-    // Liberación de recursos
-    free(timer_tids);
-    return 0;
+void set_num_timers(int n) {
+    num_temp = n;
+}
+
+int get_global_ticks() {
+    return global_ticks;
 }
