@@ -31,7 +31,7 @@ static void* clock_thread() {
 }
 
 
-static void* temporizador(void *arg) {
+static void* timer(void *arg) {
 // 1. Convertir el argumento void* a int* y obtener el ID
     int *timer_id_ptr = arg;
     int timer_id = *timer_id_ptr;
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
         *timer_id = i + 1;
 
         // En cada iteración, se crea un hilo y su ID se guarda en timer_tids[i]
-        if (pthread_create(&timer_tids[i], NULL, temporizador, timer_id) != 0) {
+        if (pthread_create(&timer_tids[i], NULL, timer, timer_id) != 0) {
             perror("Error al crear un hilo temporizador.");
             break; 
         }

@@ -1,11 +1,13 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-struct Clock {
-    void (*start)(float freq_ghz, int num_timers);
-    int (*get_global_ticks)();
-    void (*set_num_timers)(int n);
-};
+typedef struct {
+    int seconds;
+    int nanoseconds;
+} Time;
 
+int init_clock_module(float freq_cpu);
+void set_num_timers(int n);
+Time get_time();
 
 #endif
