@@ -1,3 +1,6 @@
+#ifndef ERRORS_H
+#define ERRORS_H
+
 typedef enum {
     OK = 0, 
     ERR_CLOCK_INIT = 1,
@@ -8,3 +11,4 @@ typedef enum {
     // Un error final para saber el total de errores si es necesario
     MAX_ERRORS
 } ErrorCode;
+#endif // ERRORS_H

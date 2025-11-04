@@ -1,0 +1,36 @@
+
+--- BUILD INICIADO: Tue Nov  4 11:44:13 PM CET 2025 ---
+
+make: *** No targets specified and no makefile found.  Stop.
+
+--- INICIANDO LIMPIEZA ---
+
+make: *** No rule to make target 'clean'.  Stop.
+
+--- BUILD INICIADO: Tue Nov  4 11:44:40 PM CET 2025 ---
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov  4 11:45:07 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o

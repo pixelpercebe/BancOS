@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "pthread.h": "c",
+        "sync_resources.h": "c",
+        "utils.h": "c",
+        "timer.h": "c"
+    }
+}

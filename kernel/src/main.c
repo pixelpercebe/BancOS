@@ -1,14 +1,14 @@
 // kernel/src/main.c
 // Módulo principal del sistema operativo 
-// gcc mutex.cond.c -pthread -o mutex_cond
+// gcc ./src/main.c ./src/clock.c ./src/timer.c ./src/utils.c ./src/process_generator.c src/sync_resources.c -o bancos -I include/ -pthread -lm
 // mutex_cond 5 (para crear 5 temporizadores)
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <stdint.h>
+
 #include <clock.h>
 #include <timer.h>
 #include <errors.h>

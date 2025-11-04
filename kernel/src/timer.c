@@ -1,12 +1,13 @@
+#include <timer.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <stdint.h>
+
 #include <sync_resources.h>
-#include <timer.h>
-#include <errors.h>
+
 
 /*
 * Función del hilo temporizador.
@@ -16,7 +17,6 @@
 static void* timer(void *arg) {
 // 1. Convertir el argumento void* a int* y obtener el ID
     int *timer_id_ptr = arg;
-    int timer_id = *timer_id_ptr;
 
     pthread_mutex_lock(&mutex);
     while (1) {
@@ -26,6 +26,7 @@ static void* timer(void *arg) {
         pthread_cond_wait(&cond2, &mutex);
     }
     free(timer_id_ptr);
+    return NULL;
 }
 
 
@@ -50,7 +51,7 @@ ErrorCode init_timer_module(int num_temp) {
         int *timer_id = (int *)malloc(sizeof(int));
         if (timer_id == NULL) {
             perror("Error al asignar memoria para el ID del temporizador");
-            // Manejo de errores...
+
             free(timer_tids);
             return ERR_MEMORY_INSUFFICIENT;
         }

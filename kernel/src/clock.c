@@ -1,10 +1,12 @@
+#include <clock.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <stdint.h>
+
 #include <sync_resources.h>
-#include <clock.h>
 #include <errors.h>
 #include <utils.h>
 #include <types.h>
@@ -31,6 +33,7 @@ static void* clock_thread() {
         pthread_mutex_unlock(&mutex);
         usleep(microseconds);       
     }
+    return NULL;
 }
 
 

@@ -8,6 +8,5 @@ typedef struct {
 
 int init_clock_module(float freq_cpu);
 void set_num_timers(int n);
-Time get_time();
-
+int get_global_ticks();
 #endif
