@@ -12,5 +12,6 @@ extern pthread_cond_t cond2;
 // Variables de estado compartidas
 extern volatile u_llong global_ticks;
 extern volatile int done;
+extern volatile int num_temp;
 
 #endif /* SYNC_RESOURCES_H */

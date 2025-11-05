@@ -7,8 +7,6 @@
 #include <stdint.h>
 
 #include <sync_resources.h>
-
-
 /*
 * Función del hilo temporizador.
 * arg: Puntero al ID del temporizador (entero).
@@ -37,7 +35,9 @@ static void* timer(void *arg) {
 * num_temp: Número de temporizadores a crear.
 * return: OK o código de error.
 */
-ErrorCode init_timer_module(int num_temp) {
+ErrorCode init_timer_module(int temp) {
+    set_num_timers(temp);
+
     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
     if (timer_tids == NULL) {
         perror("Error al asignar memoria para los hilos.");
@@ -65,4 +65,12 @@ ErrorCode init_timer_module(int num_temp) {
         }
     }
     return OK;
+}
+
+/**
+ * @brief Establece el número de temporizadores que el reloj debe sincronizar.
+ * @param n Número de temporizadores.
+ */
+const void set_num_timers(int n) {
+    num_temp = n;
 }

@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error al inicializar el módulo de temporizadores. Código de error: %d\n", timer_result);
         return timer_result;
     }
-
+    
 
     
     //while(1), esperar indefinidamente

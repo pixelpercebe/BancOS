@@ -12,7 +12,6 @@
 #include <types.h>
 
 static int seconds, nanoseconds;
-static int num_temp;
 u_llong microseconds;
 pthread_t clock_tid;
 
@@ -50,11 +49,11 @@ void freq_to_seconds(float freq_ghz, int *seconds, int *nanoseconds) {
 }
 
 
-/*
- * Inicializa el módulo de reloj. Crea el hilo de reloj y los hilos temporizadores.
+/**
+ * @brief Inicializa el módulo de reloj. Crea el hilo de reloj y los hilos temporizadores.
  * Devuelve el ID del hilo de reloj o un código de error.
- * freq_cpu: Frecuencia de la CPU en GHz.
- * return: ID del hilo de reloj o código de error.
+ * @param freq_cpu Frecuencia de la CPU en GHz.
+ * @return ID del hilo de reloj o código de error.
  */
 int init_clock_module(float freq_cpu) {
     // Declaracion y Asignacion de Memoria Dinamica
@@ -74,10 +73,12 @@ int init_clock_module(float freq_cpu) {
     return clock_tid;
 }
 
-void set_num_timers(int n) {
-    num_temp = n;
-}
 
+
+/**
+ * @brief Obtiene el valor actual de global_ticks.
+ * @return Valor de global_ticks.
+ */
 int get_global_ticks() {
     return global_ticks;
 }

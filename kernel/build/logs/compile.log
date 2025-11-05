@@ -34,3 +34,34 @@ gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resource
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 11:49:06 AM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c:11:12: error: conflicting type qualifiers for ‘num_temp’
+   11 | static int num_temp;
+      |            ^~~~~~~~
+In file included from ../src/timer.c:9:
+../include/sync_resources.h:15:21: note: previous declaration of ‘num_temp’ with type ‘int’
+   15 | extern volatile int num_temp;
+      |                     ^~~~~~~~
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:41:5: error: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   41 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:76:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   76 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:41:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   41 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
