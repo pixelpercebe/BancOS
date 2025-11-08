@@ -20,13 +20,13 @@
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        fprintf(stderr, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
+        fprintf(stderr, "Uso: %s <tiempo_en_ghz_CPU> <velocidad_generacion_procesos> <velocidad_dispatcher + scheduler> \n", argv[0]);
         return 1;
         //return INT_ERROR(1, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
     }
 
-    int num_temp = atoi(argv[1]);
-    if (num_temp <= 0) {
+    int n_timers = atoi(argv[1]);
+    if (n_timers <= 0) {
         fprintf(stderr, "El número de temporizadores debe ser positivo.\n");
         return 1;
     }
@@ -42,9 +42,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error al inicializar el módulo de reloj. Código de error: %d\n", clock_tid);
         return clock_tid;
     }
-
-    set_num_timers(num_temp);
-    int timer_result = init_timer_module(num_temp);
+    int timer_result = init_timer_module(n_timers);
     if (timer_result == ERR_TIMER_INIT) {
         fprintf(stderr, "Error al inicializar el módulo de temporizadores. Código de error: %d\n", timer_result);
         return timer_result;

@@ -3,6 +3,7 @@
         "pthread.h": "c",
         "sync_resources.h": "c",
         "utils.h": "c",
-        "timer.h": "c"
+        "timer.h": "c",
+        "clock.h": "c"
     }
 }

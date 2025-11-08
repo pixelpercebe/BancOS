@@ -22,13 +22,13 @@ pthread_t clock_tid;
 static void* clock_thread() {
     while(1){
         pthread_mutex_lock(&mutex);
-        while (done < num_temp) {
+        while (done < num_timers) {
                 pthread_cond_wait(&cond, &mutex);
         }
         done = 0;
         pthread_cond_broadcast(&cond2);
         global_ticks++;
-        printf("reloj %llu\n", global_ticks);
+        printf("global tick: %llu\n", global_ticks);
         pthread_mutex_unlock(&mutex);
         usleep(microseconds);       
     }
@@ -79,6 +79,6 @@ int init_clock_module(float freq_cpu) {
  * @brief Obtiene el valor actual de global_ticks.
  * @return Valor de global_ticks.
  */
-int get_global_ticks() {
+int get_current_global_ticks() {
     return global_ticks;
 }

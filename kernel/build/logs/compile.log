@@ -65,3 +65,291 @@ make: *** [../build/Makefile:37: ../src/timer.o] Error 1
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 02:58:12 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:41:49: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   41 |     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
+      |                                                 ^~~~~~~~
+      |                                                 mktemp
+../src/timer.c:41:49: note: each undeclared identifier is reported only once for each function it appears in
+../src/timer.c: At top level:
+../src/timer.c:74:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: In function ‘set_num_timers’:
+../src/timer.c:75:5: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   75 |     num_temp = n;
+      |     ^~~~~~~~
+      |     mktemp
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 02:59:32 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:41:49: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   41 |     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
+      |                                                 ^~~~~~~~
+      |                                                 mktemp
+../src/timer.c:41:49: note: each undeclared identifier is reported only once for each function it appears in
+../src/timer.c: At top level:
+../src/timer.c:74:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: In function ‘set_num_timers’:
+../src/timer.c:75:5: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   75 |     num_temp = n;
+      |     ^~~~~~~~
+      |     mktemp
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:00:09 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:41:49: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   41 |     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
+      |                                                 ^~~~~~~~
+      |                                                 mktemp
+../src/timer.c:41:49: note: each undeclared identifier is reported only once for each function it appears in
+../src/timer.c: At top level:
+../src/timer.c:74:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: In function ‘set_num_timers’:
+../src/timer.c:75:5: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   75 |     num_temp = n;
+      |     ^~~~~~~~
+      |     mktemp
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:05:08 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:41:49: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   41 |     pthread_t *timer_tids = (pthread_t *)malloc(num_temp * sizeof(pthread_t));
+      |                                                 ^~~~~~~~
+      |                                                 mktemp
+../src/timer.c:41:49: note: each undeclared identifier is reported only once for each function it appears in
+../src/timer.c: At top level:
+../src/timer.c:74:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: In function ‘set_num_timers’:
+../src/timer.c:75:5: error: ‘num_temp’ undeclared (first use in this function); did you mean ‘mktemp’?
+   75 |     num_temp = n;
+      |     ^~~~~~~~
+      |     mktemp
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:06:48 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:74:12: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | const void set_num_timers(int n) {
+      |            ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:08:01 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:74:13: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | static void set_num_timers(int n) {
+      |             ^~~~~~~~~~~~~~
+../src/timer.c:74:13: error: static declaration of ‘set_num_timers’ follows non-static declaration
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:74:13: warning: ‘set_num_timers’ defined but not used [-Wunused-function]
+   74 | static void set_num_timers(int n) {
+      |             ^~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:08:13 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:74:6: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | void set_num_timers(int n) {
+      |      ^~~~~~~~~~~~~~
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:09:25 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:10:37 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:39:5: warning: implicit declaration of function ‘set_num_timers’ [-Wimplicit-function-declaration]
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:74:13: warning: conflicting types for ‘set_num_timers’; have ‘void(int)’
+   74 | static void set_num_timers(int n) {
+      |             ^~~~~~~~~~~~~~
+../src/timer.c:74:13: error: static declaration of ‘set_num_timers’ follows non-static declaration
+../src/timer.c:39:5: note: previous implicit declaration of ‘set_num_timers’ with type ‘void(int)’
+   39 |     set_num_timers(temp);
+      |     ^~~~~~~~~~~~~~
+../src/timer.c:74:13: warning: ‘set_num_timers’ defined but not used [-Wunused-function]
+   74 | static void set_num_timers(int n) {
+      |             ^~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/timer.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:11:50 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/main.o: in function `main':
+/home/ivan/SO/fondOS/kernel/bin/../src/main.c:46: undefined reference to `set_num_timers'
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov  5 03:13:14 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
