@@ -1,15 +1,18 @@
 
-#include <task_map.h>
+#include <OS_task/task_map.h>
+#include <stdio.h>
 #include <timer.h>
 #include <errors.h>
 
 Timer task_map[TASK_LIST_LENGTH];
+int number_of_tasks = 0;
 
 ErrorCode add_task(int task_id, Timer timer) {
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
     }
     task_map[task_id] = timer;
+    number_of_tasks++;
     return OK;
 }
 

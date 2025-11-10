@@ -7,6 +7,7 @@
 #include <stdint.h>
 
 #include <sync_resources.h>
+#include <OS_task/task_map.h>
 #include <errors.h>
 #include <utils.h>
 #include <types.h>
@@ -22,7 +23,7 @@ pthread_t clock_tid;
 static void* clock_thread() {
     while(1){
         pthread_mutex_lock(&mutex);
-        while (done < num_timers) {
+        while (done < number_of_tasks) {
                 pthread_cond_wait(&cond, &mutex);
         }
         done = 0;

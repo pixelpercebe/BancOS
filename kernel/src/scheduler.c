@@ -1,4 +1,6 @@
 #include <scheduler.h>
+
+#include <stdlib.h>
 #include <errors.h>
 #include <types.h>
 #include <OS_task/task_def.h>
@@ -8,11 +10,10 @@
 //&list[index]
 //list + index
 
-ErrorCode init_scheduler()
+ErrorCode init_scheduler(int tick_freq)
 {
-    // Initialize the task scheduler
-    // Set up task lists, priority levels, etc.
-    init_timer_module(10, TIMER_ACTIVE, scheduler, &task_map[SCHE]);
+    int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &task_map[SCHE]);
+    if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
     print_task_map();
     return OK;
 }
@@ -21,7 +22,7 @@ ErrorCode init_scheduler()
 
 void scheduler()
 {
-    printf("IAM SCHEDULER");
+    printf("\nIAM SCHEDULER\n");
 }
 
 

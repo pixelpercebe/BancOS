@@ -353,3 +353,483 @@ gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resource
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/sync_resources.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 04:57:18 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:59:5: warning: implicit declaration of function ‘init_scheduler’ [-Wimplicit-function-declaration]
+   59 |     init_scheduler();
+      |     ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+../src/task_map.c:2:10: fatal error: task_map.h: No such file or directory
+    2 | #include <task_map.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [../build/Makefile:37: ../src/task_map.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 04:57:49 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:59:5: warning: implicit declaration of function ‘init_scheduler’ [-Wimplicit-function-declaration]
+   59 |     init_scheduler();
+      |     ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+../src/task_map.c: In function ‘print_task_map’:
+../src/task_map.c:42:9: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+   42 |         printf("Task ID: %d, Timer ID: %d, Duration: %d, Active: %d\n",
+      |         ^~~~~~
+../src/task_map.c:3:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+    2 | #include <OS_task/task_map.h>
+  +++ |+#include <stdio.h>
+    3 | #include <timer.h>
+../src/task_map.c:42:9: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   42 |         printf("Task ID: %d, Timer ID: %d, Duration: %d, Active: %d\n",
+      |         ^~~~~~
+../src/task_map.c:42:9: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:71: warning: ignoring ‘#pragma region Asignacion’ [-Wunknown-pragmas]
+   71 |     #pragma region Asignacion de Memoria Dinamica para Timer
+      | 
+../src/timer.c:82: warning: ignoring ‘#pragma endregion ’ [-Wunknown-pragmas]
+   82 |     #pragma endregion
+      | 
+../src/timer.c:85:42: warning: passing argument 3 of ‘pthread_create’ from incompatible pointer type [-Wincompatible-pointer-types]
+   85 |     if (pthread_create(&timer_tid, NULL, timer, timer_arg) != 0) {
+      |                                          ^~~~~
+      |                                          |
+      |                                          Timer * {aka struct timer *}
+In file included from ../src/timer.c:5:
+/usr/include/pthread.h:204:36: note: expected ‘void * (*)(void *)’ but argument is of type ‘Timer *’ {aka ‘struct timer *’}
+  204 |                            void *(*__start_routine) (void *),
+      |                            ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:40:14: warning: ‘timer’ defined but not used [-Wunused-function]
+   40 | static void* timer(void *arg) {
+      |              ^~~~~
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/clock.o: warning: relocation against `num_timers' in read-only section `.text'
+/usr/bin/ld: ../src/clock.o: in function `clock_thread':
+/home/ivan/SO/fondOS/kernel/tools/../src/clock.c:25: undefined reference to `num_timers'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 04:59:49 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:71: warning: ignoring ‘#pragma region Asignacion’ [-Wunknown-pragmas]
+   71 |     #pragma region Asignacion de Memoria Dinamica para Timer
+      | 
+../src/timer.c:82: warning: ignoring ‘#pragma endregion ’ [-Wunknown-pragmas]
+   82 |     #pragma endregion
+      | 
+../src/timer.c:85:42: warning: passing argument 3 of ‘pthread_create’ from incompatible pointer type [-Wincompatible-pointer-types]
+   85 |     if (pthread_create(&timer_tid, NULL, timer, timer_arg) != 0) {
+      |                                          ^~~~~
+      |                                          |
+      |                                          Timer * {aka struct timer *}
+In file included from ../src/timer.c:5:
+/usr/include/pthread.h:204:36: note: expected ‘void * (*)(void *)’ but argument is of type ‘Timer *’ {aka ‘struct timer *’}
+  204 |                            void *(*__start_routine) (void *),
+      |                            ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/timer.c: At top level:
+../src/timer.c:40:14: warning: ‘timer’ defined but not used [-Wunused-function]
+   40 | static void* timer(void *arg) {
+      |              ^~~~~
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/clock.o: warning: relocation against `num_timers' in read-only section `.text'
+/usr/bin/ld: ../src/clock.o: in function `clock_thread':
+/home/ivan/SO/fondOS/kernel/tools/../src/clock.c:25: undefined reference to `num_timers'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:01:16 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+../src/timer.c: In function ‘init_timer_module’:
+../src/timer.c:77:42: warning: passing argument 3 of ‘pthread_create’ from incompatible pointer type [-Wincompatible-pointer-types]
+   77 |     if (pthread_create(&timer_tid, NULL, timer, timer) != 0) {
+      |                                          ^~~~~
+      |                                          |
+      |                                          Timer * {aka struct timer *}
+In file included from ../src/timer.c:5:
+/usr/include/pthread.h:204:36: note: expected ‘void * (*)(void *)’ but argument is of type ‘Timer *’ {aka ‘struct timer *’}
+  204 |                            void *(*__start_routine) (void *),
+      |                            ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/timer.c:77:5: warning: passing argument 4 to ‘restrict’-qualified parameter aliases with argument 3 [-Wrestrict]
+   77 |     if (pthread_create(&timer_tid, NULL, timer, timer) != 0) {
+      |     ^~
+../src/timer.c: At top level:
+../src/timer.c:40:14: warning: ‘timer’ defined but not used [-Wunused-function]
+   40 | static void* timer(void *arg) {
+      |              ^~~~~
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/clock.o: warning: relocation against `num_timers' in read-only section `.text'
+/usr/bin/ld: ../src/clock.o: in function `clock_thread':
+/home/ivan/SO/fondOS/kernel/tools/../src/clock.c:25: undefined reference to `num_timers'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:02:24 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/clock.o: warning: relocation against `num_timers' in read-only section `.text'
+/usr/bin/ld: ../src/clock.o: in function `clock_thread':
+/home/ivan/SO/fondOS/kernel/tools/../src/clock.c:25: undefined reference to `num_timers'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:02:55 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/clock.o: warning: relocation against `num_timers' in read-only section `.text'
+/usr/bin/ld: ../src/clock.o: in function `clock_thread':
+/home/ivan/SO/fondOS/kernel/tools/../src/clock.c:25: undefined reference to `num_timers'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:28:17 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:32:46 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:40:38 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘check_args’:
+../src/main.c:32:25: warning: assignment to ‘int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   32 |     scheduler_tick_freq = atoi(argv[2]);
+      |                         ^
+../src/main.c:38:16: error: incompatible types when assigning to type ‘float *’ from type ‘double’
+   38 |     freq_cpu = atof(argv[1]);
+      |                ^~~~
+make: *** [../build/Makefile:37: ../src/main.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:45:01 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:46:39 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:55:43 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:72:5: warning: implicit declaration of function ‘init_process_generator’ [-Wimplicit-function-declaration]
+   72 |     init_process_generator(proc_gen_freq);
+      |     ^~~~~~~~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c: In function ‘init_process_generator’:
+../src/process_generator.c:28:24: warning: the comparison will always evaluate as ‘false’ for the address of ‘print_task_map’ will never be NULL [-Waddress]
+   28 |     if (print_task_map == NULL) return ERR_TIMER_INIT;
+      |                        ^~
+In file included from ../src/process_generator.c:7:
+../include/OS_task/task_map.h:18:6: note: ‘print_task_map’ declared here
+   18 | void print_task_map();
+      |      ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘init_scheduler’:
+../src/scheduler.c:14:24: warning: the comparison will always evaluate as ‘false’ for the address of ‘print_task_map’ will never be NULL [-Waddress]
+   14 |     if (print_task_map == NULL) return ERR_TIMER_INIT;
+      |                        ^~
+In file included from ../src/scheduler.c:5:
+../include/OS_task/task_map.h:18:6: note: ‘print_task_map’ declared here
+   18 | void print_task_map();
+      |      ^~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:56:57 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:72:5: warning: implicit declaration of function ‘init_process_generator’ [-Wimplicit-function-declaration]
+   72 |     init_process_generator(proc_gen_freq);
+      |     ^~~~~~~~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c: In function ‘init_process_generator’:
+../src/process_generator.c:28:13: warning: comparison between pointer and integer
+   28 |     if (ret == NULL) return ERR_TIMER_INIT;
+      |             ^~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘init_scheduler’:
+../src/scheduler.c:14:13: warning: comparison between pointer and integer
+   14 |     if (ret == NULL) return ERR_TIMER_INIT;
+      |             ^~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:57:58 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:72:5: warning: implicit declaration of function ‘init_process_generator’ [-Wimplicit-function-declaration]
+   72 |     init_process_generator(proc_gen_freq);
+      |     ^~~~~~~~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘init_scheduler’:
+../src/scheduler.c:14:32: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+   14 |     if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
+      |                                ^~~~
+../src/scheduler.c:7:1: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+    6 | #include <stdio.h>
+  +++ |+#include <stdlib.h>
+    7 | #include <timer.h>
+../src/scheduler.c:14:32: warning: incompatible implicit declaration of built-in function ‘exit’ [-Wbuiltin-declaration-mismatch]
+   14 |     if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
+      |                                ^~~~
+../src/scheduler.c:14:32: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:58:46 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:72:5: warning: implicit declaration of function ‘init_process_generator’ [-Wimplicit-function-declaration]
+   72 |     init_process_generator(proc_gen_freq);
+      |     ^~~~~~~~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 05:59:45 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:72:5: warning: implicit declaration of function ‘init_process_generator’ [-Wimplicit-function-declaration]
+   72 |     init_process_generator(proc_gen_freq);
+      |     ^~~~~~~~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 06:00:14 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 06:06:56 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c: In function ‘generate_process’:
+../src/process_generator.c:46:5: warning: implicit declaration of function ‘print_processes’ [-Wimplicit-function-declaration]
+   46 |     print_processes();
+      |     ^~~~~~~~~~~~~~~
+../src/process_generator.c: At top level:
+../src/process_generator.c:49:13: warning: conflicting types for ‘print_processes’; have ‘void()’
+   49 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+../src/process_generator.c:49:13: error: static declaration of ‘print_processes’ follows non-static declaration
+../src/process_generator.c:46:5: note: previous implicit declaration of ‘print_processes’ with type ‘void()’
+   46 |     print_processes();
+      |     ^~~~~~~~~~~~~~~
+../src/process_generator.c:49:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   49 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/process_generator.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Nov 10 06:07:21 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o

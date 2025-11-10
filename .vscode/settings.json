@@ -8,6 +8,8 @@
         "errors.h": "c",
         "cstddef": "cpp",
         "task_map.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "types.h": "c",
+        "scheduler.h": "c"
     }
 }

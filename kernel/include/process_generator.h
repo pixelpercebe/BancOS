@@ -2,7 +2,12 @@
 #define PROCESS_GENERATOR_H
 
 #include <pcb.h>
+#include <errors.h>
 
-void generate_process(PCB process[]);
+#define MAX_PCB 10
+extern PCB process[MAX_PCB];
+
+ErrorCode init_process_generator(int proc_gen_freq);
+void generate_process();
 
 #endif // PROCESS_GENERATOR_H
