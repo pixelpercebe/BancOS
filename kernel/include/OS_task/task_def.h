@@ -11,10 +11,8 @@ https://www.freecodeformat.com/md516.php
 #ifndef TASK_DEF_H
 #define TASK_DEF_H
 
-#define SCHE "c830e3dcc26e2baf"     // Scheduler task
-#define DISP "c3e5ce1ce480c242"     // Dispatcher task
-#define PROC_GEN "39eba635da0ffb2d" // Process Generator task
-
-#define TASK_HASH_LENGTH 16
+#define SCHE 0     // Scheduler task
+#define DISP 1     // Dispatcher task
+#define PROC_GEN 2 // Process Generator task
 
 #endif

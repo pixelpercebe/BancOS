@@ -4,6 +4,10 @@
         "sync_resources.h": "c",
         "utils.h": "c",
         "timer.h": "c",
-        "clock.h": "c"
+        "clock.h": "c",
+        "errors.h": "c",
+        "cstddef": "cpp",
+        "task_map.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -14,15 +14,6 @@ typedef struct timer
     void (*callback)(void);
 } Timer;
 
-extern int last_id;
-
-Timer timers_list[MAX_TIMERS]; //todo borrar lista de timers
-
-ErrorCode add_timer(int duration);
-ErrorCode remove_timer(int timer_id);
-ErrorCode activate_timer(int timer_id);
-ErrorCode deactivate_timer(int timer_id);
-
 ErrorCode init_timer_module();
 
 //void set_num_timers(int n);

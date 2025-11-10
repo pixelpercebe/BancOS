@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <stdint.h>
 
+#include <types.h>
+#include <OS_task/task_map.h>
 #include <clock.h>
 #include <timer.h>
 #include <errors.h>
@@ -51,12 +53,10 @@ int main(int argc, char *argv[]) {
     if (clock_tid == ERR_CLOCK_INIT) {
         fprintf(stderr, "Error al inicializar el módulo de reloj. Código de error: %d\n", clock_tid);
         return clock_tid;
+    
     }
-    int timer_result = init_timer_module(n_timers);
-    if (timer_result == ERR_TIMER_INIT) {
-        fprintf(stderr, "Error al inicializar el módulo de temporizadores. Código de error: %d\n", timer_result);
-        return timer_result;
-    }
+
+    init_scheduler();
     
     //while(1), esperar indefinidamente
     pause(); 

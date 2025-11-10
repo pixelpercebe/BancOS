@@ -1,23 +1,19 @@
 
 #ifndef OS_TASK_TASK_MAP_H
 #define OS_TASK_TASK_MAP_H
-#include <cstddef>
+#include <timer.h>
+#include <errors.h>
 
 
-typedef struct ht ht;
+#define TASK_LIST_LENGTH 16
 
+extern Timer task_map[TASK_LIST_LENGTH]; //todo borrar lista de timers
 
-typedef struct {
-    const char* key;  // sys task hash
-    void* value;      // task control timer struct pointer
+ErrorCode add_task(int task_id, Timer timer);
+ErrorCode get_task_timer(int task_id, Timer *timer);
+ErrorCode activate_task(int task_id);
+ErrorCode deactivate_task(int task_id);
 
-    // Don't use these fields directly.
-    ht* _table;       // reference to hash table being iterated
-    size_t _index;    // current index into ht._entries
-} hti;
-
-hti ht_iterator(ht* table);
-int ht_iterator_has_next(hti* iterator);
-void ht_iterator_next(hti* iterator);
+void print_task_map();
 
 #endif // OS_TASK_TASK_MAP_H
