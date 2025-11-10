@@ -3,7 +3,8 @@
 
 typedef enum {
     OK = 0, 
-    ERR_CLOCK_INIT = 1,
+    ERR_ARGS = 1,
+    ERR_CLOCK_INIT,
     ERR_TIMER_INIT,
     ERR_MEMORY_INSUFFICIENT,
     ERR_INVALID_PARAMETER,

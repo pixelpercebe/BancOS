@@ -17,24 +17,34 @@
 #define INT_ERROR(code, msg, value) \
     (fprintf(stderr, msg, value), code)
 */
+float freq_cpu;
+int n_timers;
 
-int main(int argc, char *argv[]) {
+static ErrorCode check_args(int argc, char* argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Uso: %s <tiempo_en_ghz_CPU> <velocidad_generacion_procesos> <velocidad_dispatcher + scheduler> \n", argv[0]);
-        return 1;
+        return ERR_ARGS;
         //return INT_ERROR(1, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
     }
 
     int n_timers = atoi(argv[1]);
     if (n_timers <= 0) {
         fprintf(stderr, "El número de temporizadores debe ser positivo.\n");
-        return 1;
+        return ERR_ARGS;
     }
 
     float freq_cpu = atof(argv[2]);
     if (freq_cpu <= 0) {
         fprintf(stderr, "La frecuencia de la CPU debe ser positiva.\n");
-        return 1;
+        return ERR_ARGS;
+    }
+    return OK;
+}
+
+int main(int argc, char *argv[]) {
+    ErrorCode err = check_args(argc, argv);
+    if (err != OK) {
+        return err;
     }
 
     int clock_tid = init_clock_module(freq_cpu);
@@ -47,8 +57,6 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error al inicializar el módulo de temporizadores. Código de error: %d\n", timer_result);
         return timer_result;
     }
-    
-
     
     //while(1), esperar indefinidamente
     pause(); 

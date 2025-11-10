@@ -8,5 +8,4 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;
 
 volatile u_llong global_ticks = 0;
-volatile int num_timers = 0;
 volatile int done = 0;
