@@ -7,7 +7,7 @@
 
 #define TASK_LIST_LENGTH 16
 
-extern Timer task_map[TASK_LIST_LENGTH]; //todo borrar lista de timers
+extern Timer task_map[TASK_LIST_LENGTH];
 extern int number_of_tasks;
 
 ErrorCode add_task(int task_id, Timer timer);

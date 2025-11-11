@@ -7,6 +7,13 @@
 Timer task_map[TASK_LIST_LENGTH];
 int number_of_tasks = 0;
 
+
+/**
+ * @brief Añade una tarea al mapa de tareas.
+ * @param task_id: ID de la tarea.
+ * @param timer: Estructura Timer asociada a la tarea.
+ * @return: Código de error.
+ */
 ErrorCode add_task(int task_id, Timer timer) {
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
@@ -16,6 +23,12 @@ ErrorCode add_task(int task_id, Timer timer) {
     return OK;
 }
 
+/**
+ * @brief Obtiene el temporizador asociado a una tarea.
+ * @param task_id: ID de la tarea.
+ * @param timer: Puntero a la estructura Timer donde se almacenará el temporizador.
+ * @return: Código de error.
+ */
 ErrorCode get_task_timer(int task_id, Timer *timer){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
@@ -24,6 +37,12 @@ ErrorCode get_task_timer(int task_id, Timer *timer){
     return OK;
 }
 
+
+/**
+ * @brief Activa una tarea en el mapa de tareas.
+ * @param task_id: ID de la tarea.
+ * @return: Código de error.
+ */
 ErrorCode activate_task(int task_id){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
@@ -31,6 +50,12 @@ ErrorCode activate_task(int task_id){
     task_map[task_id].is_active = TIMER_ACTIVE;
     return OK;
 }
+
+/**
+ * @brief Desactiva una tarea en el mapa de tareas.
+ * @param task_id: ID de la tarea.
+ * @return: Código de error.
+ */
 ErrorCode deactivate_task(int task_id){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
@@ -39,6 +64,10 @@ ErrorCode deactivate_task(int task_id){
     return OK;
 }
 
+
+/**
+ * @brief Imprime el mapa de tareas.
+ */
 void print_task_map() {
     for (int i = 0; i < TASK_LIST_LENGTH; i++) {
         Timer timer = task_map[i];

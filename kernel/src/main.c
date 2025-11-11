@@ -21,7 +21,15 @@
     (fprintf(stderr, msg, value), code)
 */
 
-
+/**
+ * @brief Verifica y procesa los argumentos de la línea de comandos.
+ * @param argc: Número de argumentos.
+ * @param argv: Array de argumentos.
+ * @param freq_cpu: Puntero para almacenar la frecuencia de la CPU.
+ * @param scheduler_tick_freq: Puntero para almacenar la frecuencia del scheduler.
+ * @param proc_gen_freq: Puntero para almacenar la frecuencia del generador de procesos.
+ * @return: Código de error.
+ */
 static ErrorCode check_args(int argc, char* argv[], float * freq_cpu,  int *scheduler_tick_freq, int *proc_gen_freq) {
 
     if (argc != 4) {

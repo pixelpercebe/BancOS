@@ -7,9 +7,13 @@
 #include <OS_task/task_map.h>
 #include <stdio.h>
 #include <timer.h>
-//&list[index]
-//list + index
 
+
+/**
+ * @brief Inicializa el módulo del scheduler.
+ * @param tick_freq: Frecuencia de ticks del scheduler.
+ * @return: Código de error.
+ */
 ErrorCode init_scheduler(int tick_freq)
 {
     int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &task_map[SCHE]);
@@ -19,7 +23,9 @@ ErrorCode init_scheduler(int tick_freq)
 }
 
 
-
+/**
+ * @brief Función del scheduler.
+ */
 void scheduler()
 {
     printf("\nIAM SCHEDULER\n");

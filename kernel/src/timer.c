@@ -16,6 +16,11 @@ pthread_t timer_tid;
 *********************************************************************************************************
 */
 
+
+/**
+* @brief Genera un ID único para cada temporizador.
+ * @return: ID único.
+ */
 static int get_random_id() {
     static int last_id = 0;
     return ++last_id;

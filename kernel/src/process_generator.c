@@ -13,6 +13,10 @@
 
 PCB process[MAX_PCB];
 
+
+/**
+ * @brief Imprime la lista de procesos generados.
+ */
 static void print_processes() {
     printf("Lista de procesos generados:\n");
     for (int i = 0; i < MAX_PCB; i++) {
@@ -25,13 +29,16 @@ static void print_processes() {
 
 /*
 *********************************************************************************************************
-*                                     Process generator function
+*                                 funciones del process generator.
 *
-* Description: This function generates a new process with a unique PID,
-*              a random lifetime, and calculates its final tick based on
-*              the current global ticks.
+* funciones base para el funcionamiento del generador de procesos.
 *********************************************************************************************************
 */
+/**
+ * @brief Inicializa el módulo del generador de procesos.
+ * @param proc_gen_freq: Frecuencia de generación de procesos en ticks.
+ * @return: Código de error.
+ */
 ErrorCode init_process_generator(int proc_gen_freq)
 {
     int ret = init_timer_module(proc_gen_freq,TIMER_ACTIVE, generate_process, &task_map[PROC_GEN]);
@@ -40,6 +47,10 @@ ErrorCode init_process_generator(int proc_gen_freq)
     return OK;
 }
 
+
+/**
+ * @brief Genera un nuevo proceso y lo añade a la lista de procesos.
+ */
 void generate_process()
 {
     static int process_count = 0;
