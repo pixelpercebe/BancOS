@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <os.h>
 #include <OS_task/task_def.h>
 #include <OS_task/task_map.h>
 #include <errors.h>
@@ -11,16 +12,19 @@
 #include <clock.h>
 
 
-PCB process[MAX_PCB];
+static void print_info()
+{
+    printf("\n [PROC_GEN] información del generador de procesos\n");
+}
 
 
 /**
  * @brief Imprime la lista de procesos generados.
  */
 static void print_processes() {
-    printf("Lista de procesos generados:\n");
+    print_info();
     for (int i = 0; i < MAX_PCB; i++) {
-        PCB p = process[i];
+        PCB p = bancos.all_processes[i];
         if (p.pid != 0) { // Asumiendo que un PID de 0 significa que el proceso no está inicializado
             printf("PID: %d, Lifetime: %d, Final Tick: %d\n", p.pid, p.lifetime, p.final_tick);
         }
@@ -41,7 +45,7 @@ static void print_processes() {
  */
 ErrorCode init_process_generator(int proc_gen_freq)
 {
-    int ret = init_timer_module(proc_gen_freq,TIMER_ACTIVE, generate_process, &task_map[PROC_GEN]);
+    int ret = init_timer_module(proc_gen_freq,TIMER_ACTIVE, generate_process, &bancos.task_map[PROC_GEN]);
     if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
     print_task_map();
     return OK;
@@ -61,7 +65,7 @@ void generate_process()
     new_process.final_tick = get_current_global_ticks() + new_process.lifetime;
 
 
-    process[process_count] = new_process;
+    bancos.all_processes[process_count] = new_process;
     process_count = (process_count + 1) % MAX_PCB;
     printf("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d\n", new_process.pid, new_process.lifetime, new_process.final_tick);
     print_processes();

@@ -1,5 +1,6 @@
 #include <scheduler.h>
 
+#include <os.h>
 #include <stdlib.h>
 #include <errors.h>
 #include <types.h>
@@ -8,6 +9,10 @@
 #include <stdio.h>
 #include <timer.h>
 
+static void print_info()
+{
+    printf("\n [SCHED] ejecución del scheduler\n");
+}
 
 /**
  * @brief Inicializa el módulo del scheduler.
@@ -16,7 +21,7 @@
  */
 ErrorCode init_scheduler(int tick_freq)
 {
-    int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &task_map[SCHE]);
+    int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &bancos.task_map[SCHE]);
     if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
     print_task_map();
     return OK;
@@ -28,7 +33,7 @@ ErrorCode init_scheduler(int tick_freq)
  */
 void scheduler()
 {
-    printf("\nIAM SCHEDULER\n");
+    print_info();
 }
 
 

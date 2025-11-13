@@ -5,10 +5,9 @@
 #include <errors.h>
 
 
-#define TASK_LIST_LENGTH 16
-
-extern Timer task_map[TASK_LIST_LENGTH];
-extern int number_of_tasks;
+// global
+//extern Timer task_map[TASK_LIST_LENGTH];
+//extern int number_of_tasks;
 
 ErrorCode add_task(int task_id, Timer timer);
 ErrorCode get_task_timer(int task_id, Timer *timer);

@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <timer.h>
 #include <errors.h>
+#include <os.h>
 
-Timer task_map[TASK_LIST_LENGTH];
-int number_of_tasks = 0;
 
 
 /**
@@ -18,8 +17,8 @@ ErrorCode add_task(int task_id, Timer timer) {
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
     }
-    task_map[task_id] = timer;
-    number_of_tasks++;
+    bancos.task_map[task_id] = timer;
+    bancos.number_of_tasks++;
     return OK;
 }
 
@@ -33,7 +32,7 @@ ErrorCode get_task_timer(int task_id, Timer *timer){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
     }
-    *timer = task_map[task_id];
+    *timer = bancos.task_map[task_id];
     return OK;
 }
 
@@ -47,7 +46,7 @@ ErrorCode activate_task(int task_id){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
     }
-    task_map[task_id].is_active = TIMER_ACTIVE;
+    bancos.task_map[task_id].is_active = TIMER_ACTIVE;
     return OK;
 }
 
@@ -60,7 +59,7 @@ ErrorCode deactivate_task(int task_id){
     if (task_id < 0 || task_id >= TASK_LIST_LENGTH) {
         return ERR_INVALID_TASK_ID;
     }
-    task_map[task_id].is_active = TIMER_INACTIVE;
+    bancos.task_map[task_id].is_active = TIMER_INACTIVE;
     return OK;
 }
 
@@ -70,7 +69,7 @@ ErrorCode deactivate_task(int task_id){
  */
 void print_task_map() {
     for (int i = 0; i < TASK_LIST_LENGTH; i++) {
-        Timer timer = task_map[i];
+        Timer timer = bancos.task_map[i];
         printf("Task ID: %d, Timer ID: %d, Duration: %d, Active: %d\n",
                i, timer.timer_id, timer.duration, timer.is_active);
     }

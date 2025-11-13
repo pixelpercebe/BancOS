@@ -6,6 +6,7 @@ typedef struct {
     int pid;                // ID del proceso
     int lifetime;
     int final_tick;
+    int presupuesto; 
 } PCB;
 
 #endif

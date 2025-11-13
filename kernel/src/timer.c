@@ -12,10 +12,17 @@ pthread_t timer_tid;
 
 /*
 *********************************************************************************************************
-*                                  Utilidades para la creación de timers.
+*                                  Utilidades timers
 *********************************************************************************************************
 */
 
+static void print_info(int timer_id, int tick_count, int is_counting)
+{
+    if (!is_counting)
+        printf("\n [TIMER %d] tick: %d\n", timer_id, tick_count);
+    else
+        printf("\n [TIMER %d] ejecutando\n", timer_id);
+}
 
 /**
 * @brief Genera un ID único para cada temporizador.
@@ -51,9 +58,9 @@ static void* timer(void *arg) {
     pthread_mutex_lock(&mutex);
 
     while (1) {
-        printf("temporizador %d tick %d\n", timer_id, tick_count);
+        print_info(timer_id, tick_count, 1);
         if (tick_count == timer->duration) {
-            printf("Temporizador %d ha alcanzado su duración.\n", timer_id);
+            print_info(timer_id, tick_count, 0);
             if (timer->callback != NULL) {
                 timer->callback();
             }

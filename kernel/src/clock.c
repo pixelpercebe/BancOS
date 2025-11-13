@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdint.h>
 
+#include <os.h>
 #include <sync_resources.h>
 #include <OS_task/task_map.h>
 #include <errors.h>
@@ -17,25 +18,10 @@ u_llong microseconds;
 pthread_t clock_tid;
 
 
-/**
- * @brief Función del hilo de reloj. Incrementa global_ticks y maneja la sincronización con los temporizadores.
- */
-static void* clock_thread() {
-    while(1){
-        pthread_mutex_lock(&mutex);
-        while (done < number_of_tasks) {
-                pthread_cond_wait(&cond, &mutex);
-        }
-        done = 0;
-        pthread_cond_broadcast(&cond2);
-        global_ticks++;
-        printf("global tick: %llu\n", global_ticks);
-        pthread_mutex_unlock(&mutex);
-        usleep(microseconds);       
-    }
-    return NULL;
+static void print_info(int global_tick)
+{
+    printf("\n [CLOCK] tick: %d\n", global_tick);
 }
-
 
 /**
  * @brief Convierte la frecuencia de la CPU de GHz a segundos y nanosegundos.
@@ -47,6 +33,25 @@ void freq_to_seconds(float freq_ghz, int *seconds, int *nanoseconds) {
     float total_seconds = 1.0f / freq_ghz; // Convertir GHz a segundos
     *seconds = (int)total_seconds; // Parte entera
     *nanoseconds = (int)((total_seconds - *seconds) * 1e9); // Parte fraccionaria a nanosegundos
+}
+
+/**
+ * @brief Función del hilo de reloj. Incrementa global_ticks y maneja la sincronización con los temporizadores.
+ */
+static void* clock_thread() {
+    while(1){
+        pthread_mutex_lock(&mutex);
+        while (done < bancos.number_of_tasks) {
+                pthread_cond_wait(&cond, &mutex);
+        }
+        done = 0;
+        pthread_cond_broadcast(&cond2);
+        global_ticks++;
+        print_info(global_ticks);
+        pthread_mutex_unlock(&mutex);
+        usleep(microseconds);       
+    }
+    return NULL;
 }
 
 

@@ -833,3 +833,247 @@ gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o .
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 03:58:48 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 04:02:15 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 04:31:35 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+../src/clock.c:20:13: warning: ‘print_info’ defined but not used [-Wunused-function]
+   20 | static void print_info(int global_tick)
+      |             ^~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+In file included from ../src/process_generator.c:6:
+../include/OS_task/task_def.h:5:18: error: expected identifier before numeric constant
+    5 | #define PROC_GEN 1 // Process Generator task
+      |                  ^
+../include/types.h:10:5: note: in expansion of macro ‘PROC_GEN’
+   10 |     PROC_GEN
+      |     ^~~~~~~~
+../src/process_generator.c:17:13: warning: ‘print_info’ defined but not used [-Wunused-function]
+   17 | static void print_info()
+      |             ^~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/process_generator.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 04:35:30 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+In file included from ../src/process_generator.c:6:
+../include/OS_task/task_def.h:5:18: error: expected identifier before numeric constant
+    5 | #define PROC_GEN 1 // Process Generator task
+      |                  ^
+../include/types.h:10:5: note: in expansion of macro ‘PROC_GEN’
+   10 |     PROC_GEN
+      |     ^~~~~~~~
+../src/process_generator.c:17:13: warning: ‘print_info’ defined but not used [-Wunused-function]
+   17 | static void print_info()
+      |             ^~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/process_generator.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 04:36:12 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:17:13: warning: ‘print_info’ defined but not used [-Wunused-function]
+   17 | static void print_info()
+      |             ^~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Nov 11 04:36:51 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov 12 03:47:40 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+In file included from ../include/os.h:9,
+                 from ../src/clock.c:9:
+../include/machine/machine.h:18:5: error: expected specifier-qualifier-list before ‘static’
+   18 |     static const int num_cpu;
+      |     ^~~~~~
+make: *** [../build/Makefile:37: ../src/clock.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov 12 03:48:24 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+../src/os.c: In function ‘system_init’:
+../src/os.c:10:5: warning: implicit declaration of function ‘machine_init’ [-Wimplicit-function-declaration]
+   10 |     machine_init(&bancos.machine_data);
+      |     ^~~~~~~~~~~~
+../src/os.c:14:9: warning: implicit declaration of function ‘pcb_init’ [-Wimplicit-function-declaration]
+   14 |         pcb_init(&bancos.all_processes[i]);
+      |         ^~~~~~~~
+../src/os.c:24:9: warning: implicit declaration of function ‘timer_init’ [-Wimplicit-function-declaration]
+   24 |         timer_init(&bancos.task_map[i]);
+      |         ^~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+../src/task_map.c: In function ‘add_task’:
+../src/task_map.c:20:5: error: ‘system’ undeclared (first use in this function); did you mean ‘system_t’?
+   20 |     system.task_map[task_id] = timer;
+      |     ^~~~~~
+      |     system_t
+../src/task_map.c:20:5: note: each undeclared identifier is reported only once for each function it appears in
+../src/task_map.c: In function ‘get_task_timer’:
+../src/task_map.c:35:14: error: ‘system’ undeclared (first use in this function); did you mean ‘system_t’?
+   35 |     *timer = system.task_map[task_id];
+      |              ^~~~~~
+      |              system_t
+../src/task_map.c: In function ‘activate_task’:
+../src/task_map.c:49:5: error: ‘system’ undeclared (first use in this function); did you mean ‘system_t’?
+   49 |     system.task_map[task_id].is_active = TIMER_ACTIVE;
+      |     ^~~~~~
+      |     system_t
+../src/task_map.c: In function ‘deactivate_task’:
+../src/task_map.c:62:5: error: ‘system’ undeclared (first use in this function); did you mean ‘system_t’?
+   62 |     system.task_map[task_id].is_active = TIMER_INACTIVE;
+      |     ^~~~~~
+      |     system_t
+../src/task_map.c: In function ‘print_task_map’:
+../src/task_map.c:72:23: error: ‘task_map’ undeclared (first use in this function)
+   72 |         Timer timer = task_map[i];
+      |                       ^~~~~~~~
+make: *** [../build/Makefile:37: ../src/task_map.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov 12 03:49:38 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+../src/os.c: In function ‘system_init’:
+../src/os.c:10:5: warning: implicit declaration of function ‘machine_init’ [-Wimplicit-function-declaration]
+   10 |     machine_init(&bancos.machine_data);
+      |     ^~~~~~~~~~~~
+../src/os.c:14:9: warning: implicit declaration of function ‘pcb_init’ [-Wimplicit-function-declaration]
+   14 |         pcb_init(&bancos.all_processes[i]);
+      |         ^~~~~~~~
+../src/os.c:24:9: warning: implicit declaration of function ‘timer_init’ [-Wimplicit-function-declaration]
+   24 |         timer_init(&bancos.task_map[i]);
+      |         ^~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+/usr/bin/ld: ../src/os.o: in function `system_init':
+/home/ivan/SO/fondOS/kernel/bin/../src/os.c:10: undefined reference to `machine_init'
+/usr/bin/ld: /home/ivan/SO/fondOS/kernel/bin/../src/os.c:14: undefined reference to `pcb_init'
+/usr/bin/ld: /home/ivan/SO/fondOS/kernel/bin/../src/os.c:19: undefined reference to `pcb_init'
+/usr/bin/ld: /home/ivan/SO/fondOS/kernel/bin/../src/os.c:24: undefined reference to `timer_init'
+collect2: error: ld returned 1 exit status
+make: *** [../build/Makefile:32: ../bin/bancos] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Nov 12 03:50:31 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Thu Nov 13 03:43:42 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
