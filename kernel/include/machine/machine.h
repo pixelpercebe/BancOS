@@ -2,27 +2,27 @@
 #define MACHINE_H
 #include <types.h>
 
-/*
-num_cpu = 1
-cpu_cores = 4
-cpu_clock_speed_Ghz = 3.2
-cpu_hardware_threads = 8
-cpu_cache_L1 = 32KB
-cpu_cache_L2 = 256KB
-cpu_cache_L3 = 8MB
-replacement_policy = Economical
-*/
-
-//global
 typedef struct{
-    const int num_cpu;
-    const int cpu_num_cores;
-    const double cpu_clock_speed_Ghz;
-    const int cpu_hardware_threads;
-    //static const char* cpu_cache_L1;
-    //static const char* cpu_cache_L2;
-    //static const char* cpu_cache_L3;
-    //static const char* replacement_policy; 
+    u_int num_cpu;
+    u_int cpu_num_cores;
+    u_long cpu_clock_speed_Ghz;
+    u_int cpu_hardware_threads;
+    u_int cpu_cache_L1;
+    u_int cpu_cache_L2;
+    u_int cpu_cache_L3;
+    char * replacement_policy;
+    u_int scheduler_tick_freq;
 } Machine;
+
+
+#define FIELD_NUM_CPU "num_CPU"
+#define FIELD_CORES "num_cpu_cores"
+#define FIELD_CLOCK_SPEED "cpu_clock_speed_Ghz"
+#define FIELD_THREADS "cpu_hardware_threads"
+#define FIELD_CACHE_L1 "cpu_cache_L1"
+#define FIELD_CACHE_L2 "cpu_cache_L2"
+#define FIELD_CACHE_L3 "cpu_cache_L3"
+#define FIELD_REPLACEMENT_POLICY "replacement_policy"
+#define FIELD_SCHED_TICK_FREQ "scheduler_tick_freq"
 
 #endif

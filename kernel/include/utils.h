@@ -24,5 +24,5 @@ typedef struct {
 
 
 void calculate_microseconds(int seconds, int nanoseconds, u_llong *microseconds);
-void trim_ini(const char *filepath, char *output, size_t max_length);
+void trim_ini(const char *filepath, ini_file_t *output, size_t max_length);
 #endif // UTILS_H

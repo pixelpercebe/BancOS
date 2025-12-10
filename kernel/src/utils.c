@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <errors.h>
 #include <stdio.h>
+#include <string.h>
 /*
  * Calcula la duración en microsegundos de cada tick basada en segundos y nanosegundos.
  */

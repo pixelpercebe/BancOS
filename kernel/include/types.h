@@ -3,9 +3,12 @@
 
 #include <pthread.h>
 
+//scheduler types
+#define ECONOMICAL "Economical"
+
 typedef  unsigned char            u_char;
 typedef  unsigned short           u_short;
-typedef  unsigned int             u_int;
+typedef  unsigned int             u_int; 
 typedef  unsigned long            u_long;
 typedef  unsigned long long       u_llong;
 

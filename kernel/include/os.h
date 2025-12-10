@@ -6,11 +6,12 @@
 #include <pcb.h>
 #include <process_generator.h>
 #include <OS_task/task_map.h>
-#include <machine/machine.h>
+#include <machine/machine.h> 
 
 #define RUN_QUEUE_SIZE 10
 #define TASK_LIST_LENGTH 4
 #define MAX_PCB 10
+
 
 typedef struct{
     Machine machine_data;
@@ -22,4 +23,6 @@ typedef struct{
     Timer task_map[TASK_LIST_LENGTH];
 } system_t;
 
+
 extern system_t bancos;
+int load_machine_config();
