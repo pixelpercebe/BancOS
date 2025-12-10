@@ -12,6 +12,8 @@
 #define TASK_LIST_LENGTH 4
 #define MAX_PCB 10
 
+#define PARAM_CONF_FILE "-confile"
+
 
 typedef struct{
     Machine machine_data;

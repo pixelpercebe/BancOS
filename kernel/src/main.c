@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <string.h>
 
 #include <types.h>
 #include <scheduler.h>
@@ -16,6 +17,8 @@
 #include <timer.h>
 #include <errors.h>
 #include <sync_resources.h>
+#include <os.h>
+
 /*
 #define INT_ERROR(code, msg, value) \
     (fprintf(stderr, msg, value), code)
@@ -32,6 +35,15 @@
  */
 static ErrorCode check_args(int argc, char* argv[], float * freq_cpu,  int *scheduler_tick_freq, int *proc_gen_freq) {
 
+
+    if (argc == 2 && strcmp(argv[1],"PARAM_CONF_FILE")) {
+        load_machine_config();
+        *freq_cpu = bancos.machine_data.cpu_clock_speed_Ghz;
+        *scheduler_tick_freq = bancos.machine_data.scheduler_tick_freq;
+        *proc_gen_freq = bancos.machine_data.scheduler_tick_freq;
+        return OK;
+    }
+
     if (argc != 4) {
         fprintf(stderr, "Uso: %s <tiempo_en_ghz_CPU> <velocidad_dispatcher + scheduler> <velocidad_proceso_generador>\n", argv[0]);
         return ERR_ARGS;
@@ -40,6 +52,7 @@ static ErrorCode check_args(int argc, char* argv[], float * freq_cpu,  int *sche
 
 
     *freq_cpu = (float) atof(argv[1]);
+    
     if (*freq_cpu <= 0) {
         fprintf(stderr, "La frecuencia de la CPU debe ser positiva.\n");
         return ERR_ARGS;

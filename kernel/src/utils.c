@@ -37,9 +37,10 @@ void delete_white_spaces(char *str, char* output) {
  */
 void trim_ini(const char *filepath, ini_file_t *output, size_t max_length) {
     //todo : implementar funcion para leer archivos ini y parsear valores
+    printf("\npath: %s",filepath);
     FILE *file = fopen(filepath, "r");
     if (file == NULL) {
-        perror("Error al abrir el archivo");
+        perror("UTILS_ERR Error al abrir el archivo");
         return;
     }
 

@@ -29,6 +29,7 @@ int load_machine_config(){
         return ERR_CONFIG_FILE; // O manejar el error apropiadamente
     }
 
+    printf("configuracion enviada desde %s ",FULLPATH_MACHINE_CONFIG);
     trim_ini(FULLPATH_MACHINE_CONFIG,config_hmap,500);
 
     ini_section_t * current_section= config_hmap->sections;
@@ -46,24 +47,31 @@ int load_machine_config(){
 
                 if(!strcmp(key, FIELD_NUM_CPU)){
                     bancos.machine_data.num_cpu = atoi(value);
+                    printf("\nnum cpu cargado:%d", bancos.machine_data.num_cpu);
                 }
                 if(!strcmp(key,FIELD_CORES)){
                     bancos.machine_data.cpu_num_cores = atoi(value);
+                    printf("\nnum cores por cpu cargado:%d", bancos.machine_data.cpu_num_cores);
                 }
                 if(!strcmp(key,FIELD_CLOCK_SPEED)){
                     bancos.machine_data.cpu_clock_speed_Ghz = strtoul(value,NULL,10);
+                    printf("\nclock speed cargado:%lu", bancos.machine_data.cpu_clock_speed_Ghz);
                 }
                 if(!strcmp(key,FIELD_THREADS)){
                     bancos.machine_data.cpu_hardware_threads = atoi(value);
+                    printf("\nnum threads por cpu cargado:%d", bancos.machine_data.cpu_hardware_threads);
                 }
                 if(!strcmp(key,FIELD_CACHE_L1)){
                     bancos.machine_data.cpu_cache_L1 = atoi(value);
+                    printf("\ncache L1 cargado:%d", bancos.machine_data.cpu_cache_L1);
                 }
                 if(!strcmp(key,FIELD_CACHE_L2)){
                     bancos.machine_data.cpu_cache_L2 = atoi(value);
+                    printf("\ncache L2 cargado:%d", bancos.machine_data.cpu_cache_L2);
                 }
                 if(!strcmp(key,FIELD_CACHE_L3)){
                     bancos.machine_data.cpu_cache_L3 = atoi(value);
+                    printf("\ncache L3 cargado:%d", bancos.machine_data.cpu_cache_L3);
                 }
                 current_entry = current_entry->next;
             }
@@ -80,9 +88,11 @@ int load_machine_config(){
 
                 if(!strcmp(key,FIELD_SCHED_TICK_FREQ)){
                     bancos.machine_data.scheduler_tick_freq = atoi(value);
+                    printf("\nscheduler tick freq cargado:%d", bancos.machine_data.scheduler_tick_freq);
                 }
                 if (!strcmp(key,FIELD_REPLACEMENT_POLICY)){
                     bancos.machine_data.replacement_policy = strdup(value);
+                    printf("\nreplacement policy cargado:%s", bancos.machine_data.replacement_policy);
                 }
 
                 current_entry = current_entry->next;
