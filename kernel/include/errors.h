@@ -10,6 +10,7 @@ typedef enum {
     ERR_INVALID_PARAMETER,
     ERR_INVALID_TASK_ID,
     ERR_CONFIG_FILE,
+    ABORT,
     
     // Un error final para saber el total de errores si es necesario
     MAX_ERRORS

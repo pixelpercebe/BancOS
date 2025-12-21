@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdarg.h>
+#include <errno.h>
 
 #include <types.h>
 #include <scheduler.h>
@@ -18,80 +20,150 @@
 #include <errors.h>
 #include <sync_resources.h>
 #include <os.h>
+#include <sys_paths.h>
+#include <utils.h>
 
 /*
 #define INT_ERROR(code, msg, value) \
     (fprintf(stderr, msg, value), code)
 */
 
+void print_help(char * name){
+    fprintf(stderr, "\n----- BancOS Kernel -----\n");
+    fprintf(stderr, "Uso: %s [-confile][-rpolicy][-fcpu][-ncpu][-tcpu][-schedticks]\n\n", name);
+    fprintf(stderr, "* No importa el orden de los parametros *\n\n");
+
+    fprintf(stderr, "DESCRIPCIÓN:\n");
+    fprintf(stderr, "  Simula el comportamiento de un kernel, gestionando ciclos de CPU, planificación\n");
+    fprintf(stderr, "  de procesos y políticas de reemplazo.\n\n");
+
+    fprintf(stderr, "OPCIONES DE CONFIGURACIÓN:\n");
+    fprintf(stderr, "  -confile <archivo>    Carga la configuración desde 'config/<archivo>'.\n");
+    fprintf(stderr, "                        Por defecto: 'conf/config.ini'.\n");
+    fprintf(stderr, "  -rpolicy <policy>     Define la política de reemplazo. Actual: CGS\n");
+    fprintf(stderr, "                        (Capital Gains Scheduling).\n\n");
+
+    fprintf(stderr, "PARÁMETROS DE HARDWARE (Sobrescriben el archivo de configuración):\n");
+    fprintf(stderr, "  -fcpu <float>         Frecuencia de la CPU en GHz.\n");
+    fprintf(stderr, "  -ncpu <int>           Número de núcleos (cores) disponibles.\n");
+    fprintf(stderr, "  -tcpu <int>           Número de hilos (threads) por núcleo.\n\n");
+
+    fprintf(stderr, "PARÁMETROS DE PLANIFICACIÓN:\n");
+    fprintf(stderr, "  -schedticks <int>     Número de ticks de reloj entre ejecuciones del scheduler.\n\n");
+
+    fprintf(stderr, "EJEMPLO:\n");
+    fprintf(stderr, "  %s -confile custom.ini -rpolicy CGS -fcpu 1 -ncpu 4 -tcpu 6 -schedticks 5\n", name);
+    fprintf(stderr, "----------------------------------------------------------------------\n");
+}
+
 /**
  * @brief Verifica y procesa los argumentos de la línea de comandos.
  * @param argc: Número de argumentos.
  * @param argv: Array de argumentos.
- * @param freq_cpu: Puntero para almacenar la frecuencia de la CPU.
- * @param scheduler_tick_freq: Puntero para almacenar la frecuencia del scheduler.
- * @param proc_gen_freq: Puntero para almacenar la frecuencia del generador de procesos.
  * @return: Código de error.
  */
-static ErrorCode check_args(int argc, char* argv[], float * freq_cpu,  int *scheduler_tick_freq, int *proc_gen_freq) {
-
-
-    if (argc == 2 && strcmp(argv[1],"PARAM_CONF_FILE")) {
-        load_machine_config();
-        *freq_cpu = bancos.machine_data.cpu_clock_speed_Ghz;
-        *scheduler_tick_freq = bancos.machine_data.scheduler_tick_freq;
-        *proc_gen_freq = bancos.machine_data.scheduler_tick_freq;
-        return OK;
+static ErrorCode load_args(int argc, char* argv[]) {
+    if(argc == 1){
+        load_machine_config(DEFAULT_FULLPATH_CONFIG);
+    }
+    if (argc == 2){
+        if (strcmp(argv[1],PARAM_HELP)==0){
+            print_help(argv[0]);
+            return ABORT;
+        }
+        else{
+            printf("\nERROR EN LOS ARGUMENTOS\n");
+            return ERR_ARGS;}
     }
 
-    if (argc != 4) {
-        fprintf(stderr, "Uso: %s <tiempo_en_ghz_CPU> <velocidad_dispatcher + scheduler> <velocidad_proceso_generador>\n", argv[0]);
-        return ERR_ARGS;
-        //return INT_ERROR(1, "Uso: %s <numero_de_temporizadores> <tiempo_en_ghz>\n", argv[0]);
-    }
-
-
-    *freq_cpu = (float) atof(argv[1]);
     
-    if (*freq_cpu <= 0) {
-        fprintf(stderr, "La frecuencia de la CPU debe ser positiva.\n");
-        return ERR_ARGS;
+    //carga el config.ini
+    if (argc > 2 && strcmp(argv[1],PARAM_CONF_FILE)==0) {
+        //todo el siguiente parametro es el archivo de configuracion si no, el default
+        load_machine_config(argv[2]);
+    }
+    else
+    {
+         load_machine_config(DEFAULT_FULLPATH_CONFIG);
     }
 
-    *scheduler_tick_freq = atoi(argv[2]);
-    if (*scheduler_tick_freq <= 0) {
-        fprintf(stderr, "La frecuencia del scheduler debe ser positiva.\n");
-        return ERR_ARGS;
+    for (int i = 1; i < argc-1; i++){
+
+        if(strcmp(argv[i],PARAM_FCPU)==0){
+            if (i+1 <= argc){
+                float temp_fcpu;
+                if (!safe_atof(argv[++i], &temp_fcpu) || temp_fcpu <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -fcpu: '%s'. Debe ser un número positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.machine_data.cpu_clock_speed_Ghz = temp_fcpu;
+                printf("\nfcpu: %.2ld\n", bancos.machine_data.cpu_clock_speed_Ghz);
+            }
+        }
+        if(strcmp(argv[i],PARAM_NCPU)==0){
+            if (i+1 <= argc){
+                int temp_ncpu;
+                if (!safe_atoi(argv[++i], &temp_ncpu) || temp_ncpu <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -ncpu: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.machine_data.cpu_num_cores = temp_ncpu;
+                printf("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
+            }
+        }
+        if(strcmp(argv[i],PARAM_TCPU)==0){
+            if (i+1 <= argc){
+                int temp_tcpu;
+                if (!safe_atoi(argv[++i], &temp_tcpu) || temp_tcpu <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -tcpu: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.machine_data.cpu_hardware_threads = temp_tcpu;
+                printf("\ntcpu: %d\n", bancos.machine_data.cpu_hardware_threads);
+            }
+        }
+        if(strcmp(argv[i],PARAM_RPOLICY)==0){
+            if (i+1 <= argc){
+                bancos.machine_data.replacement_policy = argv[++i];
+                printf("\nrpolicy: %s\n", bancos.machine_data.replacement_policy);
+            }
+        }
+        if(strcmp(argv[i],PARAM_SCHEDTICKS)==0){
+            if (i+1 <= argc){
+                int temp_schedticks;
+                if (!safe_atoi(argv[++i], &temp_schedticks) || temp_schedticks <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -schedticks: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.machine_data.scheduler_tick_freq = temp_schedticks;
+                printf("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
+            }
+        }
     }
-
-    *proc_gen_freq = atoi(argv[3]);
-    if (*proc_gen_freq <= 0) {
-        fprintf(stderr, "La frecuencia del generador de procesos debe ser positiva.\n");
-        return ERR_ARGS;
-    }
-
-
+    
     return OK;
 }
 
+
 int main(int argc, char *argv[]) {
-    float freq_cpu;
-    int scheduler_tick_freq;
-    int proc_gen_freq;
-    ErrorCode err = check_args(argc, argv, &freq_cpu, &scheduler_tick_freq, &proc_gen_freq);
+    
+    ErrorCode err = load_args(argc, argv);
     if (err != OK) {
         return err;
     }
+    if (err == ABORT){
+        return OK;
+    }
 
-    int clock_tid = init_clock_module(freq_cpu);
+    int clock_tid = init_clock_module(bancos.machine_data.cpu_clock_speed_Ghz);
     if (clock_tid == ERR_CLOCK_INIT) {
         fprintf(stderr, "Error al inicializar el módulo de reloj. Código de error: %d\n", clock_tid);
         return clock_tid;
     
     }
 
-    init_scheduler(scheduler_tick_freq);
-    init_process_generator(proc_gen_freq);
+    init_scheduler(bancos.machine_data.scheduler_tick_freq);
+    init_process_generator(2);
 
     //while(1), esperar indefinidamente
     pause(); 

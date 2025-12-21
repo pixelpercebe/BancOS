@@ -5,7 +5,7 @@
 #include <timer.h>
 #include <pcb.h>
 #include <process_generator.h>
-#include <OS_task/task_map.h>
+
 #include <machine/machine.h> 
 
 #define RUN_QUEUE_SIZE 10
@@ -13,6 +13,12 @@
 #define MAX_PCB 10
 
 #define PARAM_CONF_FILE "-confile"
+#define PARAM_HELP "-help"
+#define PARAM_NCPU "-ncpu"
+#define PARAM_TCPU "-tcpu"
+#define PARAM_FCPU "-fcpu"
+#define PARAM_RPOLICY "-rpolicy"
+#define PARAM_SCHEDTICKS "-schedticks"
 
 
 typedef struct{

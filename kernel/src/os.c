@@ -18,19 +18,18 @@ void system_init(){
     load_machine_config();
 }
 
-int load_machine_config(){
+int load_machine_config(char * filepath){
     //todo: cargar configuracion de maquina desde archivo ini utils trim_ini() y parsear valores
     //void trim_ini(const char *filepath, ini_file_t *output, size_t max_length)
     ini_file_t *config_hmap = (ini_file_t *)malloc(sizeof(ini_file_t));
-    
+    char full_path[256];
     // VERIFICACIÓN: Siempre verifica si malloc falló
     if (config_hmap == NULL) {
-        perror("Error al asignar memoria para config_hmap");
         return ERR_CONFIG_FILE; // O manejar el error apropiadamente
     }
-
-    printf("configuracion enviada desde %s ",FULLPATH_MACHINE_CONFIG);
-    trim_ini(FULLPATH_MACHINE_CONFIG,config_hmap,500);
+    
+    snprintf(full_path, sizeof(full_path), "%s%s", CONFIG_PATH, filepath);
+    trim_ini(full_path,config_hmap,500);
 
     ini_section_t * current_section= config_hmap->sections;
     while (current_section != NULL){
@@ -92,7 +91,7 @@ int load_machine_config(){
                 }
                 if (!strcmp(key,FIELD_REPLACEMENT_POLICY)){
                     bancos.machine_data.replacement_policy = strdup(value);
-                    printf("\nreplacement policy cargado:%s", bancos.machine_data.replacement_policy);
+                    printf("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
                 }
 
                 current_entry = current_entry->next;

@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <types.h>
+#include <stdbool.h>
 
 //todo crear struct para manejar archivos ini como hashmaps
 typedef struct ini_entry {
@@ -22,7 +23,13 @@ typedef struct {
     ini_section_t *sections; // Puntero a la primera sección
 } ini_file_t;
 
-
 void calculate_microseconds(int seconds, int nanoseconds, u_llong *microseconds);
 void trim_ini(const char *filepath, ini_file_t *output, size_t max_length);
+void print_array(void*array, size_t element_size, size_t length);
+
+// Funciones de conversión segura
+bool safe_atoi(const char *str, int *result);
+bool safe_atof(const char *str, float *result);
+bool safe_atod(const char *str, double *result);
+
 #endif // UTILS_H

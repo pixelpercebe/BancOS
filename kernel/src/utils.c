@@ -7,6 +7,9 @@
 #include <errors.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
+#include <limits.h>
+#include <math.h>
 /*
  * Calcula la duración en microsegundos de cada tick basada en segundos y nanosegundos.
  */
@@ -98,4 +101,67 @@ void print_array(void*array, size_t element_size, size_t length) {
         
     }
     printf("\n");
+}
+
+/**
+ * @brief Convierte string a entero de forma segura
+ * @param str: String a convertir
+ * @param result: Puntero donde guardar el resultado
+ * @return: true si la conversión fue exitosa, false en caso contrario
+ */
+bool safe_atoi(const char *str, int *result) {
+    if (str == NULL || *str == '\0') return false;
+    
+    char *endptr;
+    errno = 0;
+    long val = strtol(str, &endptr, 10);
+    
+    // Verificar errores de conversión
+    if (errno == ERANGE || val > INT_MAX || val < INT_MIN) return false;
+    if (endptr == str || *endptr != '\0') return false;
+    
+    *result = (int)val;
+    return true;
+}
+
+/**
+ * @brief Convierte string a float de forma segura
+ * @param str: String a convertir
+ * @param result: Puntero donde guardar el resultado
+ * @return: true si la conversión fue exitosa, false en caso contrario
+ */
+bool safe_atof(const char *str, float *result) {
+    if (str == NULL || *str == '\0') return false;
+    
+    char *endptr;
+    errno = 0;
+    double val = strtof(str, &endptr);
+    
+    // Verificar errores de conversión
+    if (errno == ERANGE || isnan(val) || isinf(val)) return false;
+    if (endptr == str || *endptr != '\0') return false;
+    
+    *result = (float)val;
+    return true;
+}
+
+/**
+ * @brief Convierte string a double de forma segura
+ * @param str: String a convertir
+ * @param result: Puntero donde guardar el resultado
+ * @return: true si la conversión fue exitosa, false en caso contrario
+ */
+bool safe_atod(const char *str, double *result) {
+    if (str == NULL || *str == '\0') return false;
+    
+    char *endptr;
+    errno = 0;
+    double val = strtod(str, &endptr);
+    
+    // Verificar errores de conversión
+    if (errno == ERANGE || isnan(val) || isinf(val)) return false;
+    if (endptr == str || *endptr != '\0') return false;
+    
+    *result = val;
+    return true;
 }
