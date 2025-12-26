@@ -79,7 +79,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
     
     //carga el config.ini
     if (argc > 2 && strcmp(argv[1],PARAM_CONF_FILE)==0) {
-        //todo el siguiente parametro es el archivo de configuracion si no, el default
+        //el siguiente parametro es el archivo de configuracion si no, el default
         load_machine_config(argv[2]);
     }
     else

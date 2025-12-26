@@ -15,11 +15,11 @@ system_t bancos;
 
 void system_init(){
     printf("Sistema inicializado\n");
-    load_machine_config();
+    //todo corregir que no se le este dando uso a esta funcion
 }
 
 int load_machine_config(char * filepath){
-    //todo: cargar configuracion de maquina desde archivo ini utils trim_ini() y parsear valores
+    //cargar configuracion de maquina desde archivo ini utils trim_ini() y parsear valores
     //void trim_ini(const char *filepath, ini_file_t *output, size_t max_length)
     ini_file_t *config_hmap = (ini_file_t *)malloc(sizeof(ini_file_t));
     char full_path[256];

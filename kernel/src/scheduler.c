@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <timer.h>
 
+const initial_budget = 100;
+
 static void print_info()
 {
     printf("\n [SCHED] ejecución del scheduler\n");
@@ -33,6 +35,8 @@ ErrorCode init_scheduler(int tick_freq)
  */
 void scheduler()
 {
+    u_llong budget = initial_budget;
+
     print_info();
 }
 
