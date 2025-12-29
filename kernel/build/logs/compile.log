@@ -2534,3 +2534,502 @@ gcc ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/s
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:00:23 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+In file included from ../src/clock.c:9:
+../include/os.h:30:5: error: unknown type name ‘Core’
+   30 |     Core *cores;
+      |     ^~~~
+make: *** [../build/Makefile:37: ../src/clock.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:01:03 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+../src/machine.c: In function ‘init_machine_architecture’:
+../src/machine.c:6:1: warning: control reaches end of non-void function [-Wreturn-type]
+    6 | }
+      | ^
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:17:7: error: type defaults to ‘int’ in declaration of ‘initial_budget’ [-Wimplicit-int]
+   17 | const initial_budget = 100;
+      |       ^~~~~~~~~~~~~~
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:02:27 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:09:17 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:17:29 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘load_args’:
+../src/main.c:112:37: warning: format ‘%ld’ expects argument of type ‘long int’, but argument 2 has type ‘double’ [-Wformat=]
+  112 |                 printf("\nfcpu: %.2ld\n", bancos.machine_data.cpu_clock_speed_Ghz);
+      |                                 ~~~~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     |                        |
+      |                                     long int                 double
+      |                                 %.2f
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+../src/os.c: In function ‘load_machine_config’:
+../src/os.c:59:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   59 |                     safe_atoi(value, &bancos.machine_data.num_cpu);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+In file included from ../src/os.c:7:
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:63:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   63 |                     safe_atoi(value, &bancos.machine_data.cpu_num_cores);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:71:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   71 |                     safe_atoi(value, &bancos.machine_data.cpu_hardware_threads);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:75:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   75 |                     safe_atoi(value, &bancos.machine_data.cpu_cache_L1);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:79:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   79 |                     safe_atoi(value, &bancos.machine_data.cpu_cache_L2);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:83:38: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   83 |                     safe_atoi(value, &bancos.machine_data.cpu_cache_L3);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:23:28 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+../src/os.c: In function ‘load_machine_config’:
+../src/os.c:59:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   59 |                     if (safe_atoi(value, &bancos.machine_data.num_cpu)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+In file included from ../src/os.c:7:
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:67:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   67 |                     if (safe_atoi(value, &bancos.machine_data.cpu_num_cores)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:83:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   83 |                     if (safe_atoi(value, &bancos.machine_data.cpu_hardware_threads)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:91:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   91 |                     if (safe_atoi(value, &bancos.machine_data.cpu_cache_L1)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:99:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+   99 |                     if (safe_atoi(value, &bancos.machine_data.cpu_cache_L2)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+../src/os.c:107:42: warning: pointer targets in passing argument 2 of ‘safe_atoi’ differ in signedness [-Wpointer-sign]
+  107 |                     if (safe_atoi(value, &bancos.machine_data.cpu_cache_L3)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                          |
+      |                                          u_int * {aka unsigned int *}
+../include/utils.h:31:38: note: expected ‘int *’ but argument is of type ‘u_int *’ {aka ‘unsigned int *’}
+   31 | bool safe_atoi(const char *str, int *result);
+      |                                 ~~~~~^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:24:27 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:26:41 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:28:42 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:28:50 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:32:26 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:34:55 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:39:47 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:44:39 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:66:13: warning: unused variable ‘budget’ [-Wunused-variable]
+   66 |     u_llong budget = initial_budget;
+      |             ^~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:44:54 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:50:04 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:51:02 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:52:32 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Mon Dec 29 12:55:15 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o

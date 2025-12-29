@@ -165,3 +165,29 @@ bool safe_atod(const char *str, double *result) {
     *result = val;
     return true;
 }
+
+/**
+ * @brief Convierte string a unsigned int de forma segura
+ * @param str: String a convertir
+ * @param result: Puntero donde guardar el resultado
+ * @return: true si la conversión fue exitosa, false en caso contrario
+ */
+bool safe_atoui(const char *str, u_int *result) {
+    if (str == NULL || *str == '\0') return false;
+    printf("Convirtiendo string a u_int: '%s'\n", str);
+    char *endptr;
+    errno = 0;
+    // Usamos base 10
+    unsigned long val = strtoul(str, &endptr, 10);
+    
+    // Verificar errores de conversión
+    // 1. ERANGE: Desbordamiento del tipo long
+    // 2. val > UINT_MAX: El número cabe en long pero es demasiado grande para u_int
+    if (errno == ERANGE || val > UINT_MAX) return false;
+    
+    // 3. No se convirtieron caracteres o quedaron caracteres basura
+    if (endptr == str || *endptr != '\0') return false;
+    
+    *result = (u_int)val;
+    return true;
+}

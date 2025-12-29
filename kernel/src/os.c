@@ -6,6 +6,9 @@
 #include <timer.h>
 #include <utils.h>
 #include <sys_paths.h>
+#include <errors.h>
+#include <machine/core.h>
+#include <scheduler.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,9 +18,17 @@ system_t bancos;
 
 void system_init(){
     printf("Sistema inicializado\n");
-    //todo corregir que no se le este dando uso a esta funcion
+    if (init_cores_struct() != OK){
+        printf("Error al inicializar estructuras de cores\n");
+        exit(ERR_CORE_INIT);
+    }
+    if (init_scheduler(bancos.machine_data.scheduler_tick_freq) != OK) {
+        printf("Error al inicializar el scheduler\n");
+        exit(ERR_SCHEDULER_INIT);
+    }
 }
 
+//todo cambiar uso de atoi por safe atoi donde sea necesario
 int load_machine_config(char * filepath){
     //cargar configuracion de maquina desde archivo ini utils trim_ini() y parsear valores
     //void trim_ini(const char *filepath, ini_file_t *output, size_t max_length)
@@ -47,30 +58,58 @@ int load_machine_config(char * filepath){
                 if(!strcmp(key, FIELD_NUM_CPU)){
                     bancos.machine_data.num_cpu = atoi(value);
                     printf("\nnum cpu cargado:%d", bancos.machine_data.num_cpu);
+                    if (bancos.machine_data.num_cpu <= 0){
+                        printf("\nError: num_cpu debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_CORES)){
                     bancos.machine_data.cpu_num_cores = atoi(value);
                     printf("\nnum cores por cpu cargado:%d", bancos.machine_data.cpu_num_cores);
+                    if (bancos.machine_data.cpu_num_cores <= 0){
+                        printf("\nError: cpu_num_cores debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_CLOCK_SPEED)){
-                    bancos.machine_data.cpu_clock_speed_Ghz = strtoul(value,NULL,10);
-                    printf("\nclock speed cargado:%lu", bancos.machine_data.cpu_clock_speed_Ghz);
+                    bancos.machine_data.cpu_clock_speed_Ghz = atof(value);
+                    printf("\nclock speed cargado:%f", bancos.machine_data.cpu_clock_speed_Ghz);
+                    if (bancos.machine_data.cpu_clock_speed_Ghz <= 0){
+                        printf("\nError: cpu_clock_speed_Ghz debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_THREADS)){
                     bancos.machine_data.cpu_hardware_threads = atoi(value);
                     printf("\nnum threads por cpu cargado:%d", bancos.machine_data.cpu_hardware_threads);
+                    if (bancos.machine_data.cpu_hardware_threads <= 0){
+                        printf("\nError: cpu_hardware_threads debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_CACHE_L1)){
                     bancos.machine_data.cpu_cache_L1 = atoi(value);
                     printf("\ncache L1 cargado:%d", bancos.machine_data.cpu_cache_L1);
+                    if (bancos.machine_data.cpu_cache_L1 <= 0){
+                        printf("\nError: cpu_cache_L1 debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_CACHE_L2)){
                     bancos.machine_data.cpu_cache_L2 = atoi(value);
                     printf("\ncache L2 cargado:%d", bancos.machine_data.cpu_cache_L2);
+                    if (bancos.machine_data.cpu_cache_L2 <= 0){
+                        printf("\nError: cpu_cache_L2 debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 if(!strcmp(key,FIELD_CACHE_L3)){
                     bancos.machine_data.cpu_cache_L3 = atoi(value);
                     printf("\ncache L3 cargado:%d", bancos.machine_data.cpu_cache_L3);
+                    if (bancos.machine_data.cpu_cache_L3 <= 0){
+                        printf("\nError: cpu_cache_L3 debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
                 }
                 current_entry = current_entry->next;
             }
@@ -97,12 +136,42 @@ int load_machine_config(char * filepath){
                 current_entry = current_entry->next;
             }
         }
-
         else {
             printf("ERROR - Formato de archivo config erroneo\n");
             return ERR_CONFIG_FILE;
         }
         current_section = current_section->next;
     } 
+    bancos.machine_data.total_cores = bancos.machine_data.num_cpu * bancos.machine_data.cpu_num_cores;
+    printf("\ntotal cores cargado:%d", bancos.machine_data.total_cores);
+    bancos.machine_data.total_hardware_threads = bancos.machine_data.total_cores * bancos.machine_data.cpu_hardware_threads;
+    printf("\ntotal hardware threads cargado:%d\n", bancos.machine_data.total_hardware_threads);
+    return OK;
+}
+
+//todo mover a machine.c
+ErrorCode init_cores_struct(){
+    printf("\nInicializando %d cores en total\n", bancos.machine_data.total_cores);
+    bancos.cores = (Core *)malloc(sizeof(Core) * bancos.machine_data.total_cores);
+    if (bancos.cores == NULL) {
+        return ERR_MEMORY_INSUFFICIENT; // Manejar error de asignación de memoria
+    }
+
+    for (int i = 0; i < bancos.machine_data.total_cores; i++) {
+        bancos.cores[i].core_id = i;
+        bancos.cores[i].num_configured_threads = bancos.machine_data.cpu_hardware_threads;
+        bancos.cores[i].threads = (HardwareThread *)malloc(sizeof(HardwareThread) * bancos.machine_data.cpu_hardware_threads);
+        printf("Core %d: Inicializando %d hardware threads\n", i, bancos.machine_data.cpu_hardware_threads);
+        if (bancos.cores[i].threads == NULL) {
+            return ERR_MEMORY_INSUFFICIENT; // Manejar error de asignación de memoria
+        }
+        for (int j = 0; j < bancos.machine_data.cpu_hardware_threads; j++) {
+            bancos.cores[i].threads[j].thread_id = j;
+            bancos.cores[i].threads[j].current_process = NULL;
+            bancos.cores[i].threads[j].is_idle = 1; // Inicialmente inactivo
+            printf("  Core %d - Hardware Thread %d inicializado\n", i, j);
+        }
+        bancos.cores[i].current_rent_price = PRECIO_ALQUILER_BASE; // Precio base inicial
+    }
     return OK;
 }

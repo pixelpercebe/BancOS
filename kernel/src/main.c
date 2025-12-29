@@ -45,8 +45,9 @@ void print_help(char * name){
 
     fprintf(stderr, "PARÁMETROS DE HARDWARE (Sobrescriben el archivo de configuración):\n");
     fprintf(stderr, "  -fcpu <float>         Frecuencia de la CPU en GHz.\n");
-    fprintf(stderr, "  -ncpu <int>           Número de núcleos (cores) disponibles.\n");
-    fprintf(stderr, "  -tcpu <int>           Número de hilos (threads) por núcleo.\n\n");
+    fprintf(stderr, "  -ncpu <int>           Número de CPUs disponibles.\n");
+    fprintf(stderr, "  -ncores <int>         Número de núcleos (cores) disponibles.\n");
+    fprintf(stderr, "  -tcores <int>         Número de hilos (threads) por núcleo.\n\n");
 
     fprintf(stderr, "PARÁMETROS DE PLANIFICACIÓN:\n");
     fprintf(stderr, "  -schedticks <int>     Número de ticks de reloj entre ejecuciones del scheduler.\n\n");
@@ -89,6 +90,17 @@ static ErrorCode load_args(int argc, char* argv[]) {
 
     for (int i = 1; i < argc-1; i++){
 
+        if (strcmp(argv[i],PARAM_NCORES)==0){
+            if (i+1 <= argc){
+                int temp_ncores;
+                if (!safe_atoi(argv[++i], &temp_ncores) || temp_ncores <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -ncores: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.machine_data.cpu_num_cores = temp_ncores;
+                printf("\nncores: %d\n", bancos.machine_data.cpu_num_cores);
+            }
+        }
         if(strcmp(argv[i],PARAM_FCPU)==0){
             if (i+1 <= argc){
                 float temp_fcpu;
@@ -97,7 +109,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_clock_speed_Ghz = temp_fcpu;
-                printf("\nfcpu: %.2ld\n", bancos.machine_data.cpu_clock_speed_Ghz);
+                printf("\nfcpu: %.2f\n", bancos.machine_data.cpu_clock_speed_Ghz);
             }
         }
         if(strcmp(argv[i],PARAM_NCPU)==0){
@@ -111,15 +123,15 @@ static ErrorCode load_args(int argc, char* argv[]) {
                 printf("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
             }
         }
-        if(strcmp(argv[i],PARAM_TCPU)==0){
+        if(strcmp(argv[i],PARAM_TCORES)==0){
             if (i+1 <= argc){
-                int temp_tcpu;
-                if (!safe_atoi(argv[++i], &temp_tcpu) || temp_tcpu <= 0) {
-                    fprintf(stderr, "Error: Valor inválido para -tcpu: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                int temp_tcores;
+                if (!safe_atoi(argv[++i], &temp_tcores) || temp_tcores <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -tcores: '%s'. Debe ser un entero positivo.\n", argv[i]);
                     return ERR_ARGS;
                 }
-                bancos.machine_data.cpu_hardware_threads = temp_tcpu;
-                printf("\ntcpu: %d\n", bancos.machine_data.cpu_hardware_threads);
+                bancos.machine_data.cpu_hardware_threads = temp_tcores;
+                printf("\ntcores: %d\n", bancos.machine_data.cpu_hardware_threads);
             }
         }
         if(strcmp(argv[i],PARAM_RPOLICY)==0){
@@ -161,9 +173,8 @@ int main(int argc, char *argv[]) {
         return clock_tid;
     
     }
-
-    init_scheduler(bancos.machine_data.scheduler_tick_freq);
-    init_process_generator(2);
+    system_init();
+    init_process_generator(2); //borrar en el futuro, solo para pruebas
 
     //while(1), esperar indefinidamente
     pause(); 

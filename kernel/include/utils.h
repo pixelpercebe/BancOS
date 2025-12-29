@@ -31,5 +31,6 @@ void print_array(void*array, size_t element_size, size_t length);
 bool safe_atoi(const char *str, int *result);
 bool safe_atof(const char *str, float *result);
 bool safe_atod(const char *str, double *result);
+bool safe_atoui(const char *str, u_int *result);
 
 #endif // UTILS_H

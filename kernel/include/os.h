@@ -5,6 +5,7 @@
 #include <timer.h>
 #include <pcb.h>
 #include <process_generator.h>
+#include <machine/core.h>
 
 #include <machine/machine.h> 
 
@@ -15,7 +16,8 @@
 #define PARAM_CONF_FILE "-confile"
 #define PARAM_HELP "-help"
 #define PARAM_NCPU "-ncpu"
-#define PARAM_TCPU "-tcpu"
+#define PARAM_NCORES "-ncores"
+#define PARAM_TCORES "-tcore"
 #define PARAM_FCPU "-fcpu"
 #define PARAM_RPOLICY "-rpolicy"
 #define PARAM_SCHEDTICKS "-schedticks"
@@ -26,6 +28,7 @@ typedef struct{
 
     PCB all_processes[MAX_PCB];
     int number_of_tasks;
+    Core *cores;
 
     PCB ready_queue[RUN_QUEUE_SIZE];
     Timer task_map[TASK_LIST_LENGTH];
@@ -34,3 +37,5 @@ typedef struct{
 
 extern system_t bancos;
 int load_machine_config();
+ErrorCode init_cores_struct();
+void system_init();

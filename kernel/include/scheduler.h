@@ -19,7 +19,7 @@ extern PCB ready_process;
 
 // Estructuras del Scheduler
 typedef struct {
-    // Tus colas, bitmaps, árboles...
+    //colas, bitmaps, árboles...
 } RunQueue;
 
 
@@ -29,6 +29,7 @@ extern PCB waiting_proc_vec[];
 
 ErrorCode init_scheduler(int tick_freq);
 void scheduler();
+void * local_scheduler(void *arg);
 
 #endif // SCHEDULER_H
 
