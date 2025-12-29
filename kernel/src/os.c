@@ -161,7 +161,6 @@ ErrorCode init_cores_struct(){
         bancos.cores[i].core_id = i;
         bancos.cores[i].num_configured_threads = bancos.machine_data.cpu_hardware_threads;
         bancos.cores[i].threads = (HardwareThread *)malloc(sizeof(HardwareThread) * bancos.machine_data.cpu_hardware_threads);
-        printf("Core %d: Inicializando %d hardware threads\n", i, bancos.machine_data.cpu_hardware_threads);
         if (bancos.cores[i].threads == NULL) {
             return ERR_MEMORY_INSUFFICIENT; // Manejar error de asignación de memoria
         }
@@ -169,7 +168,6 @@ ErrorCode init_cores_struct(){
             bancos.cores[i].threads[j].thread_id = j;
             bancos.cores[i].threads[j].current_process = NULL;
             bancos.cores[i].threads[j].is_idle = 1; // Inicialmente inactivo
-            printf("  Core %d - Hardware Thread %d inicializado\n", i, j);
         }
         bancos.cores[i].current_rent_price = PRECIO_ALQUILER_BASE; // Precio base inicial
     }

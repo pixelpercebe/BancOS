@@ -34,7 +34,7 @@ ErrorCode init_scheduler(int tick_freq)
 
 
     // Crear hilos de scheduler local para cada core
-    for (int i = 0; i < bancos.machine_data.cpu_num_cores; i++) {
+    for (int i = 0; i < bancos.machine_data.total_cores; i++) {
         Core *core = &bancos.cores[i];
         // Inicializar herramientas de sincronización
         if (pthread_mutex_init(&core->lock, NULL) != 0) {

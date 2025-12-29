@@ -66,6 +66,7 @@ void print_help(char * name){
 static ErrorCode load_args(int argc, char* argv[]) {
     if(argc == 1){
         load_machine_config(DEFAULT_FULLPATH_CONFIG);
+        return OK;
     }
     if (argc == 2){
         if (strcmp(argv[1],PARAM_HELP)==0){
