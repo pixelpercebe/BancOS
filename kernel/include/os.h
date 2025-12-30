@@ -36,6 +36,4 @@ typedef struct{
 
 
 extern system_t bancos;
-int load_machine_config();
-ErrorCode init_cores_struct();
 void system_init();

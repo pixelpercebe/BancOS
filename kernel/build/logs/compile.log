@@ -3087,3 +3087,173 @@ gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_gen
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 12:03:43 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+../src/machine.c: In function ‘init_machine_architecture’:
+../src/machine.c:10:9: error: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+   10 |         printf("Error al inicializar estructuras de cores\n");
+      |         ^~~~~~
+../src/machine.c:6:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+    5 | #include <sys_paths.h>
+  +++ |+#include <stdio.h>
+    6 | 
+../src/machine.c:10:9: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   10 |         printf("Error al inicializar estructuras de cores\n");
+      |         ^~~~~~
+../src/machine.c:10:9: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:11:9: error: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+   11 |         exit(ERR_CORE_INIT);
+      |         ^~~~
+../src/machine.c:6:1: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+    5 | #include <sys_paths.h>
+  +++ |+#include <stdlib.h>
+    6 | 
+../src/machine.c:11:9: warning: incompatible implicit declaration of built-in function ‘exit’ [-Wbuiltin-declaration-mismatch]
+   11 |         exit(ERR_CORE_INIT);
+      |         ^~~~
+../src/machine.c:11:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+../src/machine.c: In function ‘load_machine_config’:
+../src/machine.c:20:45: error: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+   20 |     ini_file_t *config_hmap = (ini_file_t *)malloc(sizeof(ini_file_t));
+      |                                             ^~~~~~
+../src/machine.c:20:45: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+../src/machine.c:20:45: warning: incompatible implicit declaration of built-in function ‘malloc’ [-Wbuiltin-declaration-mismatch]
+../src/machine.c:20:45: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+../src/machine.c:27:5: error: implicit declaration of function ‘snprintf’ [-Wimplicit-function-declaration]
+   27 |     snprintf(full_path, sizeof(full_path), "%s%s", CONFIG_PATH, filepath);
+      |     ^~~~~~~~
+../src/machine.c:27:5: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+../src/machine.c:27:5: warning: incompatible implicit declaration of built-in function ‘snprintf’ [-Wbuiltin-declaration-mismatch]
+../src/machine.c:27:5: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+../src/machine.c:34:14: error: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+   34 |         if (!strcmp(name, "machine")){
+      |              ^~~~~~
+../src/machine.c:6:1: note: include ‘<string.h>’ or provide a declaration of ‘strcmp’
+    5 | #include <sys_paths.h>
+  +++ |+#include <string.h>
+    6 | 
+../src/machine.c:44:51: error: implicit declaration of function ‘atoi’ [-Wimplicit-function-declaration]
+   44 |                     bancos.machine_data.num_cpu = atoi(value);
+      |                                                   ^~~~
+../src/machine.c:45:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   45 |                     printf("\nnum cpu cargado:%d", bancos.machine_data.num_cpu);
+      |                     ^~~~~~
+../src/machine.c:45:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:53:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   53 |                     printf("\nnum cores por cpu cargado:%d", bancos.machine_data.cpu_num_cores);
+      |                     ^~~~~~
+../src/machine.c:53:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:60:63: error: implicit declaration of function ‘atof’ [-Wimplicit-function-declaration]
+   60 |                     bancos.machine_data.cpu_clock_speed_Ghz = atof(value);
+      |                                                               ^~~~
+../src/machine.c:61:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   61 |                     printf("\nclock speed cargado:%f", bancos.machine_data.cpu_clock_speed_Ghz);
+      |                     ^~~~~~
+../src/machine.c:61:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:69:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   69 |                     printf("\nnum threads por cpu cargado:%d", bancos.machine_data.cpu_hardware_threads);
+      |                     ^~~~~~
+../src/machine.c:69:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:77:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   77 |                     printf("\ncache L1 cargado:%d", bancos.machine_data.cpu_cache_L1);
+      |                     ^~~~~~
+../src/machine.c:77:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:85:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   85 |                     printf("\ncache L2 cargado:%d", bancos.machine_data.cpu_cache_L2);
+      |                     ^~~~~~
+../src/machine.c:85:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:93:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+   93 |                     printf("\ncache L3 cargado:%d", bancos.machine_data.cpu_cache_L3);
+      |                     ^~~~~~
+../src/machine.c:93:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:114:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+  114 |                     printf("\nscheduler tick freq cargado:%d", bancos.machine_data.scheduler_tick_freq);
+      |                     ^~~~~~
+../src/machine.c:114:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:117:62: error: implicit declaration of function ‘strdup’ [-Wimplicit-function-declaration]
+  117 |                     bancos.machine_data.replacement_policy = strdup(value);
+      |                                                              ^~~~~~
+../src/machine.c:117:62: warning: incompatible implicit declaration of built-in function ‘strdup’ [-Wbuiltin-declaration-mismatch]
+../src/machine.c:118:21: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+  118 |                     printf("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
+      |                     ^~~~~~
+../src/machine.c:118:21: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:125:13: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+  125 |             printf("ERROR - Formato de archivo config erroneo\n");
+      |             ^~~~~~
+../src/machine.c:125:13: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:131:5: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+  131 |     printf("\ntotal cores cargado:%d", bancos.machine_data.total_cores);
+      |     ^~~~~~
+../src/machine.c:131:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c: In function ‘init_cores_struct’:
+../src/machine.c:139:5: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+  139 |     printf("\nInicializando %d cores en total\n", bancos.machine_data.total_cores);
+      |     ^~~~~~
+../src/machine.c:139:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/machine.c:140:28: warning: incompatible implicit declaration of built-in function ‘malloc’ [-Wbuiltin-declaration-mismatch]
+  140 |     bancos.cores = (Core *)malloc(sizeof(Core) * bancos.machine_data.total_cores);
+      |                            ^~~~~~
+../src/machine.c:140:28: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+../src/machine.c:167:13: error: implicit declaration of function ‘perror’ [-Wimplicit-function-declaration]
+  167 |             perror("Error al inicializar el mutex del core.");
+      |             ^~~~~~
+make: *** [../build/Makefile:37: ../src/machine.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 12:04:03 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+../src/main.c: In function ‘main’:
+../src/main.c:178:9: error: implicit declaration of function ‘init_machine_architecture’ [-Wimplicit-function-declaration]
+  178 |     if (init_machine_architecture() != OK){
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/main.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 12:08:50 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘init_scheduler’:
+../src/scheduler.c:34:25: error: assignment to ‘struct RunQueue *’ from incompatible pointer type ‘RunQueue *’ [-Wincompatible-pointer-types]
+   34 |         core->run_queue = (RunQueue *)malloc(sizeof(RunQueue));
+      |                         ^
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 12:17:03 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o

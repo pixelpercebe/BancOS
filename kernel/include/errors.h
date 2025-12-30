@@ -16,6 +16,7 @@ typedef enum {
     ERR_COND_INIT,
     ERR_CORE_INIT,
     ERR_SCHEDULER_INIT,
+    ERR_MACHINE_ARCH_INIT,
     ABORT,
     
     // Un error final para saber el total de errores si es necesario

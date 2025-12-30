@@ -5,11 +5,9 @@
 #include <pcb.h>
 #include <errors.h>
 
-
-#define SUELDO_BASE 100
 extern PCB ready_process;
 
-
+#define SUELDO_BASE 100
 #define SALARIO_POBRE 100
 #define SALARIO_MEDIA 500
 #define SALARIO_ALTA  5000
@@ -18,14 +16,16 @@ extern PCB ready_process;
 
 
 // Estructuras del Scheduler
-typedef struct {
+typedef struct RunQueue {
+    //PCB *processes[RUN_QUEUE_CAPACITY]; // Asegúrate de definir el array
     //colas, bitmaps, árboles...
+    PCB *head;
+    PCB *tail;
+    int count;
+    PCB *richest;
 } RunQueue;
 
-
-extern PCB ready_proc_vec[];
 extern PCB waiting_proc_vec[];
-
 
 ErrorCode init_scheduler(int tick_freq);
 void scheduler();

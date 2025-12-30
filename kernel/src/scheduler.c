@@ -28,31 +28,30 @@ static void print_info()
  */
 ErrorCode init_scheduler(int tick_freq)
 {
-    int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &bancos.task_map[SCHE]);
-    if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
-    print_task_map();
-
-
     // Crear hilos de scheduler local para cada core
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
         Core *core = &bancos.cores[i];
-        // Inicializar herramientas de sincronización
-        if (pthread_mutex_init(&core->lock, NULL) != 0) {
-            perror("Error al inicializar el mutex del core.");
-            return ERR_MUTEX_INIT;
-        }
-        if (pthread_cond_init(&core->wake_cond, NULL) != 0) {
-            perror("Error al inicializar la condición del core.");
-            return ERR_COND_INIT;
-        }
+        core->run_queue = (RunQueue *)malloc(sizeof(RunQueue));
+        if (core->run_queue == NULL) return ERR_MEMORY_INSUFFICIENT;
 
-        core->should_work = 0; // Inicialmente dormido
+        // Inicializamos la cola (función auxiliar o manual)
+        core->run_queue = NULL; // Inicialización simple por ahora
+        
+        
+
+        // Fijamos el precio base
+        core->current_rent_price = PRECIO_ALQUILER_BASE;
 
         if (pthread_create(&core->thread_id, NULL, local_scheduler, (void *)core) != 0) {
             perror("Error al crear el hilo del core.");
             return  ERR_THREAD_CREATE;
         }
     }
+
+    int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &bancos.task_map[SCHE]);
+    if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
+    print_task_map();
+
     return OK;
 }
 
@@ -111,6 +110,12 @@ void * local_scheduler(void *arg)
         
         printf("[Core %d] Procesando ciclo...\n", mi_core->core_id);
         //gestionar_vivienda(mi_core); 
+
+
+        //completar con las funciones necesarias para gestionar la vivienda del core
+        //llamada al dispatcher
+
+
 
         // 3. MARCAR TRABAJO TERMINADO
         pthread_mutex_lock(&mi_core->lock);

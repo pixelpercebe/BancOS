@@ -17,7 +17,6 @@ static int seconds, nanoseconds;
 u_llong microseconds;
 pthread_t clock_tid;
 
-
 static void print_info(int global_tick)
 {
     printf("\n [CLOCK] tick: %d\n", global_tick);
@@ -54,7 +53,6 @@ static void* clock_thread() {
     return NULL;
 }
 
-
 /**
  * @brief Inicializa el módulo de reloj. Crea el hilo de reloj y los hilos temporizadores.
  * Devuelve el ID del hilo de reloj o un código de error.
@@ -78,7 +76,6 @@ int init_clock_module(float freq_cpu) {
     printf("Frecuencia CPU: %.2f GHz -> Tiempo de tick: %d segundos y %d nanosegundos\n", freq_cpu, seconds, nanoseconds);
     return clock_tid;
 }
-
 
 
 /**

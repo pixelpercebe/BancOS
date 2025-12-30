@@ -1,6 +1,7 @@
 #ifndef MACHINE_H
 #define MACHINE_H
 #include <types.h>
+#include <errors.h>
 
 typedef struct{
     u_int num_cpu;
@@ -26,5 +27,9 @@ typedef struct{
 #define FIELD_CACHE_L3 "cpu_cache_L3"
 #define FIELD_REPLACEMENT_POLICY "replacement_policy"
 #define FIELD_SCHED_TICK_FREQ "scheduler_tick_freq"
+
+ErrorCode init_machine_architecture();
+int load_machine_config(char * filepath);
+ErrorCode init_cores_struct();
 
 #endif // MACHINE_H

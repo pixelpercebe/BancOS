@@ -15,6 +15,7 @@
 #include <types.h>
 #include <scheduler.h>
 #include <process_generator.h>
+#include <machine/machine.h>
 #include <clock.h>
 #include <timer.h>
 #include <errors.h>
@@ -78,7 +79,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
             return ERR_ARGS;}
     }
 
-    
+
     //carga el config.ini
     if (argc > 2 && strcmp(argv[1],PARAM_CONF_FILE)==0) {
         //el siguiente parametro es el archivo de configuracion si no, el default
@@ -168,14 +169,18 @@ int main(int argc, char *argv[]) {
         return OK;
     }
 
+    if (init_machine_architecture() != OK){
+        printf("Error al inicializar la arquitectura de la máquina\n");
+        exit(ERR_MACHINE_ARCH_INIT);
+    }
+    system_init(); //inicializa el sistema (scheduler, colas, etc)
+    init_process_generator(2); //borrar en el futuro, solo para pruebas
+
     int clock_tid = init_clock_module(bancos.machine_data.cpu_clock_speed_Ghz);
     if (clock_tid == ERR_CLOCK_INIT) {
         fprintf(stderr, "Error al inicializar el módulo de reloj. Código de error: %d\n", clock_tid);
         return clock_tid;
-    
     }
-    system_init();
-    init_process_generator(2); //borrar en el futuro, solo para pruebas
 
     //while(1), esperar indefinidamente
     pause(); 
