@@ -13,10 +13,108 @@
 #include <machine/machine.h>
 #include <machine/core.h>
 
+static ErrorCode get_next_process(Core *core, PCB **out_process){
+    // Implementar la lógica para obtener el siguiente proceso de la runqueue del core
+    // Basado en la política de scheduling (CGS)
+    // Por ahora, simplemente devolvemos NULL
+    *out_process = NULL;
+    return OK;
+
+}
+
+static ErrorCode get_process_bucket(PCB *process){
+    if (process == NULL) return -1;
+    int bucket = process->budget / bancos.bucket_cgs_granularity;
+    return bucket;
+}
+
+
+static ErrorCode add_process_to_runqueue(PCB *process){
+    RunQueue *rq = NULL;
+    if (process->last_core != NULL && process->last_core > 0 && process->last_core < bancos.machine_data.total_cores) {
+        Core *core = &bancos.cores[process->last_core];
+        rq = core->run_queue;
+    } else {
+        for (int i = 0; i < bancos.machine_data.total_cores; i++) {
+            continue;
+            //todo buscar core con menos procesos
+            }
+        }
+    
+
+    //todo verificar que esto sea correcto
+    ///////////////////////////////////////////
+    if (rq == NULL || process == NULL) return ERR_INVALID_PARAMETER;
+
+    int bucket_index = get_process_bucket(process);
+    if (bucket_index < 0 || bucket_index >= rq->num_buckets) {
+        return ERR_INVALID_PARAMETER;
+    }
+
+    Bucket *bucket = &rq->buckets[bucket_index];
+
+    // Añadir el proceso al final del bucket
+    if (bucket->head == NULL) {
+        // Bucket vacío
+        bucket->head = process;
+        bucket->tail = process;
+        process->next_br = NULL;
+        process->prev_br = NULL;
+    } else {
+        // Bucket no vacío
+        bucket->tail->next_br = process;
+        process->prev_br = bucket->tail;
+        process->next_br = NULL;
+        bucket->tail = process;
+    }
+
+    // Actualizar la runqueue
+    rq->count++;
+
+    // Actualizar el bitmap de activos
+    int array_idx = bucket_index / 32;
+    int bit_pos = bucket_index % 32;
+    rq->active_bitmap[array_idx] |= (1 << bit_pos);
+
+    // Actualizar el máximo bucket activo si es necesario
+    if (bucket_index > rq->max_active_bucket) {
+        rq->max_active_bucket = bucket_index;
+    }
+
+    ///////////////////////////////////////////
+
+    return OK;
+}
+
 static void print_info()
 {
     printf("\n [SCHED] ejecución del scheduler global\n");
 }
+
+
+/**
+ * @brief Marca un bit en el mapa de bits como activo.
+ 
+static void set_bitmap_bit(RunQueue *rq, int index) {
+    int array_idx = index / 32;
+    int bit_pos = index % 32;
+    rq->active_bitmap[array_idx] |= (1 << bit_pos);
+}*/
+
+/**
+ * @brief Desmarca un bit si el bucket se vació.
+ 
+static void clear_bitmap_bit(RunQueue *rq, int index) {
+    int array_idx = index / 32;
+    int bit_pos = index % 32;
+    rq->active_bitmap[array_idx] &= ~(1 << bit_pos);
+}*/
+
+
+/*-------------------------------------------------------------------------------*
+ |                        FUNCIONES SCHEDULER PRINCIPALES                        |
+ *-------------------------------------------------------------------------------*/
+
 
 /**
  * @brief Inicializa el módulo del scheduler global y locales.
@@ -45,25 +143,20 @@ ErrorCode init_scheduler(int tick_freq)
         core->run_queue->count = 0;
         core->run_queue->num_buckets = num_buckets;
         core->run_queue->max_active_bucket = -1;
-        core->run_queue->total_processes = 0;
 
-        core->run_queue->buckets = (PCB **) calloc(num_buckets, sizeof(PCB *));
+
+        core->run_queue->buckets = (Bucket *)calloc(num_buckets, sizeof(Bucket));
         if (core->run_queue->buckets == NULL) {
             free(core->run_queue);
             return ERR_MEMORY_INSUFFICIENT;
         }
-        core->run_queue->tails = (PCB **) calloc(num_buckets, sizeof(PCB *));
-        if (core->run_queue->tails == NULL) {
-            free(core->run_queue->buckets);
-            free(core->run_queue);
-            return ERR_MEMORY_INSUFFICIENT;
-        }
 
-        int bitmaps_size = (num_buckets + 31) / 32; // Número de enteros necesarios para el bitmap
-        core->run_queue->active_bitmap = (u_int *) calloc(bitmaps_size, sizeof(u_int));
+        int bitmap_size = (num_buckets / 32) + 1;; // Número de enteros necesarios para el bitmap
+        core->run_queue->bitmap_size = bitmap_size;
+
+        core->run_queue->active_bitmap = (u_int *) calloc(bitmap_size, sizeof(u_int));
         if (core->run_queue->active_bitmap == NULL) {
             free(core->run_queue->buckets);
-            free(core->run_queue->tails);
             free(core->run_queue);
             return ERR_MEMORY_INSUFFICIENT;
         }
@@ -79,7 +172,6 @@ ErrorCode init_scheduler(int tick_freq)
     int ret = init_timer_module(tick_freq, TIMER_ACTIVE, scheduler, &bancos.task_map[SCHE]);
     if (ret == ERR_TIMER_INIT) exit(ERR_TIMER_INIT);
     print_task_map();
-
     return OK;
 }
 
@@ -90,8 +182,6 @@ ErrorCode init_scheduler(int tick_freq)
  */
 void scheduler()
 {
-    //u_llong budget = initial_budget;
-
     print_info();
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
         Core *core = &bancos.cores[i];
@@ -128,24 +218,20 @@ void * local_core_scheduler(void *arg)
         }
         pthread_mutex_unlock(&mi_core->lock);
 
-        // 2. TRABAJAR (PARALELO REAL)
-        // Aquí es donde el core gestiona SU vivienda independientemente de los demás
-        // a) Cobrar alquiler a los inquilinos (pisos)
-        // b) Ejecutar instrucciones (simulado)
-        // c) Si un inquilino se arruina -> Llamar Dispatcher (Desahucio)
-        // d) Si hay sitio libre -> Llamar Scheduler Local (Buscar nuevo inquilino rico)
         
+        // 2. SELECCIÓN (Pick Next)
+        // 3. DISPATCH (Mudanza)
+        // 4. EJECUCIÓN CON LIMITES (Runtime Dinámico)
+            // a) Pagar Impuestos
+            // b) Envejecer
+        // 5. LIQUIDACIÓN
         printf("[Core %d] Procesando ciclo...\n", mi_core->core_id);
-
         //gestionar_vivienda(mi_core); 
         dispatcher(mi_core);
 
-        //completar con las funciones necesarias para gestionar la vivienda del core
-        //llamada al dispatcher
 
 
-
-        // 3. MARCAR TRABAJO TERMINADO
+        // 6. VOLVER A DORMIR
         pthread_mutex_lock(&mi_core->lock);
         mi_core->should_work = 0; // Me vuelvo a dormir hasta el siguiente aviso
         pthread_mutex_unlock(&mi_core->lock);

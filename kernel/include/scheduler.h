@@ -6,19 +6,11 @@
 #include <errors.h>
 #include <machine/core.h>
 
-extern PCB ready_process;
-
-#define SUELDO_BASE 100
-#define SALARIO_POBRE 100
-#define SALARIO_MEDIA 500
-#define SALARIO_ALTA  5000
-
-#define PRECIO_ALQUILER_BASE 10
-
+#define PRECIO_ALQUILER_BASE 100
 
 //SALARIOS INICIALES: Con cuánto dinero nace cada clase (Define su bucket inicial)
 // y cuanto ganan al volver al scheduler
-static const int SALARIO_INICIAL[] = {
+static const int SUELDO_INICIAL[] = {
     50,    // VAGABUNDO: Bucket 5
     200,   // BAJA:      Bucket 20
     800,   // MEDIA:     Bucket 80
@@ -46,16 +38,21 @@ static const int QUANTUM_BASE[] = {
     150    // ELITE: Barra libre
 };
 
+typedef struct Bucket {
+    PCB *head;
+    PCB *tail;
+} Bucket;
+
 // Estructuras del Scheduler
 typedef struct RunQueue {
-    PCB **buckets; //array dinámico de punteros a PCB
-    PCB **tails;    //array dinamico de punteros a PCB (colas) de cada bucket
+    Bucket *buckets; //array dinámico de punteros a PCB
+
     u_int * active_bitmap; // bitmap de buckets activos
+    int bitmap_size; // Tamaño del array de ints del bitmap
 
     u_int count;     // número de procesos en la cola
     u_int num_buckets; // número de buckets
     u_int max_active_bucket; // bucket más alto que tiene procesos
-    u_int total_processes; // número total de procesos en la runqueue
 } RunQueue;
 
 extern PCB waiting_proc_vec[];
