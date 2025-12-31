@@ -32,7 +32,7 @@ typedef struct {
     // Cola de espera local (RunQueue)
     // lista de los procesos esperando piso en ESTE core
     // (estruct RunQueue en scheduler.h)
-    struct RunQueue *run_queue; 
+    struct RunQueue *run_queue;
     
 } Core;
 

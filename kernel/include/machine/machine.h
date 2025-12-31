@@ -17,17 +17,6 @@ typedef struct{
     u_int total_hardware_threads; //no se puede calcular en tiempo de compilacion
 } Machine;
 
-
-#define FIELD_NUM_CPU "num_cpu"
-#define FIELD_CORES "cpu_num_cores"
-#define FIELD_CLOCK_SPEED "cpu_clock_speed_Ghz"
-#define FIELD_THREADS "cpu_hardware_threads"
-#define FIELD_CACHE_L1 "cpu_cache_L1"
-#define FIELD_CACHE_L2 "cpu_cache_L2"
-#define FIELD_CACHE_L3 "cpu_cache_L3"
-#define FIELD_REPLACEMENT_POLICY "replacement_policy"
-#define FIELD_SCHED_TICK_FREQ "scheduler_tick_freq"
-
 ErrorCode init_machine_architecture();
 int load_machine_config(char * filepath);
 ErrorCode init_cores_struct();

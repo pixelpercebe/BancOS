@@ -61,8 +61,13 @@ void generate_process()
     PCB new_process;
 
     new_process.pid = rand() % 1000; // Generar un PID aleatorio
-    new_process.lifetime = (rand() % 10) + 1; // Duración entre 1 y 10 ticks
+    // Vida entre 50 y 250 ticks. Da tiempo a jugar con ellos.
+    new_process.lifetime = (rand() % 200) + 50;
     new_process.final_tick = get_current_global_ticks() + new_process.lifetime;
+
+    //clase social aleatoria
+    int class_rand = rand() % 5;
+    new_process.class = (SocialClass)class_rand;
 
 
     bancos.all_processes[process_count] = new_process;

@@ -4,7 +4,20 @@
 #include <types.h>
 #include <stdbool.h>
 
-//todo crear struct para manejar archivos ini como hashmaps
+//ini configurable fields
+#define FIELD_NUM_CPU "num_cpu"
+#define FIELD_CORES "cpu_num_cores"
+#define FIELD_CLOCK_SPEED "cpu_clock_speed_Ghz"
+#define FIELD_THREADS "cpu_hardware_threads"
+#define FIELD_CACHE_L1 "cpu_cache_L1"
+#define FIELD_CACHE_L2 "cpu_cache_L2"
+#define FIELD_CACHE_L3 "cpu_cache_L3"
+#define FIELD_REPLACEMENT_POLICY "replacement_policy"
+#define FIELD_SCHED_TICK_FREQ "scheduler_tick_freq"
+#define FIELD_GRANULARITY "bucket_cgs_granularity"
+#define FIELD_MAX_BUDGET "max_budget"
+
+
 typedef struct ini_entry {
     char *key;
     char *value;

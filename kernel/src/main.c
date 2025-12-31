@@ -153,6 +153,28 @@ static ErrorCode load_args(int argc, char* argv[]) {
                 printf("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
             }
         }
+        if(strcmp(argv[i],PARAM_GRANULARITY)==0){
+            if (i+1 <= argc){
+                int temp_granularity;
+                if (!safe_atoi(argv[++i], &temp_granularity) || temp_granularity <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -granularity: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.bucket_cgs_granularity = temp_granularity;
+                printf("\ngranularity: %d\n", bancos.bucket_cgs_granularity);
+            }
+        }
+        if(strcmp(argv[i],PARAM_MAX_BUDGET)==0){
+            if (i+1 <= argc){
+                int temp_max_budget;
+                if (!safe_atoi(argv[++i], &temp_max_budget) || temp_max_budget <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -max_budget: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                bancos.max_budget = temp_max_budget;
+                printf("\nmax_budget: %d\n", bancos.max_budget);
+            }
+        }
     }
     
     return OK;

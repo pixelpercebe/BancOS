@@ -6,12 +6,12 @@
 #include <pcb.h>
 #include <process_generator.h>
 #include <machine/core.h>
+#include <scheduler.h>
 
 #include <machine/machine.h> 
 
-#define RUN_QUEUE_SIZE 10
 #define TASK_LIST_LENGTH 4
-#define MAX_PCB 10
+#define MAX_PCB 100
 
 #define PARAM_CONF_FILE "-confile"
 #define PARAM_HELP "-help"
@@ -21,17 +21,23 @@
 #define PARAM_FCPU "-fcpu"
 #define PARAM_RPOLICY "-rpolicy"
 #define PARAM_SCHEDTICKS "-schedticks"
+#define PARAM_GRANULARITY "-granularity"
+#define PARAM_MAX_BUDGET "-max_budget"
 
 
 typedef struct{
     Machine machine_data;
 
-    PCB all_processes[MAX_PCB];
-    int number_of_tasks;
-    Core *cores;
+    PCB all_processes[MAX_PCB]; // Array de todos los PCBs
+    u_int number_of_tasks; // número de tareas cargadas
+    Core *cores; // Array dinámico de cores
 
-    PCB ready_queue[RUN_QUEUE_SIZE];
-    Timer task_map[TASK_LIST_LENGTH];
+    u_int bucket_cgs_granularity; // Granularidad de los buckets CGS
+    u_int max_budget; // Presupuesto máximo para un proceso
+
+    Timer task_map[TASK_LIST_LENGTH]; // Mapa de tareas del sistema
+
+    
 } system_t;
 
 

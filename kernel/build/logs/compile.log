@@ -3257,3 +3257,155 @@ gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_gen
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:35:07 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+In file included from ../include/os.h:6,
+                 from ../src/clock.c:9:
+../include/pcb.h:20:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   20 |     PCB *next_br;  // Puntero al siguiente PCB en la lista
+      |     ^~~
+      |     PCB_H
+../include/pcb.h:21:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   21 |     PCB *prev_br;  // Puntero al PCB anterior en la lista
+      |     ^~~
+      |     PCB_H
+make: *** [../build/Makefile:37: ../src/clock.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:35:22 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:42:39 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler’:
+../src/scheduler.c:74:9: error: implicit declaration of function ‘dispatcher’ [-Wimplicit-function-declaration]
+   74 |         dispatcher(core);
+      |         ^~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:131:11: error: conflicting types for ‘dispatcher’; have ‘ErrorCode(Core *)’
+  131 | ErrorCode dispatcher(Core *core) {
+      |           ^~~~~~~~~~
+../src/scheduler.c:74:9: note: previous implicit declaration of ‘dispatcher’ with type ‘int()’
+   74 |         dispatcher(core);
+      |         ^~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:43:38 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+In file included from ../src/main.c:16:
+../include/scheduler.h:33:22: error: unknown type name ‘Core’
+   33 | ErrorCode dispatcher(Core *core);
+      |                      ^~~~
+make: *** [../build/Makefile:37: ../src/main.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:43:48 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Dec 30 06:45:22 PM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Dec 31 02:43:30 AM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘init_scheduler’:
+../src/scheduler.c:66:40: error: assignment to ‘u_int’ {aka ‘unsigned int’} from ‘u_int *’ {aka ‘unsigned int *’} makes integer from pointer without a cast [-Wint-conversion]
+   66 |         core->run_queue->active_bitmap = (u_int *) calloc(bitmaps_size, sizeof(u_int));
+      |                                        ^
+../src/scheduler.c:67:44: warning: comparison between pointer and integer
+   67 |         if (core->run_queue->active_bitmap == NULL) {
+      |                                            ^~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Dec 31 02:44:59 AM CET 2025 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o

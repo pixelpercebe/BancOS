@@ -13,9 +13,6 @@
 #include <machine/machine.h>
 #include <machine/core.h>
 
-
-const u_llong initial_budget = 100;
-
 static void print_info()
 {
     printf("\n [SCHED] ejecución del scheduler global\n");
@@ -28,21 +25,52 @@ static void print_info()
  */
 ErrorCode init_scheduler(int tick_freq)
 {
+    u_int max_money = (bancos.max_budget > 0) ? bancos.max_budget : 30000;
+    u_int gran = (bancos.bucket_cgs_granularity > 0) ? bancos.bucket_cgs_granularity : 10;
+    u_int num_buckets = (max_money/gran) + 1;
+
+    printf("[SCHED] Inicializando HASH MAP Dinámico:\n");
+    printf("   - Presupuesto Max: %d\n", max_money);
+    printf("   - Granularidad:    %d (1 bucket = %d euros)\n", gran, gran);
+    printf("   - Total Buckets:   %d\n", num_buckets);
+
     // Crear hilos de scheduler local para cada core
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
         Core *core = &bancos.cores[i];
         core->run_queue = (RunQueue *)malloc(sizeof(RunQueue));
         if (core->run_queue == NULL) return ERR_MEMORY_INSUFFICIENT;
 
-        // Inicializamos la cola (función auxiliar o manual)
-        core->run_queue = NULL; // Inicialización simple por ahora
-        
-        
+        ////////////////////////////////////////////////////////////////
 
-        // Fijamos el precio base
-        core->current_rent_price = PRECIO_ALQUILER_BASE;
+        core->run_queue->count = 0;
+        core->run_queue->num_buckets = num_buckets;
+        core->run_queue->max_active_bucket = -1;
+        core->run_queue->total_processes = 0;
 
-        if (pthread_create(&core->thread_id, NULL, local_scheduler, (void *)core) != 0) {
+        core->run_queue->buckets = (PCB **) calloc(num_buckets, sizeof(PCB *));
+        if (core->run_queue->buckets == NULL) {
+            free(core->run_queue);
+            return ERR_MEMORY_INSUFFICIENT;
+        }
+        core->run_queue->tails = (PCB **) calloc(num_buckets, sizeof(PCB *));
+        if (core->run_queue->tails == NULL) {
+            free(core->run_queue->buckets);
+            free(core->run_queue);
+            return ERR_MEMORY_INSUFFICIENT;
+        }
+
+        int bitmaps_size = (num_buckets + 31) / 32; // Número de enteros necesarios para el bitmap
+        core->run_queue->active_bitmap = (u_int *) calloc(bitmaps_size, sizeof(u_int));
+        if (core->run_queue->active_bitmap == NULL) {
+            free(core->run_queue->buckets);
+            free(core->run_queue->tails);
+            free(core->run_queue);
+            return ERR_MEMORY_INSUFFICIENT;
+        }
+
+        ////////////////////////////////////////////////////////////////
+
+        if (pthread_create(&core->thread_id, NULL, local_core_scheduler, (void *)core) != 0) {
             perror("Error al crear el hilo del core.");
             return  ERR_THREAD_CREATE;
         }
@@ -67,7 +95,6 @@ void scheduler()
     print_info();
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
         Core *core = &bancos.cores[i];
-
         // Despertar el core para que trabaje en este tick
         pthread_mutex_lock(&core->lock);
         core->should_work = 1;
@@ -90,7 +117,7 @@ void scheduler()
  * @param arg: Argumento pasado a la rutina.
  * @return: Puntero nulo.
  */
-void * local_scheduler(void *arg)
+void * local_core_scheduler(void *arg)
 {
     Core *mi_core = (Core *)arg;
     while (1) {
@@ -109,8 +136,9 @@ void * local_scheduler(void *arg)
         // d) Si hay sitio libre -> Llamar Scheduler Local (Buscar nuevo inquilino rico)
         
         printf("[Core %d] Procesando ciclo...\n", mi_core->core_id);
-        //gestionar_vivienda(mi_core); 
 
+        //gestionar_vivienda(mi_core); 
+        dispatcher(mi_core);
 
         //completar con las funciones necesarias para gestionar la vivienda del core
         //llamada al dispatcher
@@ -123,6 +151,25 @@ void * local_scheduler(void *arg)
         pthread_mutex_unlock(&mi_core->lock);
     }
     return NULL;
+}
+
+ErrorCode dispatcher(Core *core) {
+    // Implementar la lógica del despachador aquí
+    // Esta función debería seleccionar un nuevo proceso para ejecutar en el core
+    // basándose en la política de scheduling y el estado de la runqueue del core
+
+    printf("[Core %d] Dispatcher invocado.\n", core->core_id);
+
+    // Ejemplo simple: seleccionar el proceso más rico de la runqueue
+    PCB *next_process = NULL;
+    if (next_process != NULL) {
+        printf("[Core %d] Seleccionando proceso PID: %d para ejecución.\n", core->core_id, next_process->pid);
+        // Aquí se implementaría la lógica para asignar el proceso al core
+    } else {
+        printf("[Core %d] No hay procesos disponibles en la runqueue.\n", core->core_id);
+    }
+
+    return OK;
 }
 
 

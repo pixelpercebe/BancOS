@@ -121,6 +121,22 @@ int load_machine_config(char * filepath){
                     bancos.machine_data.replacement_policy = strdup(value);
                     printf("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
                 }
+                if(!strcmp(key,FIELD_GRANULARITY)){
+                    bancos.bucket_cgs_granularity = atoi(value);
+                    printf("\nbucket cgs granularity cargado:%d", bancos.bucket_cgs_granularity);
+                    if (bancos.bucket_cgs_granularity <= 0){
+                        printf("\nError: bucket_cgs_granularity debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
+                }
+                if (!strcmp(key,FIELD_MAX_BUDGET)){
+                    bancos.max_budget = atoi(value);
+                    printf("\nmax budget cargado:%d", bancos.max_budget);
+                    if (bancos.max_budget <= 0){
+                        printf("\nError: max_budget debe ser mayor que 0\n");
+                        return ERR_CONFIG_FILE;
+                    }
+                }
 
                 current_entry = current_entry->next;
             }
