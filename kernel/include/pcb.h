@@ -21,8 +21,11 @@ typedef struct PCB{
     int estado;         // Estado del proceso (READY, RUNNING, BLOCKED, etc.)
 
     int budget;
-    struct PCB *next_br;  // Puntero al siguiente PCB en la lista
-    struct PCB *prev_br;  // Puntero al PCB anterior en la lista
+    PCB *next_br;  // Puntero al siguiente PCB en la lista de todos los procesos 
+    PCB *prev_br;  // Puntero al PCB anterior en la lista de todos los procesos 
+
+    PCB *next_pcb_runqueue; //proximo puntero en la runqueu del bucket
+    PCB *prev_pcb_runqueue; //proximo puntero en la runqueu del bucket
     
     //todo jerarquia de procesos
     // puntero a pcb hijos

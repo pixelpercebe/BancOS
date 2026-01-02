@@ -13,17 +13,19 @@
 #include <machine/machine.h>
 #include <machine/core.h>
 
+
 static ErrorCode get_next_process(Core *core, PCB **out_process){
     // Implementar la lógica para obtener el siguiente proceso de la runqueue del core
     // Basado en la política de scheduling (CGS)
     // Por ahora, simplemente devolvemos NULL
     *out_process = NULL;
+    
     return OK;
 
 }
 
-static ErrorCode get_process_bucket(PCB *process){
-    if (process == NULL) return -1;
+static inline ErrorCode get_process_bucket(PCB *process){
+    if (process == NULL) return ERR_INVALID_PROCESS;
     int bucket = process->budget / bancos.bucket_cgs_granularity;
     return bucket;
 }
@@ -34,11 +36,16 @@ static ErrorCode add_process_to_runqueue(PCB *process){
     if (process->last_core != NULL && process->last_core > 0 && process->last_core < bancos.machine_data.total_cores) {
         Core *core = &bancos.cores[process->last_core];
         rq = core->run_queue;
-    } else {
+    } 
+    else {
+
+        Core tmp = bancos.cores[0];
         for (int i = 0; i < bancos.machine_data.total_cores; i++) {
-            continue;
-            //todo buscar core con menos procesos
+            Core * current = bancos.cores[i].run_queue->count;
+                tmp = tmp.run_queue->count < bancos.cores[i].run_queue->count ? bancos.cores[i]: tmp;
             }
+    
+            rq = tmp.run_queue;
         }
     
 
@@ -48,7 +55,7 @@ static ErrorCode add_process_to_runqueue(PCB *process){
 
     int bucket_index = get_process_bucket(process);
     if (bucket_index < 0 || bucket_index >= rq->num_buckets) {
-        return ERR_INVALID_PARAMETER;
+        return ERR_INVALID_BUCKET;
     }
 
     Bucket *bucket = &rq->buckets[bucket_index];
