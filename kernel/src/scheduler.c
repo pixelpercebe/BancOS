@@ -158,7 +158,7 @@ static ErrorCode add_process_to_runque(Core *core, PCB *process){
 
     if (core == NULL || process == NULL) return ERR_INVALID_PARAMETER;
 
-    process->budget += SUELDO_INICIAL[process->class];
+    process->budget += INITIAL_SALARY[process->class];
     if (process->budget > bancos.max_budget) {
         process->budget = bancos.max_budget;
     }
@@ -292,21 +292,21 @@ static int get_eviction_victim_index(Core *core) {
         }
 
         //Evaluar si es el más "pobre" encontrado hasta ahora
-        int es_peor = 0;
+        int is_worse = 0;
 
         //si Clase Social más baja
         if (p->class < lowest_class) {
-            es_peor = 1;
+            is_worse = 1;
         } 
         // si la clase es igual
         else if (p->class == lowest_class) {
             if (p->budget < lowest_budget) {
-                es_peor = 1;
+                is_worse = 1;
             }
         }
 
         // Actualizar candidato
-        if (es_peor) {
+        if (is_worse) {
             lowest_class = p->class;
             lowest_budget = p->budget;
             victim_idx = i;
@@ -458,8 +458,8 @@ void * local_core_scheduler(void *arg)
             if (!slot_is_empty) {
                 
                 // a) Cobrar Impuestos (Fórmula de Coste)
-                // Asegúrate de que IMPUESTO_POR_TICK sea accesible aquí
-                int tax = IMPUESTO_POR_TICK[proc->class] + (QUANTUM_BASE[proc->class] * inflation_factor);
+                // Asegúrate de que TAX_PER_TICK sea accesible aquí
+                int tax = TAX_PER_TICK[proc->class] + (QUANTUM_BASE[proc->class] * inflation_factor);
                 proc->budget -= tax;
                 
                 // b) Envejecer

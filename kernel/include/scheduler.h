@@ -10,9 +10,9 @@
 #define INFLATION_DIVIDER 10 //nunca debe ser 0
 #define BITS_PER_WORD 32
 
-//SALARIOS INICIALES: Con cuánto dinero nace cada clase (Define su bucket inicial)
+// SALARIOS INICIALES: Con cuánto dinero nace cada clase (Define su bucket inicial)
 // y cuanto ganan al volver al scheduler
-static const int SUELDO_INICIAL[] = {
+static const int INITIAL_SALARY[] = {
     50,    // VAGABUNDO: Bucket 5
     200,   // BAJA:      Bucket 20
     800,   // MEDIA:     Bucket 80
@@ -22,7 +22,7 @@ static const int SUELDO_INICIAL[] = {
 
 // IMPUESTOS (ALQUILER): Cuánto pagan por cada tick de CPU
 //    - los ricos pagan menos proporcionalmente.
-static const int IMPUESTO_POR_TICK[] = {
+static const int TAX_PER_TICK[] = {
     5,     // VAGABUNDO: Pierde dinero despacio
     10,    // BAJA
     25,    // MEDIA: La clase media paga mucho ;)

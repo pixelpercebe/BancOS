@@ -25,12 +25,12 @@ static void print_info()
 void print_all_processes() {
     pthread_mutex_lock(&bancos.list_pcb_lock);
     
-    PCB *actual = bancos.list_pcb_head;
+    PCB *current = bancos.list_pcb_head;
     printf("\n--- LISTA GLOBAL DE PROCESOS (%d activos) ---\n", bancos.process_count);
     
-    while (actual != NULL) {
-        printf("PID: %d | Budget: %d | Estado: %d\n", actual->pid, actual->budget, actual->state);
-        actual = actual->next_br;
+    while (current != NULL) {
+        printf("PID: %d | Budget: %d | Estado: %d\n", current->pid, current->budget, current->state);
+        current = current->next_br;
     }
     
     pthread_mutex_unlock(&bancos.list_pcb_lock);
