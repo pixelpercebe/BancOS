@@ -70,7 +70,7 @@ ErrorCode deactivate_task(int task_id){
 void print_task_map() {
     for (int i = 0; i < TASK_LIST_LENGTH; i++) {
         Timer timer = bancos.task_map[i];
-        printf("Task ID: %d, Timer ID: %d, Duration: %d, Active: %d\n",
+        VERBOSE_PRINTF("Task ID: %d, Timer ID: %d, Duration: %d, Active: %d\n",
                i, timer.timer_id, timer.duration, timer.is_active);
     }
 }

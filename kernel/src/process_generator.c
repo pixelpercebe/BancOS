@@ -15,7 +15,7 @@
 
 static void print_info()
 {
-    printf("\n [PROC_GEN] información del generador de procesos\n");
+    VERBOSE_PRINTF("\n [PROC_GEN] información del generador de procesos\n");
 }
 
 
@@ -26,10 +26,10 @@ void print_all_processes() {
     pthread_mutex_lock(&bancos.list_pcb_lock);
     
     PCB *current = bancos.list_pcb_head;
-    printf("\n--- LISTA GLOBAL DE PROCESOS (%d activos) ---\n", bancos.process_count);
+    VERBOSE_PRINTF("\n--- LISTA GLOBAL DE PROCESOS (%d activos) ---\n", bancos.process_count);
     
     while (current != NULL) {
-        printf("PID: %d | Budget: %d | Estado: %d\n", current->pid, current->budget, current->state);
+        VERBOSE_PRINTF("PID: %d | Budget: %d | Estado: %d\n", current->pid, current->budget, current->state);
         current = current->next_br;
     }
     
@@ -83,7 +83,7 @@ void generate_process()
     insert_global_pcb(new_process);
 
 
-    printf("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d ,salario=%d\n", new_process->pid, new_process->lifetime, new_process->final_tick, new_process->budget);
+    VERBOSE_PRINTF("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d ,salario=%d\n", new_process->pid, new_process->lifetime, new_process->final_tick, new_process->budget);
     new_process_interruption(new_process);
 
     //print_processes();

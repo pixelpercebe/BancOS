@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <errors.h>
+#include <os.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -40,7 +41,7 @@ void delete_white_spaces(char *str, char* output) {
  */
 void trim_ini(const char *filepath, ini_file_t *output, size_t max_length) {
     //todo : implementar funcion para leer archivos ini y parsear valores
-    printf("\npath: %s",filepath);
+    VERBOSE_PRINTF("\npath: %s",filepath);
     FILE *file = fopen(filepath, "r");
     if (file == NULL) {
         perror("UTILS_ERR Error al abrir el archivo");
@@ -96,11 +97,11 @@ void print_array(void*array, size_t element_size, size_t length) {
     uint8_t *byte_array = (uint8_t *)array;
     for (size_t i = 0; i < length; i++) {
         for (size_t j = 0; j < element_size; j++) {
-            printf("%02X ", byte_array[i * element_size + j]);
+            VERBOSE_PRINTF("%02X ", byte_array[i * element_size + j]);
         }
         
     }
-    printf("\n");
+    VERBOSE_PRINTF("\n");
 }
 
 /**
@@ -174,7 +175,7 @@ bool safe_atod(const char *str, double *result) {
  */
 bool safe_atoui(const char *str, u_int *result) {
     if (str == NULL || *str == '\0') return false;
-    printf("Convirtiendo string a u_int: '%s'\n", str);
+    VERBOSE_PRINTF("Convirtiendo string a u_int: '%s'\n", str);
     char *endptr;
     errno = 0;
     // Usamos base 10

@@ -3,6 +3,6 @@
 
 #define SCHE 0   // Scheduler task
 #define PROC_GEN 1 // Process Generator task
-#define BLOCKED_PROCESS_MANAGER 2 // Blocked Process Manager task
+#define CONSOLE 2 // Console task parallel to the rest of the system
 
 #endif

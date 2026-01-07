@@ -7,6 +7,7 @@
 #include <stdint.h>
 
 #include <sync_resources.h>
+#include <os.h>
 
 pthread_t timer_tid;
 
@@ -19,9 +20,9 @@ pthread_t timer_tid;
 static void print_info(int timer_id, int tick_count, int is_counting)
 {
     if (!is_counting)
-        printf("\n [TIMER %d] tick: %d\n", timer_id, tick_count);
+        VERBOSE_PRINTF("\n [TIMER %d] tick: %d\n", timer_id, tick_count);
     else
-        printf("\n [TIMER %d] ejecutando\n", timer_id);
+        VERBOSE_PRINTF("\n [TIMER %d] ejecutando\n", timer_id);
 }
 
 /**

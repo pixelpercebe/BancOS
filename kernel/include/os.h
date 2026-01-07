@@ -22,6 +22,10 @@
 #define PARAM_SCHEDTICKS "-schedticks"
 #define PARAM_GRANULARITY "-granularity"
 #define PARAM_MAX_BUDGET "-max_budget"
+#define PARAM_VERBOSE "-verbose"
+
+// Helper macro to print only when verbose_mode is enabled
+#define VERBOSE_PRINTF(...) do { if (bancos.verbose_mode) printf(__VA_ARGS__); } while (0)
 
 
 typedef struct system_t{
@@ -44,7 +48,7 @@ typedef struct system_t{
 
     Timer task_map[TASK_LIST_LENGTH]; // Mapa de tareas del sistema
 
-    
+    int verbose_mode; // Modo verbose activado/desactivado
 } system_t;
 
 

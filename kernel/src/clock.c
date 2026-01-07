@@ -19,7 +19,7 @@ pthread_t clock_tid;
 
 static void print_info(int global_tick)
 {
-    printf("\n [CLOCK] tick: %d\n", global_tick);
+    VERBOSE_PRINTF("\n [CLOCK] tick: %d\n", global_tick);
 }
 
 /**
@@ -73,7 +73,7 @@ int init_clock_module(float freq_cpu) {
     
     freq_to_seconds(freq_cpu, &seconds, &nanoseconds);
     calculate_microseconds(seconds, nanoseconds, &microseconds);
-    printf("Frecuencia CPU: %.2f GHz -> Tiempo de tick: %d segundos y %d nanosegundos\n", freq_cpu, seconds, nanoseconds);
+    VERBOSE_PRINTF("Frecuencia CPU: %.2f GHz -> Tiempo de tick: %d segundos y %d nanosegundos\n", freq_cpu, seconds, nanoseconds);
     return clock_tid;
 }
 

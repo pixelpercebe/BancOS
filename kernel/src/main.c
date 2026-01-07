@@ -28,6 +28,8 @@
 #define INT_ERROR(code, msg, value) \
     (fprintf(stderr, msg, value), code)
 */
+//verbose mode variable
+static int verbose_mode;
 
 void print_help(char * name){
     fprintf(stderr, "\n----- BancOS Kernel -----\n");
@@ -90,8 +92,13 @@ static ErrorCode load_args(int argc, char* argv[]) {
          load_machine_config(DEFAULT_FULLPATH_CONFIG);
     }
 
-    for (int i = 1; i < argc-1; i++){
-
+    for (int i = 1; i < argc; i++){
+        //verbose mode
+        if (strcmp(argv[i],PARAM_VERBOSE)==0){
+            VERBOSE_PRINTF("\nVerbose mode activated\n");
+            verbose_mode = 1;
+        }
+        //ncores
         if (strcmp(argv[i],PARAM_NCORES)==0){
             if (i+1 <= argc){
                 int temp_ncores;
@@ -100,7 +107,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_num_cores = temp_ncores;
-                printf("\nncores: %d\n", bancos.machine_data.cpu_num_cores);
+                VERBOSE_PRINTF("\nncores: %d\n", bancos.machine_data.cpu_num_cores);
             }
         }
         if(strcmp(argv[i],PARAM_FCPU)==0){
@@ -111,7 +118,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_clock_speed_Ghz = temp_fcpu;
-                printf("\nfcpu: %.2f\n", bancos.machine_data.cpu_clock_speed_Ghz);
+                VERBOSE_PRINTF("\nfcpu: %.2f\n", bancos.machine_data.cpu_clock_speed_Ghz);
             }
         }
         if(strcmp(argv[i],PARAM_NCPU)==0){
@@ -122,7 +129,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_num_cores = temp_ncpu;
-                printf("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
+                VERBOSE_PRINTF("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
             }
         }
         if(strcmp(argv[i],PARAM_TCORES)==0){
@@ -133,13 +140,13 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_hardware_threads = temp_tcores;
-                printf("\ntcores: %d\n", bancos.machine_data.cpu_hardware_threads);
+                VERBOSE_PRINTF("\ntcores: %d\n", bancos.machine_data.cpu_hardware_threads);
             }
         }
         if(strcmp(argv[i],PARAM_RPOLICY)==0){
             if (i+1 <= argc){
                 bancos.machine_data.replacement_policy = argv[++i];
-                printf("\nrpolicy: %s\n", bancos.machine_data.replacement_policy);
+                VERBOSE_PRINTF("\nrpolicy: %s\n", bancos.machine_data.replacement_policy);
             }
         }
         if(strcmp(argv[i],PARAM_SCHEDTICKS)==0){
@@ -150,7 +157,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.scheduler_tick_freq = temp_schedticks;
-                printf("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
+                VERBOSE_PRINTF("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
             }
         }
         if(strcmp(argv[i],PARAM_GRANULARITY)==0){
@@ -161,7 +168,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.bucket_cgs_granularity = temp_granularity;
-                printf("\ngranularity: %d\n", bancos.bucket_cgs_granularity);
+                VERBOSE_PRINTF("\ngranularity: %d\n", bancos.bucket_cgs_granularity);
             }
         }
         if(strcmp(argv[i],PARAM_MAX_BUDGET)==0){
@@ -172,7 +179,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.max_budget = temp_max_budget;
-                printf("\nmax_budget: %d\n", bancos.max_budget);
+                VERBOSE_PRINTF("\nmax_budget: %d\n", bancos.max_budget);
             }
         }
     }
@@ -182,7 +189,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
 
 
 int main(int argc, char *argv[]) {
-    
+    verbose_mode = 0; //default verbose mode off
     ErrorCode err = load_args(argc, argv);
     if (err != OK) {
         return err;
@@ -196,6 +203,7 @@ int main(int argc, char *argv[]) {
         exit(ERR_MACHINE_ARCH_INIT);
     }
     system_init(); //inicializa el sistema (scheduler, colas, etc)
+    bancos.verbose_mode = verbose_mode;
     init_process_generator(10); //borrar en el futuro, solo para pruebas
 
     int clock_tid = init_clock_module(bancos.machine_data.cpu_clock_speed_Ghz);

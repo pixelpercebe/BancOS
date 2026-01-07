@@ -199,7 +199,7 @@ static ErrorCode add_process_to_runque(Core *core, PCB *process){
 }
     rq->count++;
     process->last_core = core->core_id;
-    printf("[Core %d] Proceso PID: %d añadido al bucket %d de la runqueue.\n", core->core_id, process->pid, bucket_index);
+    VERBOSE_PRINTF("[Core %d] Proceso PID: %d añadido al bucket %d de la runqueue.\n", core->core_id, process->pid, bucket_index);
 
     return OK;
 }
@@ -225,7 +225,7 @@ void free_pcb(PCB *proc) {
 ErrorCode scheduler_admit_process(Core *core, PCB *process) {
     if (!core || !process) return ERR_INVALID_PARAMETER;
 
-    printf("[Core %d] Solicitud de admisión para PID: %d.\n", core->core_id, process->pid);
+    VERBOSE_PRINTF("[Core %d] Solicitud de admisión para PID: %d.\n", core->core_id, process->pid);
 
     // 1. SEGURIDAD: Bloqueamos la puerta (Mutex)
     // Esto es lo que la diferencia de la otra función.
@@ -259,7 +259,7 @@ ErrorCode scheduler_admit_process(Core *core, PCB *process) {
 
 static void print_info()
 {
-    printf("\n [SCHED] ejecución del scheduler global\n");
+    VERBOSE_PRINTF("\n [SCHED] ejecución del scheduler global\n");
 }
 
 /***********************************************************************
@@ -333,10 +333,10 @@ ErrorCode init_scheduler(int tick_freq)
     u_int gran = (bancos.bucket_cgs_granularity > 0) ? bancos.bucket_cgs_granularity : 10;
     u_int num_buckets = (max_money/gran) + 1;
 
-    printf("[SCHED] Inicializando HASH MAP Dinámico:\n");
-    printf("   - Presupuesto Max: %d\n", max_money);
-    printf("   - Granularidad:    %d (1 bucket = %d euros)\n", gran, gran);
-    printf("   - Total Buckets:   %d\n", num_buckets);
+    VERBOSE_PRINTF("[SCHED] Inicializando HASH MAP Dinámico:\n");
+    VERBOSE_PRINTF("   - Presupuesto Max: %d\n", max_money);
+    VERBOSE_PRINTF("   - Granularidad:    %d (1 bucket = %d euros)\n", gran, gran);
+    VERBOSE_PRINTF("   - Total Buckets:   %d\n", num_buckets);
 
     // Crear hilos de scheduler local para cada core
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
@@ -426,7 +426,7 @@ void * local_core_scheduler(void *arg)
             pthread_cond_wait(&mi_core->wake_cond, &mi_core->lock);
         }
 
-        printf("[Core %d] Iniciando Tick...\n", mi_core->core_id);
+        VERBOSE_PRINTF("[Core %d] Iniciando Tick...\n", mi_core->core_id);
 
         // 2. CÁLCULO DE INFLACIÓN (Dentro del lock y en cada tick)
         // Protegemos la lectura de run_queue->count
@@ -435,7 +435,7 @@ void * local_core_scheduler(void *arg)
             inflation_factor = mi_core->run_queue->count / INFLATION_DIVIDER;
         }
         if (inflation_factor < 1) inflation_factor = 1;
-        printf("[Core %d] Factor de inflación calculado: %d\n", mi_core->core_id, inflation_factor);
+        VERBOSE_PRINTF("[Core %d] Factor de inflación calculado: %d\n", mi_core->core_id, inflation_factor);
 
         int target_victim_idx = -1;
 
@@ -444,7 +444,7 @@ void * local_core_scheduler(void *arg)
             target_victim_idx = get_eviction_victim_index(mi_core);
     
             if (target_victim_idx != -1) {
-                printf("[Core %d] Objetivo marcado: Hilo %d será desalojado.\n", mi_core->core_id, target_victim_idx);
+                VERBOSE_PRINTF("[Core %d] Objetivo marcado: Hilo %d será desalojado.\n", mi_core->core_id, target_victim_idx);
             }
         }
 
@@ -470,14 +470,14 @@ void * local_core_scheduler(void *arg)
 
                 // C1. Muerte por Vejez
                 if (global_ticks >= proc->final_tick) {
-                    printf("[Core %d][Hilo %d]  PID %d terminó (Time Limit).\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d terminó (Time Limit).\n", 
                            mi_core->core_id, i, proc->pid);
                     free_pcb(proc);
                     must_leave_cpu = 1;
                 }
                 // C2. Muerte por Bancarrota (Budget <= 0) -> READY
                 else if (proc->budget <= 0) {
-                    printf("[Core %d][Hilo %d]  PID %d en BANCARROTA.\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d en BANCARROTA.\n", 
                            mi_core->core_id, i, proc->pid);
                     proc->state = READY;
                     add_process_to_runque(mi_core, proc); // Devolver a la cola
@@ -486,7 +486,7 @@ void * local_core_scheduler(void *arg)
                 // C3. Expulsión por Interrupción (Preemption) -> READY
                 else if (mi_core->force_eviction == 1 && i == target_victim_idx) {
                     if (proc->class )
-                    printf("[Core %d][Hilo %d]  PID %d desalojado (Preemption).\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d desalojado (Preemption).\n", 
                            mi_core->core_id, i, proc->pid);
                     
                     proc->state = READY;
@@ -495,7 +495,7 @@ void * local_core_scheduler(void *arg)
                 }
                 else {
                     // Sigue vivo y ejecutando
-                    printf("[Core %d][Hilo %d] PID %d ejecutando. Budget restante: %d\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d] PID %d ejecutando. Budget restante: %d\n", 
                            mi_core->core_id, i, proc->pid, proc->budget);
                 }
 
@@ -512,7 +512,7 @@ void * local_core_scheduler(void *arg)
             // Si el slot está vacío (porque lo estaba o porque el proceso acaba de morir/salir)
             // intentamos llenarlo AHORA MISMO.
             if (slot_is_empty) {
-                printf("hilo vacio en core %d hilo %d\n", mi_core->core_id, i);
+                VERBOSE_PRINTF("hilo vacio en core %d hilo %d\n", mi_core->core_id, i);
                 PCB *new_proc = NULL;
                 
                 // Llamamos a tu función de selección (Pick Next)
@@ -520,12 +520,12 @@ void * local_core_scheduler(void *arg)
                 get_next_process(mi_core, &new_proc); 
 
                 if (new_proc != NULL) {
-                    printf("[Core %d][Hilo %d] Seleccionado PID %d para ejecución.\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d] Seleccionado PID %d para ejecución.\n", 
                            mi_core->core_id, i, new_proc->pid);
                     new_proc->state = RUNNING;
                     new_proc-> last_thread = i;
                     mi_core->threads[i].current_process = new_proc;
-                    printf("[Core %d][Hilo %d] PID %d entra a CPU.\n", 
+                          VERBOSE_PRINTF("[Core %d][Hilo %d] PID %d entra a CPU.\n", 
                            mi_core->core_id, i, new_proc->pid);
                 } else {
                     // printf("[Core %d][Hilo %d] IDLE (Nada en cola).\n", mi_core->core_id, i);
@@ -547,15 +547,15 @@ ErrorCode dispatcher(Core *core) {
     // Esta función debería seleccionar un nuevo proceso para ejecutar en el core
     // basándose en la política de scheduling y el estado de la runqueue del core
 
-    printf("[Core %d] Dispatcher invocado.\n", core->core_id);
+    VERBOSE_PRINTF("[Core %d] Dispatcher invocado.\n", core->core_id);
 
     // Ejemplo simple: seleccionar el proceso más rico de la runqueue
     PCB *next_process = NULL;
     if (next_process != NULL) {
-        printf("[Core %d] Seleccionando proceso PID: %d para ejecución.\n", core->core_id, next_process->pid);
+        VERBOSE_PRINTF("[Core %d] Seleccionando proceso PID: %d para ejecución.\n", core->core_id, next_process->pid);
         // Aquí se implementaría la lógica para asignar el proceso al core
     } else {
-        printf("[Core %d] No hay procesos disponibles en la runqueue.\n", core->core_id);
+        VERBOSE_PRINTF("[Core %d] No hay procesos disponibles en la runqueue.\n", core->core_id);
     }
 
     return OK;

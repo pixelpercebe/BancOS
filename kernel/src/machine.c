@@ -46,7 +46,7 @@ int load_machine_config(char * filepath){
 
                 if(!strcmp(key, FIELD_NUM_CPU)){
                     bancos.machine_data.num_cpu = atoi(value);
-                    printf("\nnum cpu cargado:%d", bancos.machine_data.num_cpu);
+                    VERBOSE_PRINTF("\nnum cpu cargado:%d", bancos.machine_data.num_cpu);
                     if (bancos.machine_data.num_cpu <= 0){
                         printf("\nError: num_cpu debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -54,7 +54,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_CORES)){
                     bancos.machine_data.cpu_num_cores = atoi(value);
-                    printf("\nnum cores por cpu cargado:%d", bancos.machine_data.cpu_num_cores);
+                    VERBOSE_PRINTF("\nnum cores por cpu cargado:%d", bancos.machine_data.cpu_num_cores);
                     if (bancos.machine_data.cpu_num_cores <= 0){
                         printf("\nError: cpu_num_cores debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -62,7 +62,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_CLOCK_SPEED)){
                     bancos.machine_data.cpu_clock_speed_Ghz = atof(value);
-                    printf("\nclock speed cargado:%f", bancos.machine_data.cpu_clock_speed_Ghz);
+                    VERBOSE_PRINTF("\nclock speed cargado:%f", bancos.machine_data.cpu_clock_speed_Ghz);
                     if (bancos.machine_data.cpu_clock_speed_Ghz <= 0){
                         printf("\nError: cpu_clock_speed_Ghz debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -70,7 +70,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_THREADS)){
                     bancos.machine_data.cpu_hardware_threads = atoi(value);
-                    printf("\nnum threads por cpu cargado:%d", bancos.machine_data.cpu_hardware_threads);
+                    VERBOSE_PRINTF("\nnum threads por cpu cargado:%d", bancos.machine_data.cpu_hardware_threads);
                     if (bancos.machine_data.cpu_hardware_threads <= 0){
                         printf("\nError: cpu_hardware_threads debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -78,7 +78,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_CACHE_L1)){
                     bancos.machine_data.cpu_cache_L1 = atoi(value);
-                    printf("\ncache L1 cargado:%d", bancos.machine_data.cpu_cache_L1);
+                    VERBOSE_PRINTF("\ncache L1 cargado:%d", bancos.machine_data.cpu_cache_L1);
                     if (bancos.machine_data.cpu_cache_L1 <= 0){
                         printf("\nError: cpu_cache_L1 debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -86,7 +86,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_CACHE_L2)){
                     bancos.machine_data.cpu_cache_L2 = atoi(value);
-                    printf("\ncache L2 cargado:%d", bancos.machine_data.cpu_cache_L2);
+                    VERBOSE_PRINTF("\ncache L2 cargado:%d", bancos.machine_data.cpu_cache_L2);
                     if (bancos.machine_data.cpu_cache_L2 <= 0){
                         printf("\nError: cpu_cache_L2 debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -94,7 +94,7 @@ int load_machine_config(char * filepath){
                 }
                 if(!strcmp(key,FIELD_CACHE_L3)){
                     bancos.machine_data.cpu_cache_L3 = atoi(value);
-                    printf("\ncache L3 cargado:%d", bancos.machine_data.cpu_cache_L3);
+                    VERBOSE_PRINTF("\ncache L3 cargado:%d", bancos.machine_data.cpu_cache_L3);
                     if (bancos.machine_data.cpu_cache_L3 <= 0){
                         printf("\nError: cpu_cache_L3 debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -115,15 +115,15 @@ int load_machine_config(char * filepath){
 
                 if(!strcmp(key,FIELD_SCHED_TICK_FREQ)){
                     bancos.machine_data.scheduler_tick_freq = atoi(value);
-                    printf("\nscheduler tick freq cargado:%d", bancos.machine_data.scheduler_tick_freq);
+                    VERBOSE_PRINTF("\nscheduler tick freq cargado:%d", bancos.machine_data.scheduler_tick_freq);
                 }
                 if (!strcmp(key,FIELD_REPLACEMENT_POLICY)){
                     bancos.machine_data.replacement_policy = strdup(value);
-                    printf("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
+                    VERBOSE_PRINTF("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
                 }
                 if(!strcmp(key,FIELD_GRANULARITY)){
                     bancos.bucket_cgs_granularity = atoi(value);
-                    printf("\nbucket cgs granularity cargado:%d", bancos.bucket_cgs_granularity);
+                    VERBOSE_PRINTF("\nbucket cgs granularity cargado:%d", bancos.bucket_cgs_granularity);
                     if (bancos.bucket_cgs_granularity <= 0){
                         printf("\nError: bucket_cgs_granularity debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -131,7 +131,7 @@ int load_machine_config(char * filepath){
                 }
                 if (!strcmp(key,FIELD_MAX_BUDGET)){
                     bancos.max_budget = atoi(value);
-                    printf("\nmax budget cargado:%d", bancos.max_budget);
+                    VERBOSE_PRINTF("\nmax budget cargado:%d", bancos.max_budget);
                     if (bancos.max_budget <= 0){
                         printf("\nError: max_budget debe ser mayor que 0\n");
                         return ERR_CONFIG_FILE;
@@ -148,14 +148,14 @@ int load_machine_config(char * filepath){
         current_section = current_section->next;
     } 
     bancos.machine_data.total_cores = bancos.machine_data.num_cpu * bancos.machine_data.cpu_num_cores;
-    printf("\ntotal cores cargado:%d", bancos.machine_data.total_cores);
+    VERBOSE_PRINTF("\ntotal cores cargado:%d", bancos.machine_data.total_cores);
     bancos.machine_data.total_hardware_threads = bancos.machine_data.total_cores * bancos.machine_data.cpu_hardware_threads;
-    printf("\ntotal hardware threads cargado:%d\n", bancos.machine_data.total_hardware_threads);
+    VERBOSE_PRINTF("\ntotal hardware threads cargado:%d\n", bancos.machine_data.total_hardware_threads);
     return OK;
 }
 
 ErrorCode init_cores_struct(){
-    printf("\nInicializando %d cores en total\n", bancos.machine_data.total_cores);
+    VERBOSE_PRINTF("\nInicializando %d cores en total\n", bancos.machine_data.total_cores);
     bancos.cores = (Core *)malloc(sizeof(Core) * bancos.machine_data.total_cores);
     if (bancos.cores == NULL) {
         return ERR_MEMORY_INSUFFICIENT;
