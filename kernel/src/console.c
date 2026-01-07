@@ -104,7 +104,7 @@ void *console_routine(void *arg) {
     printf("\n[CONSOLA] Iniciada. Escribe 'help' para comandos.\n");
 
     while (1) {
-        printf("\n<FONDOS_OS> ");
+        printf("\n<BANCOS_OS> ");
         fflush(stdout); // Asegura que el prompt salga antes de esperar input
 
         if (fgets(buffer, sizeof(buffer), stdin) == NULL) break;
