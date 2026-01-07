@@ -14,7 +14,7 @@
 
 
 /**
- * @brief Imprime la lista de procesos generados.
+ * @brief Imprime la lista global de procesos.
  */
 static void print_all_processes() {
     pthread_mutex_lock(&bancos.list_pcb_lock);
@@ -30,6 +30,9 @@ static void print_all_processes() {
     pthread_mutex_unlock(&bancos.list_pcb_lock);
 }
 
+/**
+ * @brief Muestra los procesos actualmente en ejecución por core/hilo.
+ */
 void print_running_processes() {
     printf("\n=== PROCESOS EN EJECUCIÓN (CPU) ===\n");
     printf("%-6s | %-6s | %-6s | %-10s | %-10s\n", "Core", "Hilo", "PID", "Budget", "Clase");
@@ -61,6 +64,9 @@ void print_running_processes() {
     printf("======================================================\n");
 }
 
+/**
+ * @brief Muestra el estado de colas y carga por core.
+ */
 static void print_queues() {
     printf("\n=== ESTADO DE LAS COLAS ===\n");
     for (int i = 0; i < bancos.machine_data.total_cores; i++) {
@@ -84,6 +90,11 @@ static void print_queues() {
     printf("===========================\n");
 }
 
+/**
+ * @brief Hilo de consola interactiva.
+ * @param arg No utilizado.
+ * @return Siempre NULL.
+ */
 void *console_routine(void *arg) {
     char buffer[100];
     

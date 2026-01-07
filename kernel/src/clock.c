@@ -17,6 +17,10 @@ static int seconds, nanoseconds;
 u_llong microseconds;
 pthread_t clock_tid;
 
+/**
+ * @brief Traza un tick global del reloj (solo en modo verbose).
+ * @param global_tick Valor actual de `global_ticks`.
+ */
 static void print_info(int global_tick)
 {
     VERBOSE_PRINTF("\n [CLOCK] tick: %d\n", global_tick);
@@ -35,7 +39,11 @@ void freq_to_seconds(float freq_ghz, int *seconds, int *nanoseconds) {
 }
 
 /**
- * @brief Función del hilo de reloj. Incrementa global_ticks y maneja la sincronización con los temporizadores.
+ * @brief Hilo del reloj.
+ *
+ * Incrementa `global_ticks` y coordina la sincronización con los temporizadores
+ * mediante señales y variables de condición.
+ * @return Siempre NULL.
  */
 static void* clock_thread() {
     while(1){

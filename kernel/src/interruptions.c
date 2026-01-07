@@ -7,6 +7,14 @@
 #include <os.h>
 
 
+/**
+ * @brief Atiende la interrupción de llegada de un nuevo proceso.
+ *
+ * Selecciona un core objetivo (usando afinidad si existe) y solicita su admisión
+ * al scheduler local correspondiente.
+ * @param process Puntero al proceso recién creado.
+ * @return `OK` si fue encolado correctamente, o un código de error.
+ */
 ErrorCode new_process_interruption(PCB *process) {
     VERBOSE_PRINTF("[Interrupción] Nuevo proceso PID: %d recibido.\n", process->pid);
     Core *target_core = NULL;

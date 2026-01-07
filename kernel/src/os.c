@@ -18,6 +18,12 @@
 
 system_t bancos;
 
+/**
+ * @brief Inicializa el sistema operativo.
+ *
+ * Configura estructuras globales (lista de PCBs, contadores y mutex) y
+ * arranca el scheduler con la frecuencia configurada.
+ */
 void system_init(){
     //inicializar mutex de la lista global de PCBs
     if (!bancos.verbose_mode) {
@@ -38,6 +44,10 @@ void system_init(){
 
 
 // Inserta al final de la lista global (O(1))
+/**
+ * @brief Inserta un PCB en la lista global del sistema.
+ * @param p Puntero al `PCB` a insertar. Si es NULL no hace nada.
+ */
 void insert_global_pcb(PCB *p) {
     if (!p) return;
 
@@ -59,6 +69,10 @@ void insert_global_pcb(PCB *p) {
 
 
 // Elimina de la lista global (O(1)) Se llama antes de free()
+/**
+ * @brief Elimina un PCB de la lista global del sistema.
+ * @param p Puntero al `PCB` a eliminar. Si es NULL no hace nada.
+ */
 void remove_global_pcb(PCB *p) {
     if (!p) return;
 

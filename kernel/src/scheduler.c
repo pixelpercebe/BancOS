@@ -18,8 +18,11 @@
  *                  FUNCIONES AUXILIARES DEL BITMAP DE RUNQUEUE                  *
  *********************************************************************************
 */
-
-/* @brief Marca un bit en el mapa de bits como activo.*/
+/**
+ * @brief Marca un bit en el mapa de bits como activo.
+ * @param rq Puntero a la runqueue.
+ * @param index Índice global del bucket a marcar.
+ */
  
 static void set_bitmap_bit(RunQueue *rq, int index) {
     int array_idx = index / 32;
@@ -29,6 +32,8 @@ static void set_bitmap_bit(RunQueue *rq, int index) {
 
 /**
  * @brief Desmarca un bit si el bucket se vació.
+ * @param rq Puntero a la runqueue.
+ * @param index Índice global del bucket a desmarcar.
  */
 static void clear_bitmap_bit(RunQueue *rq, int index) {
     int array_idx = index / 32;
@@ -41,6 +46,11 @@ static void clear_bitmap_bit(RunQueue *rq, int index) {
  *********************************************************************************
 */
 
+/**
+ * @brief Devuelve el bucket activo de mayor prioridad.
+ * @param rq Puntero a la runqueue.
+ * @return Índice del bucket o -1 si no hay buckets activos.
+ */
 int get_highest_priority_bucket(RunQueue *rq) {
     // 1. Calcular cuántas palabras (enteros) tiene tu bitmap
     int num_words = (rq->num_buckets + (BITS_PER_WORD - 1)) / BITS_PER_WORD;
@@ -75,6 +85,12 @@ int get_highest_priority_bucket(RunQueue *rq) {
     return -1; // La cola está completamente vacía
 }
 
+/**
+ * @brief Obtiene el siguiente proceso de la runqueue del core.
+ * @param core Core objetivo.
+ * @param out_process Salida con el proceso seleccionado (o NULL si vacío).
+ * @return `OK` o un código de error si ocurre inconsistencia.
+ */
 static ErrorCode get_next_process(Core *core, PCB **out_process){
     // Implementar la lógica para obtener el siguiente proceso de la runqueue del core
     // Basado en la política de scheduling (CGS)
@@ -115,12 +131,22 @@ static ErrorCode get_next_process(Core *core, PCB **out_process){
 
 }
 
+/**
+ * @brief Calcula el índice de bucket para un proceso según su presupuesto.
+ * @param process Proceso a evaluar.
+ * @return Índice de bucket o `ERR_INVALID_PROCESS`.
+ */
 static inline ErrorCode get_process_bucket(PCB *process){
     if (process == NULL) return ERR_INVALID_PROCESS;
     int bucket = process->budget / bancos.bucket_cgs_granularity;
     return bucket;
 }
 
+/**
+ * @brief Calcula la carga actual del core (cola + procesos en CPU).
+ * @param c Puntero al core.
+ * @return Carga total.
+ */
 int get_core_load(Core *c) {
     int active_threads = 0;
     for (int i = 0; i < c->num_configured_threads; i++) {
@@ -131,6 +157,11 @@ int get_core_load(Core *c) {
     return c->run_queue->count + active_threads;
 }
 
+/**
+ * @brief Selecciona el core con menor carga.
+ * @param out_core Core seleccionado (salida).
+ * @return `OK` o `ERR_INVALID_PARAMETER` si no hay cores.
+ */
 ErrorCode get_valid_core(Core **out_core){
     if (bancos.machine_data.total_cores == 0) return ERR_INVALID_PARAMETER;
 
@@ -154,6 +185,12 @@ ErrorCode get_valid_core(Core **out_core){
  ************************************************************************
 */
 
+/**
+ * @brief Encola un proceso en la runqueue del core según clase y presupuesto.
+ * @param core Core de destino.
+ * @param process Proceso a encolar.
+ * @return `OK` o error (`ERR_INVALID_PARAMETER`, `ERR_INVALID_BUCKET`).
+ */
 static ErrorCode add_process_to_runque(Core *core, PCB *process){
 
     if (core == NULL || process == NULL) return ERR_INVALID_PARAMETER;
@@ -205,6 +242,10 @@ static ErrorCode add_process_to_runque(Core *core, PCB *process){
 }
 
 
+/**
+ * @brief Elimina un proceso de las estructuras y libera su memoria.
+ * @param proc Proceso a liberar.
+ */
 void free_pcb(PCB *proc) {
     if (proc == NULL) return;
 
@@ -222,6 +263,12 @@ void free_pcb(PCB *proc) {
     free(proc);
 }
 
+/**
+ * @brief Admite un proceso en el core con protección de mutex y señalización.
+ * @param core Core objetivo.
+ * @param process Proceso a admitir.
+ * @return `OK` o un código de error al encolar.
+ */
 ErrorCode scheduler_admit_process(Core *core, PCB *process) {
     if (!core || !process) return ERR_INVALID_PARAMETER;
 
@@ -257,6 +304,9 @@ ErrorCode scheduler_admit_process(Core *core, PCB *process) {
     return OK;
 }
 
+/**
+ * @brief Traza informativa del scheduler global por tick (solo verbose).
+ */
 static void print_info()
 {
     VERBOSE_PRINTF("\n [SCHED] ejecución del scheduler global\n");

@@ -17,6 +17,12 @@ pthread_t timer_tid;
 *********************************************************************************************************
 */
 
+/**
+ * @brief Traza el estado del temporizador (solo en modo verbose).
+ * @param timer_id Identificador del temporizador.
+ * @param tick_count Contador de ticks actual del temporizador.
+ * @param is_counting 1 si está ejecutando, 0 si imprime el tick alcanzado.
+ */
 static void print_info(int timer_id, int tick_count, int is_counting)
 {
     if (!is_counting)

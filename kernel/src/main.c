@@ -32,6 +32,10 @@
 static int verbose_mode;
 static int proc_gen_freq = 10; //frecuencia por defecto de generacion de procesos
 
+/**
+ * @brief Imprime la ayuda de uso del binario principal.
+ * @param name Nombre del ejecutable.
+ */
 void print_help(char * name){
     fprintf(stderr, "\n----- BancOS Kernel -----\n");
     fprintf(stderr, "Uso: %s [-confile][-rpolicy][-fcpu][-ncpu][-tcpu][-schedticks]\n\n", name);
@@ -66,6 +70,13 @@ void print_help(char * name){
  * @param argc: Número de argumentos.
  * @param argv: Array de argumentos.
  * @return: Código de error.
+ */
+/**
+ * @brief Procesa y carga los argumentos de línea de comandos.
+ * @param argc Número de argumentos.
+ * @param argv Vector de argumentos.
+ * @return `OK` si se cargaron correctamente, `ERR_ARGS` si hay error de formato,
+ *         `ABORT` si se solicitó ayuda.
  */
 static ErrorCode load_args(int argc, char* argv[]) {
     if(argc == 1){
@@ -194,6 +205,14 @@ static ErrorCode load_args(int argc, char* argv[]) {
 }
 
 
+/**
+ * @brief Punto de entrada del kernel de BancOS.
+ *
+ * Inicializa la arquitectura, el sistema, el generador de procesos y el reloj.
+ * @param argc Número de argumentos.
+ * @param argv Vector de argumentos.
+ * @return Código de error o 0 si finaliza correctamente.
+ */
 int main(int argc, char *argv[]) {
     verbose_mode = 0; //default verbose mode off
     ErrorCode err = load_args(argc, argv);

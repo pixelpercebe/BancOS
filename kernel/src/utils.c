@@ -11,13 +11,21 @@
 #include <errno.h>
 #include <limits.h>
 #include <math.h>
-/*
- * Calcula la duración en microsegundos de cada tick basada en segundos y nanosegundos.
+/**
+ * @brief Calcula la duración en microsegundos de un tick.
+ * @param seconds Segundos del periodo.
+ * @param nanoseconds Nanosegundos del periodo.
+ * @param microseconds Salida con el total en microsegundos.
  */
 void calculate_microseconds(int seconds, int nanoseconds, u_llong *microseconds) {
     *microseconds = (u_llong)(seconds * 1e6 + nanoseconds / 1e3);
 }
 
+/**
+ * @brief Elimina espacios en blanco de una cadena.
+ * @param str Cadena de entrada.
+ * @param output Buffer de salida (sin espacios, tabs ni saltos de línea).
+ */
 void delete_white_spaces(char *str, char* output) {
     char *read_ptr = str;
     char *write_ptr = output;
@@ -33,11 +41,10 @@ void delete_white_spaces(char *str, char* output) {
 }
 
 /**
- * funcion generica para separarar datos de cualquier archivo ini
- * @param filepath ruta del archivo ini
- * @param output buffer donde se guardara la informacion leida
- * @param max_length tamaño maximo del buffer de salida
- * 
+ * @brief Lee y parsea un archivo INI en una estructura simple enlazada.
+ * @param filepath Ruta al archivo INI.
+ * @param output Estructura destino donde se almacenan secciones y entradas.
+ * @param max_length Tamaño máximo esperado (no estricto) para reserva/lectura.
  */
 void trim_ini(const char *filepath, ini_file_t *output, size_t max_length) {
     //todo : implementar funcion para leer archivos ini y parsear valores
@@ -93,6 +100,12 @@ void trim_ini(const char *filepath, ini_file_t *output, size_t max_length) {
 
 }
 
+/**
+ * @brief Imprime en hexadecimal un arreglo genérico (solo verbose).
+ * @param array Puntero al arreglo.
+ * @param element_size Tamaño de cada elemento en bytes.
+ * @param length Número de elementos.
+ */
 void print_array(void*array, size_t element_size, size_t length) {
     uint8_t *byte_array = (uint8_t *)array;
     for (size_t i = 0; i < length; i++) {
