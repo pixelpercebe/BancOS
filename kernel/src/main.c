@@ -30,6 +30,7 @@
 */
 //verbose mode variable
 static int verbose_mode;
+static int proc_gen_freq = 10; //frecuencia por defecto de generacion de procesos
 
 void print_help(char * name){
     fprintf(stderr, "\n----- BancOS Kernel -----\n");
@@ -41,10 +42,10 @@ void print_help(char * name){
     fprintf(stderr, "  de procesos y políticas de reemplazo.\n\n");
 
     fprintf(stderr, "OPCIONES DE CONFIGURACIÓN:\n");
+    fprintf(stderr, "  -verbose              Activa el modo verbose para mostrar información detallada.\n");
+    fprintf(stderr, "  -fgen                 frecuencia de la generación de procesos aleatorios.\n");
     fprintf(stderr, "  -confile <archivo>    Carga la configuración desde 'config/<archivo>'.\n");
     fprintf(stderr, "                        Por defecto: 'conf/config.ini'.\n");
-    fprintf(stderr, "  -rpolicy <policy>     Define la política de reemplazo. Actual: CGS\n");
-    fprintf(stderr, "                        (Capital Gains Scheduling).\n\n");
 
     fprintf(stderr, "PARÁMETROS DE HARDWARE (Sobrescriben el archivo de configuración):\n");
     fprintf(stderr, "  -fcpu <float>         Frecuencia de la CPU en GHz.\n");
@@ -107,7 +108,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_num_cores = temp_ncores;
-                VERBOSE_PRINTF("\nncores: %d\n", bancos.machine_data.cpu_num_cores);
+                printf("\nncores: %d\n", bancos.machine_data.cpu_num_cores);
             }
         }
         if(strcmp(argv[i],PARAM_FCPU)==0){
@@ -118,7 +119,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_clock_speed_Ghz = temp_fcpu;
-                VERBOSE_PRINTF("\nfcpu: %.2f\n", bancos.machine_data.cpu_clock_speed_Ghz);
+                printf("\nfcpu: %.2f\n", bancos.machine_data.cpu_clock_speed_Ghz);
             }
         }
         if(strcmp(argv[i],PARAM_NCPU)==0){
@@ -129,7 +130,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_num_cores = temp_ncpu;
-                VERBOSE_PRINTF("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
+                printf("\nncpu: %d\n", bancos.machine_data.cpu_num_cores);
             }
         }
         if(strcmp(argv[i],PARAM_TCORES)==0){
@@ -140,13 +141,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.cpu_hardware_threads = temp_tcores;
-                VERBOSE_PRINTF("\ntcores: %d\n", bancos.machine_data.cpu_hardware_threads);
-            }
-        }
-        if(strcmp(argv[i],PARAM_RPOLICY)==0){
-            if (i+1 <= argc){
-                bancos.machine_data.replacement_policy = argv[++i];
-                VERBOSE_PRINTF("\nrpolicy: %s\n", bancos.machine_data.replacement_policy);
+                printf("\ntcores: %d\n", bancos.machine_data.cpu_hardware_threads);
             }
         }
         if(strcmp(argv[i],PARAM_SCHEDTICKS)==0){
@@ -157,7 +152,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.machine_data.scheduler_tick_freq = temp_schedticks;
-                VERBOSE_PRINTF("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
+                printf("\nschedticks: %d\n", bancos.machine_data.scheduler_tick_freq);
             }
         }
         if(strcmp(argv[i],PARAM_GRANULARITY)==0){
@@ -168,7 +163,7 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.bucket_cgs_granularity = temp_granularity;
-                VERBOSE_PRINTF("\ngranularity: %d\n", bancos.bucket_cgs_granularity);
+                printf("\ngranularity: %d\n", bancos.bucket_cgs_granularity);
             }
         }
         if(strcmp(argv[i],PARAM_MAX_BUDGET)==0){
@@ -179,7 +174,18 @@ static ErrorCode load_args(int argc, char* argv[]) {
                     return ERR_ARGS;
                 }
                 bancos.max_budget = temp_max_budget;
-                VERBOSE_PRINTF("\nmax_budget: %d\n", bancos.max_budget);
+                printf("\nmax_budget: %d\n", bancos.max_budget);
+            }
+        }
+        if(strcmp(argv[i],PARAM_FGEN)==0){
+            if (i+1 <= argc){
+                int temp_fgen;
+                if (!safe_atoi(argv[++i], &temp_fgen) || temp_fgen <= 0) {
+                    fprintf(stderr, "Error: Valor inválido para -fgen: '%s'. Debe ser un entero positivo.\n", argv[i]);
+                    return ERR_ARGS;
+                }
+                proc_gen_freq = temp_fgen;
+                printf("\nfgen: %d\n", temp_fgen);
             }
         }
     }
@@ -204,7 +210,7 @@ int main(int argc, char *argv[]) {
     }
     system_init(); //inicializa el sistema (scheduler, colas, etc)
     bancos.verbose_mode = verbose_mode;
-    init_process_generator(2); //borrar en la parte 3, solo para pruebas
+    init_process_generator(proc_gen_freq); //borrar en la parte 3, solo para pruebas
 
     int clock_tid = init_clock_module(bancos.machine_data.cpu_clock_speed_Ghz);
     if (clock_tid == ERR_CLOCK_INIT) {

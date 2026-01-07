@@ -117,10 +117,6 @@ int load_machine_config(char * filepath){
                     bancos.machine_data.scheduler_tick_freq = atoi(value);
                     VERBOSE_PRINTF("\nscheduler tick freq cargado:%d", bancos.machine_data.scheduler_tick_freq);
                 }
-                if (!strcmp(key,FIELD_REPLACEMENT_POLICY)){
-                    bancos.machine_data.replacement_policy = strdup(value);
-                    VERBOSE_PRINTF("\nreplacement policy cargado:%s\n", bancos.machine_data.replacement_policy);
-                }
                 if(!strcmp(key,FIELD_GRANULARITY)){
                     bancos.bucket_cgs_granularity = atoi(value);
                     VERBOSE_PRINTF("\nbucket cgs granularity cargado:%d", bancos.bucket_cgs_granularity);

@@ -23,6 +23,7 @@
 #define PARAM_GRANULARITY "-granularity"
 #define PARAM_MAX_BUDGET "-max_budget"
 #define PARAM_VERBOSE "-verbose"
+#define PARAM_FGEN "-fgen"
 
 // Helper macro to print only when verbose_mode is enabled
 #define VERBOSE_PRINTF(...) do { if (bancos.verbose_mode) printf(__VA_ARGS__); } while (0)
