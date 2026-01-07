@@ -249,6 +249,61 @@ static void print_info()
     printf("\n [SCHED] ejecución del scheduler global\n");
 }
 
+/***********************************************************************
+ *                  FUNCIONES de los cores                             *
+ ***********************************************************************
+*/
+
+
+/**
+ * @brief Busca el índice del hilo candidato para ser desalojado.
+ * @return int: Índice del hilo (0..N) o -1 si no se debe desalojar a nadie.
+ */
+static int get_eviction_victim_index(Core *core) {
+    if (core == NULL) return -1;
+
+    int victim_idx = -1;
+    
+    // Inicializamos con los valores más altos posibles para ir bajando
+    SocialClass lowest_class = ELITE; 
+    int lowest_budget = 2147483647; // INT_MAX
+
+    for (int i = 0; i < core->num_configured_threads; i++) {
+        PCB *p = core->threads[i].current_process;
+
+        //Hay un hueco libre
+        // Si encontramos un hilo vacío, NO necesitamos víctima.
+        // Devolvemos -1 para indicar el uso del hueco libre.
+        if (p == NULL) {
+            return -1; 
+        }
+
+        //Evaluar si es el más "pobre" encontrado hasta ahora
+        int es_peor = 0;
+
+        //si Clase Social más baja
+        if (p->class < lowest_class) {
+            es_peor = 1;
+        } 
+        // si la clase es igual
+        else if (p->class == lowest_class) {
+            if (p->budget < lowest_budget) {
+                es_peor = 1;
+            }
+        }
+
+        // Actualizar candidato
+        if (es_peor) {
+            lowest_class = p->class;
+            lowest_budget = p->budget;
+            victim_idx = i;
+        }
+    }
+
+    return victim_idx;
+}
+
+
 /*-------------------------------------------------------------------------------*
  |                        FUNCIONES SCHEDULER PRINCIPALES                        |
  *-------------------------------------------------------------------------------*/
@@ -369,6 +424,17 @@ void * local_core_scheduler(void *arg)
         if (inflation_factor < 1) inflation_factor = 1;
         printf("[Core %d] Factor de inflación calculado: %d\n", mi_core->core_id, inflation_factor);
 
+        int target_victim_idx = -1;
+
+        // Si hay orden de desalojo, buscamos a quién echar
+        if (mi_core->force_eviction == 1) {
+            target_victim_idx = get_eviction_victim_index(mi_core);
+    
+            if (target_victim_idx != -1) {
+                printf("[Core %d] Objetivo marcado: Hilo %d será desalojado.\n", mi_core->core_id, target_victim_idx);
+            }
+        }
+
         // Iteramos sobre los hilos de hardware (SMT)
         for (int i = 0; i < mi_core->num_configured_threads; i++) {
             
@@ -405,7 +471,8 @@ void * local_core_scheduler(void *arg)
                     must_leave_cpu = 1;
                 }
                 // C3. Expulsión por Interrupción (Preemption) -> READY
-                else if (mi_core->force_eviction == 1) {
+                else if (mi_core->force_eviction == 1 && i == target_victim_idx) {
+                    if (proc->class )
                     printf("[Core %d][Hilo %d]  PID %d desalojado (Preemption).\n", 
                            mi_core->core_id, i, proc->pid);
                     
@@ -423,6 +490,8 @@ void * local_core_scheduler(void *arg)
                 if (must_leave_cpu) {
                     mi_core->threads[i].current_process = NULL;
                     slot_is_empty = 1; // Marcamos como vacío para la Fase B
+                    mi_core->threads[i].is_idle = 1;
+                    mi_core->force_eviction = 0; // Limpiar la bandera de expulsión
                 }
             }
 
@@ -451,8 +520,8 @@ void * local_core_scheduler(void *arg)
             }
         } // Fin del for de hilos
 
-        // Limpieza de banderas post-tick
-        mi_core->force_eviction = 0; 
+        // Limpieza de banderas post-tick 
+        mi_core->force_eviction = 0;
         mi_core->should_work = 0; // Apagar luz y esperar siguiente señal
     }
     
@@ -478,4 +547,5 @@ ErrorCode dispatcher(Core *core) {
 
     return OK;
 }
+
 
