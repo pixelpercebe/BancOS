@@ -10,6 +10,7 @@
 #include <types.h>
 #include <pcb.h>
 #include <clock.h>
+#include <interruptions.h>
 
 
 static void print_info()
@@ -21,14 +22,18 @@ static void print_info()
 /**
  * @brief Imprime la lista de procesos generados.
  */
-static void print_processes() {
-    print_info();
-    for (int i = 0; i < MAX_PCB; i++) {
-        PCB p = bancos.all_processes[i];
-        if (p.pid != 0) { // Asumiendo que un PID de 0 significa que el proceso no está inicializado
-            printf("PID: %d, Lifetime: %d, Final Tick: %d, Budget: %d\n", p.pid, p.lifetime, p.final_tick, p.budget);
-        }
+void print_all_processes() {
+    pthread_mutex_lock(&bancos.list_pcb_lock);
+    
+    PCB *actual = bancos.list_pcb_head;
+    printf("\n--- LISTA GLOBAL DE PROCESOS (%d activos) ---\n", bancos.process_count);
+    
+    while (actual != NULL) {
+        printf("PID: %d | Budget: %d | Estado: %d\n", actual->pid, actual->budget, actual->state);
+        actual = actual->next_br;
     }
+    
+    pthread_mutex_unlock(&bancos.list_pcb_lock);
 }
 
 /*
@@ -57,44 +62,31 @@ ErrorCode init_process_generator(int proc_gen_freq)
  */
 void generate_process()
 {
-    static int process_count = 0;
-    PCB new_process;
 
-    new_process.pid = rand() % 1000; // Generar un PID aleatorio
+    PCB *new_process = (PCB *)calloc(1, sizeof(PCB));
+
+    new_process->pid = rand() % 1000; // Generar un PID aleatorio
     // Vida entre 50 y 250 ticks. Da tiempo a jugar con ellos.
-    new_process.lifetime = (rand() % 200) + 50;
-    new_process.final_tick = get_current_global_ticks() + new_process.lifetime;
-
+    new_process->lifetime = (rand() % 200) + 50;
+    new_process->final_tick = get_current_global_ticks() + new_process->lifetime;
     //clase social aleatoria
     int class_rand = rand() % 5;
+    new_process->class = (SocialClass)class_rand;
 
-    new_process.class = (SocialClass)class_rand;
-    switch (new_process.class)
-    {
-    case VAGABUNDO:
-        new_process.budget = SUELDO_INICIAL[VAGABUNDO];
-        break;
-    case BAJA:
-        new_process.budget = SUELDO_INICIAL[BAJA];
-        break;
-    case MEDIA:
-        new_process.budget = SUELDO_INICIAL[MEDIA];
-        break;
-    case ALTA:
-        new_process.budget = SUELDO_INICIAL[ALTA];
-        break;
-    case ELITE:
-        new_process.budget = SUELDO_INICIAL[ELITE];
-        break;
-    default:
-        new_process.budget = SUELDO_INICIAL[MEDIA];
-        break;
-    } 
+    new_process->state = NEW; // READY
+    new_process->last_core = -1; // Inicializar con un valor inválido o predeterminado
+    new_process->last_thread = -1; // Inicializar con un valor inválido o predeterminado
+    new_process->budget = 0 ; // El scheduler le asignará presupuesto al ser admitido
 
-    bancos.all_processes[process_count] = new_process;
-    process_count = (process_count + 1) % MAX_PCB;
-    printf("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d ,salario=%d\n", new_process.pid, new_process.lifetime, new_process.final_tick, new_process.budget);
-    print_processes();
+    new_process->next_br = NULL;
+    new_process->prev_br = NULL;
+    insert_global_pcb(new_process);
+
+
+    printf("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d ,salario=%d\n", new_process->pid, new_process->lifetime, new_process->final_tick, new_process->budget);
+    new_process_interruption(new_process);
+
+    //print_processes();
 }
 
 

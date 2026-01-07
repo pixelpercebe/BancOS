@@ -9,6 +9,14 @@ typedef enum SocialClass{
     ELITE
 } SocialClass;
 
+typedef enum ProcessState{
+    NEW,
+    READY,
+    RUNNING,
+    BLOCKED,
+    TERMINATED
+} ProcessState;
+
 // Definición de la estructura PCB
 typedef struct PCB{
     int pid;                // ID del proceso
@@ -16,16 +24,16 @@ typedef struct PCB{
     int final_tick;
     SocialClass class;
 
-    int last_core;      // Último core donde se ejecutó
-    int last_thread;    // Último hilo donde se ejecutó
-    int estado;         // Estado del proceso (READY, RUNNING, BLOCKED, etc.)
+    int last_core;      // id Último core donde se ejecutó
+    int last_thread;    // id Último hilo donde se ejecutó
+    ProcessState state;          // Estado del proceso (READY, RUNNING, BLOCKED, etc.)
 
     int budget;
-    PCB *next_br;  // Puntero al siguiente PCB en la lista de todos los procesos 
-    PCB *prev_br;  // Puntero al PCB anterior en la lista de todos los procesos 
+    struct PCB *next_br;  // Puntero al siguiente PCB en la lista de todos los procesos 
+    struct PCB *prev_br;  // Puntero al PCB anterior en la lista de todos los procesos 
 
-    PCB *next_pcb_runqueue; //proximo puntero en la runqueu del bucket
-    PCB *prev_pcb_runqueue; //proximo puntero en la runqueu del bucket
+    struct PCB *next_pcb_runqueue; //proximo puntero en la runqueu del bucket
+    struct PCB *prev_pcb_runqueue; //proximo puntero en la runqueu del bucket
     
     //todo jerarquia de procesos
     // puntero a pcb hijos

@@ -7,6 +7,8 @@
 #include <machine/core.h>
 
 #define PRECIO_ALQUILER_BASE 100
+#define INFLATION_DIVIDER 10 //nunca debe ser 0
+#define BITS_PER_WORD 32
 
 //SALARIOS INICIALES: Con cuánto dinero nace cada clase (Define su bucket inicial)
 // y cuanto ganan al volver al scheduler
@@ -48,7 +50,7 @@ typedef struct RunQueue {
     Bucket *buckets; //array dinámico de punteros a PCB
 
     u_int * active_bitmap; // bitmap de buckets activos
-    int bitmap_size; // Tamaño del array de ints del bitmap
+    u_long bitmap_size; // Tamaño del array de ints del bitmap
 
     u_int count;     // número de procesos en la cola
     u_int num_buckets; // número de buckets
@@ -61,6 +63,8 @@ ErrorCode init_scheduler(int tick_freq);
 void scheduler();
 void * local_core_scheduler(void *arg);
 ErrorCode dispatcher(Core *core);
+ErrorCode get_valid_core(Core **out_core);
+ErrorCode scheduler_admit_process(Core *core, PCB *process);
 
 #endif // SCHEDULER_H
 

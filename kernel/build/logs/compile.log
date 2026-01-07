@@ -3561,3 +3561,860 @@ gcc ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_gen
 --- INICIANDO LIMPIEZA ---
 
 rm -f ../src/clock.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 02:51:52 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+In file included from ../include/os.h:6,
+                 from ../src/clock.c:9:
+../include/pcb.h:24:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   24 |     PCB *next_br;  // Puntero al siguiente PCB en la lista de todos los procesos
+      |     ^~~
+      |     PCB_H
+../include/pcb.h:25:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   25 |     PCB *prev_br;  // Puntero al PCB anterior en la lista de todos los procesos
+      |     ^~~
+      |     PCB_H
+../include/pcb.h:27:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   27 |     PCB *next_pcb_runqueue; //proximo puntero en la runqueu del bucket
+      |     ^~~
+      |     PCB_H
+../include/pcb.h:28:5: error: unknown type name ‘PCB’; did you mean ‘PCB_H’?
+   28 |     PCB *prev_pcb_runqueue; //proximo puntero en la runqueu del bucket
+      |     ^~~
+      |     PCB_H
+make: *** [../build/Makefile:37: ../src/clock.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 02:52:33 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c:2:10: fatal error: PCB.h: No such file or directory
+    2 | #include <PCB.h>
+      |          ^~~~~~~
+compilation terminated.
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 02:52:53 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:9:5: error: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+    9 |     printf("[Interrupción] Nuevo proceso PID: %d recibido.\n", process->pid);
+      |     ^~~~~~
+../src/interruptions.c:5:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+    4 | #include <scheduler.h>
+  +++ |+#include <stdio.h>
+    5 | 
+../src/interruptions.c:9:5: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+    9 |     printf("[Interrupción] Nuevo proceso PID: %d recibido.\n", process->pid);
+      |     ^~~~~~
+../src/interruptions.c:9:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+../src/interruptions.c:12:21: error: implicit declaration of function ‘add_process_to_runque’ [-Wimplicit-function-declaration]
+   12 |     ErrorCode err = add_process_to_runque(target_core, process);
+      |                     ^~~~~~~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:08:16 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:13:36: error: passing argument 1 of ‘get_valid_core’ from incompatible pointer type [-Wincompatible-pointer-types]
+   13 |     ErrorCode err = get_valid_core(&target_core);
+      |                                    ^~~~~~~~~~~~
+      |                                    |
+      |                                    Core **
+In file included from ../src/interruptions.c:4:
+../include/scheduler.h:64:32: note: expected ‘Core *’ but argument is of type ‘Core **’
+   64 | ErrorCode get_valid_core(Core *out_core);
+      |                          ~~~~~~^~~~~~~~
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:08:29 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:13:21: warning: ‘target_core’ is used uninitialized [-Wuninitialized]
+   13 |     ErrorCode err = get_valid_core(target_core);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+../src/interruptions.c:12:11: note: ‘target_core’ was declared here
+   12 |     Core *target_core;
+      |           ^~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:34:11: error: conflicting types for ‘get_valid_core’; have ‘ErrorCode(Core **)’
+   34 | ErrorCode get_valid_core(Core **out_core){
+      |           ^~~~~~~~~~~~~~
+In file included from ../src/scheduler.c:1:
+../include/scheduler.h:64:11: note: previous declaration of ‘get_valid_core’ with type ‘ErrorCode(Core *)’
+   64 | ErrorCode get_valid_core(Core *out_core);
+      |           ^~~~~~~~~~~~~~
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:08:45 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:13:36: error: passing argument 1 of ‘get_valid_core’ from incompatible pointer type [-Wincompatible-pointer-types]
+   13 |     ErrorCode err = get_valid_core(target_core);
+      |                                    ^~~~~~~~~~~
+      |                                    |
+      |                                    Core *
+In file included from ../src/interruptions.c:4:
+../include/scheduler.h:64:33: note: expected ‘Core **’ but argument is of type ‘Core *’
+   64 | ErrorCode get_valid_core(Core **out_core);
+      |                          ~~~~~~~^~~~~~~~
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:09:17 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:11:57 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c: In function ‘generate_process’:
+../src/process_generator.c:97:50: error: incompatible type for argument 1 of ‘new_process_interruption’
+   97 |     new_process_interruption(bancos.all_processes[process_count]);
+      |                              ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+      |                                                  |
+      |                                                  PCB
+In file included from ../src/process_generator.c:13:
+../include/interruptions.h:7:41: note: expected ‘PCB *’ but argument is of type ‘PCB’
+    7 | ErrorCode new_process_interruption(PCB *process);
+      |                                    ~~~~~^~~~~~~
+make: *** [../build/Makefile:37: ../src/process_generator.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:12:17 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:13:33 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:14:53 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:22:06 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:24:15: warning: unused variable ‘rq’ [-Wunused-variable]
+   24 |     RunQueue *rq = target_core->run_queue;
+      |               ^~
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:49:18: warning: ‘add_process_to_runque’ defined but not used [-Wunused-function]
+   49 | static ErrorCode add_process_to_runque(Core *core, PCB *process){
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:22:34 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:25:5: error: implicit declaration of function ‘add_process_to_runque’ [-Wimplicit-function-declaration]
+   25 |     add_process_to_runque(target_core, process);
+      |     ^~~~~~~~~~~~~~~~~~~~~
+../src/interruptions.c:24:15: warning: unused variable ‘rq’ [-Wunused-variable]
+   24 |     RunQueue *rq = target_core->run_queue;
+      |               ^~
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 05:23:17 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+../src/interruptions.c: In function ‘new_process_interruption’:
+../src/interruptions.c:24:5: error: implicit declaration of function ‘add_process_to_runque’ [-Wimplicit-function-declaration]
+   24 |     add_process_to_runque(target_core, process);
+      |     ^~~~~~~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/interruptions.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 04:50:17 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘scheduler_admit_process’:
+../src/scheduler.c:107:24: error: ‘Core’ has no member named ‘current_process’
+  107 |     PCB *current = core->current_process;
+      |                        ^~
+../src/scheduler.c:116:13: error: ‘Core’ has no member named ‘force_preemption’
+  116 |         core->force_preemption = 1;
+      |             ^~
+../src/scheduler.c: At top level:
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Tue Jan  6 07:33:37 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:17:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   17 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 01:31:13 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘local_core_scheduler’:
+../src/scheduler.c:251:14: warning: unused variable ‘enter_proc’ [-Wunused-variable]
+  251 |         PCB *enter_proc;
+      |              ^~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:66:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   66 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:18:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   18 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 01:35:49 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘local_core_scheduler’:
+../src/scheduler.c:251:14: warning: unused variable ‘enter_proc’ [-Wunused-variable]
+  251 |         PCB *enter_proc;
+      |              ^~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:66:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   66 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:18:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   18 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 01:51:29 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘local_core_scheduler’:
+../src/scheduler.c:255:14: warning: unused variable ‘enter_proc’ [-Wunused-variable]
+  255 |         PCB *enter_proc;
+      |              ^~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:65:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   65 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:18:18: warning: ‘get_next_process’ defined but not used [-Wunused-function]
+   18 | static ErrorCode get_next_process(Core *core, PCB **out_process){
+      |                  ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 06:31:46 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘local_core_scheduler’:
+../src/scheduler.c:302:27: error: initialization of ‘int’ from ‘const int *’ makes integer from pointer without a cast [-Wint-conversion]
+  302 |                 int tax = IMPUESTO_POR_TICK + (QUANTUM_BASE[proc->class] * inflation_factor);
+      |                           ^~~~~~~~~~~~~~~~~
+../src/scheduler.c:322:21: error: implicit declaration of function ‘kill_process’ [-Wimplicit-function-declaration]
+  322 |                     kill_process(proc); // O free_pcb si no tienes kill
+      |                     ^~~~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 06:32:32 AM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:13:12 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:14:34 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:20:11 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:22:03 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:26:16 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c:64:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+   64 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:49:56 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘get_next_process’:
+../src/scheduler.c:82:9: error: implicit declaration of function ‘clear_bitmap_bit’ [-Wimplicit-function-declaration]
+   82 |         clear_bitmap_bit(rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:132:13: warning: conflicting types for ‘clear_bitmap_bit’; have ‘void(RunQueue *, int)’
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: error: static declaration of ‘clear_bitmap_bit’ follows non-static declaration
+../src/scheduler.c:82:9: note: previous implicit declaration of ‘clear_bitmap_bit’ with type ‘void(RunQueue *, int)’
+   82 |         clear_bitmap_bit(rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:51:02 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘get_next_process’:
+../src/scheduler.c:82:9: error: implicit declaration of function ‘clear_bitmap_bit’ [-Wimplicit-function-declaration]
+   82 |         clear_bitmap_bit(&rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:132:13: warning: conflicting types for ‘clear_bitmap_bit’; have ‘void(RunQueue *, int)’
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: error: static declaration of ‘clear_bitmap_bit’ follows non-static declaration
+../src/scheduler.c:82:9: note: previous implicit declaration of ‘clear_bitmap_bit’ with type ‘void(RunQueue *, int)’
+   82 |         clear_bitmap_bit(&rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:51:08 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+../src/scheduler.c: In function ‘get_next_process’:
+../src/scheduler.c:82:9: error: implicit declaration of function ‘clear_bitmap_bit’ [-Wimplicit-function-declaration]
+   82 |         clear_bitmap_bit(rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c: At top level:
+../src/scheduler.c:132:13: warning: conflicting types for ‘clear_bitmap_bit’; have ‘void(RunQueue *, int)’
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: error: static declaration of ‘clear_bitmap_bit’ follows non-static declaration
+../src/scheduler.c:82:9: note: previous implicit declaration of ‘clear_bitmap_bit’ with type ‘void(RunQueue *, int)’
+   82 |         clear_bitmap_bit(rq, found_index);
+      |         ^~~~~~~~~~~~~~~~
+../src/scheduler.c:132:13: warning: ‘clear_bitmap_bit’ defined but not used [-Wunused-function]
+  132 | static void clear_bitmap_bit(RunQueue *rq, int index) {
+      |             ^~~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/scheduler.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 03:52:18 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 04:08:08 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c: In function ‘generate_process’:
+../src/process_generator.c:80:30: error: passing argument 1 of ‘new_process_interruption’ from incompatible pointer type [-Wincompatible-pointer-types]
+   80 |     new_process_interruption(&bancos.all_processes[process_count]);
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                              |
+      |                              PCB **
+In file included from ../src/process_generator.c:13:
+../include/interruptions.h:7:41: note: expected ‘PCB *’ but argument is of type ‘PCB **’
+    7 | ErrorCode new_process_interruption(PCB *process);
+      |                                    ~~~~~^~~~~~~
+../src/process_generator.c: At top level:
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+make: *** [../build/Makefile:37: ../src/process_generator.o] Error 1
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 04:09:28 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 04:36:23 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:25:13: warning: ‘print_processes’ defined but not used [-Wunused-function]
+   25 | static void print_processes() {
+      |             ^~~~~~~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o
+
+==== BUILD INICIADO: Wed Jan  7 04:39:47 PM CET 2026 ====
+
+gcc -I ../include/ -Wall -g -c ../src/clock.c -o ../src/clock.o
+gcc -I ../include/ -Wall -g -c ../src/interruptions.c -o ../src/interruptions.o
+gcc -I ../include/ -Wall -g -c ../src/machine.c -o ../src/machine.o
+gcc -I ../include/ -Wall -g -c ../src/main.c -o ../src/main.o
+gcc -I ../include/ -Wall -g -c ../src/os.c -o ../src/os.o
+gcc -I ../include/ -Wall -g -c ../src/process_generator.c -o ../src/process_generator.o
+../src/process_generator.c:16:13: warning: ‘print_info’ defined but not used [-Wunused-function]
+   16 | static void print_info()
+      |             ^~~~~~~~~~
+gcc -I ../include/ -Wall -g -c ../src/scheduler.c -o ../src/scheduler.o
+gcc -I ../include/ -Wall -g -c ../src/sync_resources.c -o ../src/sync_resources.o
+gcc -I ../include/ -Wall -g -c ../src/task_map.c -o ../src/task_map.o
+gcc -I ../include/ -Wall -g -c ../src/timer.c -o ../src/timer.o
+gcc -I ../include/ -Wall -g -c ../src/utils.c -o ../src/utils.o
+gcc ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o -o ../bin/bancos -pthread -lm
+
+--- INICIANDO LIMPIEZA ---
+
+rm -f ../src/clock.o ../src/interruptions.o ../src/machine.o ../src/main.o ../src/os.o ../src/process_generator.o ../src/scheduler.o ../src/sync_resources.o ../src/task_map.o ../src/timer.o ../src/utils.o

@@ -4,9 +4,6 @@
 #include <pcb.h>
 #include <errors.h>
 
-// global
-//extern PCB process[MAX_PCB];
-
 ErrorCode init_process_generator(int proc_gen_freq);
 void generate_process();
 

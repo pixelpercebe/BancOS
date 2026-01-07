@@ -19,6 +19,7 @@ typedef enum {
     ERR_MACHINE_ARCH_INIT,
     ERR_INVALID_PROCESS,
     ERR_INVALID_BUCKET,
+    ERR_EMPTY_RUNQUEUE,
     
     ABORT,
     

@@ -33,6 +33,7 @@ typedef struct {
     // lista de los procesos esperando piso en ESTE core
     // (estruct RunQueue en scheduler.h)
     struct RunQueue *run_queue;
+    int force_eviction; // Bandera para indicar si hay una interrupción pendiente
     
 } Core;
 

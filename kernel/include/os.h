@@ -11,7 +11,6 @@
 #include <machine/machine.h> 
 
 #define TASK_LIST_LENGTH 4
-#define MAX_PCB 100
 
 #define PARAM_CONF_FILE "-confile"
 #define PARAM_HELP "-help"
@@ -25,10 +24,18 @@
 #define PARAM_MAX_BUDGET "-max_budget"
 
 
-typedef struct{
+typedef struct system_t{
     Machine machine_data;
 
-    PCB all_processes[MAX_PCB]; // Array de todos los PCBs
+    // AÑADE ESTO: Estructura de Lista Global
+    PCB *list_pcb_head; // Cabeza de la lista global
+    PCB *list_pcb_tail; // Cola de la lista global
+    int process_count;  // Contador actual
+    pthread_mutex_t list_pcb_lock; // Mutex para proteger ESTA lista
+    // -------------------
+
+
+
     u_int number_of_tasks; // número de tareas cargadas
     Core *cores; // Array dinámico de cores
 
@@ -43,3 +50,5 @@ typedef struct{
 
 extern system_t bancos;
 void system_init();
+void insert_global_pcb(PCB *p);
+void remove_global_pcb(PCB *p);
