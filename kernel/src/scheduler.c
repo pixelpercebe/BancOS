@@ -121,7 +121,7 @@ static inline ErrorCode get_process_bucket(PCB *process){
     return bucket;
 }
 
-static int get_core_load(Core *c) {
+int get_core_load(Core *c) {
     int active_threads = 0;
     for (int i = 0; i < c->num_configured_threads; i++) {
         if (c->threads[i].current_process != NULL) {

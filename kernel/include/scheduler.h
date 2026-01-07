@@ -6,7 +6,6 @@
 #include <errors.h>
 #include <machine/core.h>
 
-#define PRECIO_ALQUILER_BASE 100
 #define INFLATION_DIVIDER 10 //nunca debe ser 0
 #define BITS_PER_WORD 32
 
@@ -65,6 +64,7 @@ void * local_core_scheduler(void *arg);
 ErrorCode dispatcher(Core *core);
 ErrorCode get_valid_core(Core **out_core);
 ErrorCode scheduler_admit_process(Core *core, PCB *process);
+int get_core_load(Core *c);
 
 #endif // SCHEDULER_H
 

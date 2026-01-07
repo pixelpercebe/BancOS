@@ -9,6 +9,8 @@
 #include <errors.h>
 #include <machine/core.h>
 #include <scheduler.h>
+#include <pthread.h>
+#include <console.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,9 +20,10 @@ system_t bancos;
 
 void system_init(){
     //inicializar mutex de la lista global de PCBs
-    // Añade esto en system_init() o init_scheduler() al final
-    //pthread_t console_thread;
-    //pthread_create(&console_thread, NULL, console_routine, NULL);
+    if (!bancos.verbose_mode) {
+        pthread_t console_thread;
+        pthread_create(&console_thread, NULL, console_routine, NULL);
+    }
     pthread_mutex_init(&bancos.list_pcb_lock, NULL);
     //inicializar contador de procesos
     bancos.process_count = 0;

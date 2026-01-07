@@ -174,7 +174,7 @@ ErrorCode init_cores_struct(){
             bancos.cores[i].threads[j].current_process = NULL;
             bancos.cores[i].threads[j].is_idle = 1; // Inicialmente inactivo
         }
-        //bancos.cores[i].current_rent_price = PRECIO_ALQUILER_BASE; // Precio base inicial
+        //bancos.cores[i].current_rent_price = BASE_RENTAL_PRICE; // Precio base inicial
         // Lo rellena el scheduler cuando inicie
         bancos.cores[i].should_work = 0;
         bancos.cores[i].run_queue = NULL;       // Todavía no hay cola

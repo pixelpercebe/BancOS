@@ -12,13 +12,6 @@
 #include <clock.h>
 #include <interruptions.h>
 
-
-static void print_info()
-{
-    VERBOSE_PRINTF("\n [PROC_GEN] información del generador de procesos\n");
-}
-
-
 /**
  * @brief Imprime la lista de procesos generados.
  */

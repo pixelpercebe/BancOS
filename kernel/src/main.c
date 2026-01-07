@@ -204,7 +204,7 @@ int main(int argc, char *argv[]) {
     }
     system_init(); //inicializa el sistema (scheduler, colas, etc)
     bancos.verbose_mode = verbose_mode;
-    init_process_generator(10); //borrar en el futuro, solo para pruebas
+    init_process_generator(2); //borrar en la parte 3, solo para pruebas
 
     int clock_tid = init_clock_module(bancos.machine_data.cpu_clock_speed_Ghz);
     if (clock_tid == ERR_CLOCK_INIT) {
