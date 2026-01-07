@@ -542,23 +542,4 @@ void * local_core_scheduler(void *arg)
     return NULL;
 }
 
-ErrorCode dispatcher(Core *core) {
-    // Implementar la lógica del despachador aquí
-    // Esta función debería seleccionar un nuevo proceso para ejecutar en el core
-    // basándose en la política de scheduling y el estado de la runqueue del core
-
-    VERBOSE_PRINTF("[Core %d] Dispatcher invocado.\n", core->core_id);
-
-    // Ejemplo simple: seleccionar el proceso más rico de la runqueue
-    PCB *next_process = NULL;
-    if (next_process != NULL) {
-        VERBOSE_PRINTF("[Core %d] Seleccionando proceso PID: %d para ejecución.\n", core->core_id, next_process->pid);
-        // Aquí se implementaría la lógica para asignar el proceso al core
-    } else {
-        VERBOSE_PRINTF("[Core %d] No hay procesos disponibles en la runqueue.\n", core->core_id);
-    }
-
-    return OK;
-}
-
 

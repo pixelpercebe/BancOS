@@ -61,7 +61,6 @@ extern PCB waiting_proc_vec[];
 ErrorCode init_scheduler(int tick_freq);
 void scheduler();
 void * local_core_scheduler(void *arg);
-ErrorCode dispatcher(Core *core);
 ErrorCode get_valid_core(Core **out_core);
 ErrorCode scheduler_admit_process(Core *core, PCB *process);
 int get_core_load(Core *c);
