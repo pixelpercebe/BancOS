@@ -38,7 +38,7 @@ static int proc_gen_freq = 10; //frecuencia por defecto de generacion de proceso
  */
 void print_help(char * name){
     fprintf(stderr, "\n----- BancOS Kernel -----\n");
-    fprintf(stderr, "Uso: %s [-confile][-rpolicy][-fcpu][-ncpu][-tcpu][-schedticks]\n\n", name);
+    fprintf(stderr, "Uso: %s [-confile][-fcpu][-ncpu][-tcpu][-schedticks]\n\n", name);
     fprintf(stderr, "* No importa el orden de los parametros *\n\n");
 
     fprintf(stderr, "DESCRIPCIÓN:\n");
@@ -61,7 +61,7 @@ void print_help(char * name){
     fprintf(stderr, "  -schedticks <int>     Número de ticks de reloj entre ejecuciones del scheduler.\n\n");
 
     fprintf(stderr, "EJEMPLO:\n");
-    fprintf(stderr, "  %s -confile custom.ini -rpolicy CGS -fcpu 1 -ncpu 4 -tcpu 6 -schedticks 5\n", name);
+    fprintf(stderr, "  %s -confile custom.ini -fcpu 1 -ncpu 4 -ncores 6 -schedticks 5\n", name);
     fprintf(stderr, "----------------------------------------------------------------------\n");
 }
 

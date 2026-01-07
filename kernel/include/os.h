@@ -31,8 +31,6 @@
 
 typedef struct system_t{
     Machine machine_data;
-
-    // AÑADE ESTO: Estructura de Lista Global
     PCB *list_pcb_head; // Cabeza de la lista global
     PCB *list_pcb_tail; // Cola de la lista global
     int process_count;  // Contador actual
