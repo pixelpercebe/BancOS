@@ -121,17 +121,30 @@ static inline ErrorCode get_process_bucket(PCB *process){
     return bucket;
 }
 
-ErrorCode get_valid_core(Core **out_core){
-    if (bancos.machine_data.total_cores == 0) return ERR_INVALID_PARAMETER;
-    Core *core = &bancos.cores[0];
-    u_int min_count = core->run_queue->count;
-    for(int i = 0; i < bancos.machine_data.total_cores; i++) {
-        if (bancos.cores[i].run_queue->count < min_count) {
-            min_count = bancos.cores[i].run_queue->count;
-            core = &bancos.cores[i];
+static int get_core_load(Core *c) {
+    int active_threads = 0;
+    for (int i = 0; i < c->num_configured_threads; i++) {
+        if (c->threads[i].current_process != NULL) {
+            active_threads++;
         }
     }
-    *out_core = core;
+    return c->run_queue->count + active_threads;
+}
+
+ErrorCode get_valid_core(Core **out_core){
+    if (bancos.machine_data.total_cores == 0) return ERR_INVALID_PARAMETER;
+
+    Core *best_core = &bancos.cores[0];
+    u_int min_load = get_core_load(best_core);
+
+    for(int i = 0; i < bancos.machine_data.total_cores; i++) {
+        int current_load = get_core_load(&bancos.cores[i]);
+        if (current_load < min_load) {
+            min_load = current_load;
+            best_core = &bancos.cores[i];
+        }
+    }
+    *out_core = best_core;
     return OK;
 }
 
