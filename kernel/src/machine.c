@@ -175,7 +175,7 @@ ErrorCode init_cores_struct(){
         bancos.cores[i].should_work = 0;
         bancos.cores[i].run_queue = NULL;       // Todavía no hay cola
         bancos.cores[i].current_rent_price = 0; // Todavía no hay precio definido
-        bancos.cores[i].force_eviction = 0; // Inicializar bandera de interrupción a 0
+        bancos.cores[i].force_eviction = 0; 
 
         // Inicializar mutexes y condiciones
         // el bloqueo es una capacidad del core

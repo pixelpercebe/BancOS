@@ -65,12 +65,7 @@ void print_help(char * name){
     fprintf(stderr, "----------------------------------------------------------------------\n");
 }
 
-/**
- * @brief Verifica y procesa los argumentos de la línea de comandos.
- * @param argc: Número de argumentos.
- * @param argv: Array de argumentos.
- * @return: Código de error.
- */
+
 /**
  * @brief Procesa y carga los argumentos de línea de comandos.
  * @param argc Número de argumentos.
@@ -237,7 +232,6 @@ int main(int argc, char *argv[]) {
         return clock_tid;
     }
 
-    //while(1), esperar indefinidamente
     pause(); 
     return 0;
 }

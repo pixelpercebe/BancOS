@@ -78,18 +78,16 @@ void remove_global_pcb(PCB *p) {
 
     pthread_mutex_lock(&bancos.list_pcb_lock);
 
-    // Desenganchar del anterior
     if (p->prev_br) {
         p->prev_br->next_br = p->next_br;
     } else {
-        bancos.list_pcb_head = p->next_br; // Era la cabeza
+        bancos.list_pcb_head = p->next_br; 
     }
 
-    // Desenganchar del siguiente
     if (p->next_br) {
         p->next_br->prev_br = p->prev_br;
     } else {
-        bancos.list_pcb_tail = p->prev_br; // Era la cola
+        bancos.list_pcb_tail = p->prev_br;
     }
 
     bancos.process_count--;

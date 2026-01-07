@@ -455,7 +455,7 @@ void scheduler()
 // que se ha guardado en el task map
 // cada core tiene su propia runqueue y su propio scheduler local
 // el scheduler local se encargara de seleccionar el siguiente proceso a ejecutar en ese core
-// basandose en la politica de scheduling definida (CGS en este caso)
+// basandose en la politica de scheduling definida (CGS)
 // y en el estado de la runqueue de ese core
 
 /**
@@ -467,18 +467,17 @@ void * local_core_scheduler(void *arg)
 {
     Core *mi_core = (Core *)arg;
     
-    // Bloqueamos ANTES de entrar al bucle (Modelo Síncrono)
+    // Bloqueamos ANTES de entrar al bucle
     pthread_mutex_lock(&mi_core->lock);
 
     while (1) {
-        // 1. ESPERA PASIVA
         while (mi_core->should_work == 0) {
             pthread_cond_wait(&mi_core->wake_cond, &mi_core->lock);
         }
 
         VERBOSE_PRINTF("[Core %d] Iniciando Tick...\n", mi_core->core_id);
 
-        // 2. CÁLCULO DE INFLACIÓN (Dentro del lock y en cada tick)
+        //CÁLCULO DE INFLACIÓN
         // Protegemos la lectura de run_queue->count
         u_int inflation_factor = 1;
         if (mi_core->run_queue->count > 0) {
@@ -489,7 +488,7 @@ void * local_core_scheduler(void *arg)
 
         int target_victim_idx = -1;
 
-        // Si hay orden de desalojo, buscamos a quién echar
+        // Si hay orden de desahucio, buscamos a quién echar
         if (mi_core->force_eviction == 1) {
             target_victim_idx = get_eviction_victim_index(mi_core);
     
@@ -498,34 +497,30 @@ void * local_core_scheduler(void *arg)
             }
         }
 
-        // Iteramos sobre los hilos de hardware (SMT)
+        // Iteramos sobre los hilos de hardware
         for (int i = 0; i < mi_core->num_configured_threads; i++) {
             
             PCB *proc = mi_core->threads[i].current_process;
             int slot_is_empty = (proc == NULL);
 
-            // --- FASE A: GESTIÓN DEL PROCESO EXISTENTE ---
+            // ---GESTIÓN DEL PROCESO EXISTENTE---
             if (!slot_is_empty) {
                 
-                // a) Cobrar Impuestos (Fórmula de Coste)
-                // Asegúrate de que TAX_PER_TICK sea accesible aquí
+                // Cobrar Impuestos (Fórmula de Coste)
                 int tax = TAX_PER_TICK[proc->class] + (QUANTUM_BASE[proc->class] * inflation_factor);
                 proc->budget -= tax;
                 
-                // b) Envejecer
-                // Asumo que restas lifetime también, o usas global_ticks para comparar
-                
-                // c) Verificar Estados de Terminación
+                //Verificar Estados de Terminación
                 int must_leave_cpu = 0;
 
-                // C1. Muerte por Vejez
+                //Muerte por Vejez
                 if (global_ticks >= proc->final_tick) {
                           VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d terminó (Time Limit).\n", 
                            mi_core->core_id, i, proc->pid);
                     free_pcb(proc);
                     must_leave_cpu = 1;
                 }
-                // C2. Muerte por Bancarrota (Budget <= 0) -> READY
+                //Bancarrota (Budget <= 0) -> READY
                 else if (proc->budget <= 0) {
                           VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d en BANCARROTA.\n", 
                            mi_core->core_id, i, proc->pid);
@@ -533,14 +528,14 @@ void * local_core_scheduler(void *arg)
                     add_process_to_runque(mi_core, proc); // Devolver a la cola
                     must_leave_cpu = 1;
                 }
-                // C3. Expulsión por Interrupción (Preemption) -> READY
+                //Expulsión por Interrupción (Preemption) -> READY
                 else if (mi_core->force_eviction == 1 && i == target_victim_idx) {
                     if (proc->class )
                           VERBOSE_PRINTF("[Core %d][Hilo %d]  PID %d desalojado (Preemption).\n", 
                            mi_core->core_id, i, proc->pid);
                     
                     proc->state = READY;
-                    add_process_to_runque(mi_core, proc); // Devolver a la cola
+                    add_process_to_runque(mi_core, proc);
                     must_leave_cpu = 1;
                 }
                 else {
@@ -558,15 +553,15 @@ void * local_core_scheduler(void *arg)
                 }
             }
 
-            // --- FASE B: RELLENAR HUECOS (Scheduling) ---
+            // --- Scheduling ---
             // Si el slot está vacío (porque lo estaba o porque el proceso acaba de morir/salir)
-            // intentamos llenarlo AHORA MISMO.
+            //se vuelve a asignar un nuevo proceso
             if (slot_is_empty) {
                 VERBOSE_PRINTF("hilo vacio en core %d hilo %d\n", mi_core->core_id, i);
                 PCB *new_proc = NULL;
                 
-                // Llamamos a tu función de selección (Pick Next)
-                // Nota: Asegúrate de que get_next_process busque en la RunQueue correcta
+
+                //* asegurarse de que get_next_process busque en la RunQueue correcta *
                 get_next_process(mi_core, &new_proc); 
 
                 if (new_proc != NULL) {
@@ -577,15 +572,13 @@ void * local_core_scheduler(void *arg)
                     mi_core->threads[i].current_process = new_proc;
                           VERBOSE_PRINTF("[Core %d][Hilo %d] PID %d entra a CPU.\n", 
                            mi_core->core_id, i, new_proc->pid);
-                } else {
-                    // printf("[Core %d][Hilo %d] IDLE (Nada en cola).\n", mi_core->core_id, i);
                 }
             }
-        } // Fin del for de hilos
+        } 
 
-        // Limpieza de banderas post-tick 
-        mi_core->force_eviction = 0;
-        mi_core->should_work = 0; // Apagar luz y esperar siguiente señal
+
+        mi_core->force_eviction = 0; // Limpiar otra vez la bandera de expulsión
+        mi_core->should_work = 0;
     }
     
     pthread_mutex_unlock(&mi_core->lock);

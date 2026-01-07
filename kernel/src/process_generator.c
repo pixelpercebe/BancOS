@@ -78,8 +78,6 @@ void generate_process()
 
     VERBOSE_PRINTF("Proceso generado: PID=%d, Lifetime=%d, Final Tick=%d ,salario=%d\n", new_process->pid, new_process->lifetime, new_process->final_tick, new_process->budget);
     new_process_interruption(new_process);
-
-    //print_processes();
 }
 
 

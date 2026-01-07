@@ -42,5 +42,3 @@ ErrorCode new_process_interruption(PCB *process) {
     VERBOSE_PRINTF("[Interrupción] Proceso PID: %d agregado a la runqueue del core %d.\n", process->pid, target_core->core_id);
     return OK;
 }
-
-//add_process_to_runque(target_core, process);

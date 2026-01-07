@@ -57,7 +57,7 @@ static int get_random_id() {
 * @return: NULL
 */
 static void* timer(void *arg) {
-// 1. Convertir el argumento void* a int* y obtener el ID
+// Convertir el argumento void* a int* y obtener el ID
     Timer *timer = arg;
     int timer_id = timer->timer_id;
     int tick_count = 0;
@@ -88,10 +88,10 @@ static void* timer(void *arg) {
 */
 ErrorCode init_timer_module(int duration, int is_active, void (*callback)(void), Timer * timer_struct) {
 
-        timer_struct ->timer_id = get_random_id(); // Asignar un ID único aquí
-        timer_struct ->duration = duration; // Asignar una duración aquí
-        timer_struct ->is_active = is_active; // Asignar el estado aquí
-        timer_struct ->callback = callback; // Asignar la función de callback aquí
+        timer_struct ->timer_id = get_random_id(); 
+        timer_struct ->duration = duration; 
+        timer_struct ->is_active = is_active;
+        timer_struct ->callback = callback;
 
     if (pthread_create(&timer_tid, NULL, timer, timer_struct) != 0) {
         perror("Error al crear un hilo temporizador.");

@@ -68,8 +68,7 @@ static void* clock_thread() {
  * @return ID del hilo de reloj o código de error.
  */
 int init_clock_module(float freq_cpu) {
-    // Declaracion y Asignacion de Memoria Dinamica
-    // array de IDs de temporizadores
+
     global_ticks = 0;
     done = 0;   
 

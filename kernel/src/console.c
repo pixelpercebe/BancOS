@@ -7,7 +7,6 @@
 #include <machine/machine.h>
 #include <unistd.h>
 
-// Si no lo tienes en un .h global, defínelo aquí para evitar errores de compilación
 #ifndef INFLATION_DIVIDER
 #define INFLATION_DIVIDER 10 
 #endif
@@ -47,7 +46,7 @@ void print_running_processes() {
             PCB *p = c->threads[t].current_process;
             
             if (p != NULL) {
-                // Convertir enum clase a texto para que se vea bonito
+                // Convertir enum clase a texto para que se vea boniquillo
                 const char* class_names[] = {"VAGABUNDO", "BAJA", "MEDIA", "ALTA", "ELITE"};
                 const char* c_name = (p->class >= 0 && p->class <= 4) ? class_names[p->class] : "UNKNOWN";
 
@@ -98,7 +97,7 @@ static void print_queues() {
 void *console_routine(void *arg) {
     char buffer[100];
     
-    // Esperamos un poco para que el log inicial del sistema no se mezcle
+    // Esperar un poco para que el log inicial del sistema no se mezcle
     usleep(100000); 
 
     printf("\n[CONSOLA] Iniciada. Escribe 'help' para comandos.\n");
@@ -117,7 +116,7 @@ void *console_routine(void *arg) {
         if (strcmp(buffer, "help") == 0) {
             printf("Comandos disponibles:\n");
             printf("  ps   - Listar TODOS los procesos (Global List)\n");
-            printf("  run  - Ver solo procesos en EJECUCIÓN (CPU)\n"); // <--- Nuevo
+            printf("  run  - Ver solo procesos en EJECUCIÓN (CPU)\n");
             printf("  qs   - Ver estado de colas y carga\n");
             printf("  exit - Apagar el simulador\n");
         }
