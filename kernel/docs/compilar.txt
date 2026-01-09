@@ -1,0 +1,7 @@
+1. COMPILAR EL PROYECTO:
+En la carpeta ~root del proyecto
+	
+	$ bash ./tools/compile.sh
+
+El script compilara el programa automaticamente. Los headers deben mantener la estructura default igual que el resto de archivos y carpetas. 
+El script debe usarse dentro de la carpeta tools.

@@ -1,0 +1,16 @@
+1.Ejecución base
+Para ejecutar se debe usar el siguiente comando desde la carpeta ~root del proyecto.
+	$./bancos [parametros]
+
+Los parametros para sobreescritura de configuracion son opcinales y se pueden escribir de manera desordenada.
+Las opciones para sobreescritura de configuracion, deben ir seguidas inmediatamente de su valor.
+
+Correcto: -fcpu 10 -verbose
+Incorrecto: 10 -verbose -fcpu
+
+Para ver todos los parametros de sobreescritura de la configuracion por defecto, ejecutar con -help
+
+2.Ejecución + consola
+Por defecto BancOS ejecuta su consola de comandos integrada.
+Los comandos se pueden escribir despues de ver el simbolo <BancOS> del sistema.
+Los comandos pueden verse con escribiendo la palabra help
