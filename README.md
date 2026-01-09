@@ -33,8 +33,6 @@
 
 # 1. Introducción
 
-*Puedes encontrar el pryecto en <https://github.com/pixelpercebe/BancOS>*
-
 Este informe detalla el diseño e implementación de **BancOS**, un simulador de kernel de sistema operativo desarrollado en lenguaje C estándar (ANSI C). Este proyecto aborda las Fases 1 (Arquitectura del Sistema) y 2 (Planificador) de la práctica de la asignatura, estableciendo un entorno de ejecución concurrente multihilo y un sistema de planificación de procesos avanzado.
 
 ## 1.1. BancOS.
